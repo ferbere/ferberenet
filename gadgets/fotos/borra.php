@@ -1,0 +1,12 @@
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:53 articulos
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:53 banners
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:53 calendario
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 catalogo
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 descargas
+drwxrwxrwx   2 ferbere0 ferbere      4096 Jun 13 16:18 fotos
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 ligas
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 noticias
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 opinion
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 perfil
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 publicaciones
+drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 testimonios

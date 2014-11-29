@@ -1,0 +1,1 @@
+INSERT INTO `gadgets_botones_admin` VALUES (159,'+ fotos','camara','png','if_masfotos.php',8,2,1),(160,'Edita + fotos','photo','png','bus_masfotos.php',8,2,1),(161,'Edita + fotos INVI','none','png','if_masfotos_a.php',8,2,1);
