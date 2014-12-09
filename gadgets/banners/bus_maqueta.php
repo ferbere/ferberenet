@@ -41,3 +41,4 @@ if(isset($_GET['ruta'])){
 			$clPag->pie($pag,$sql,$pez,$self);
 ?>
 	</div>
+</div>

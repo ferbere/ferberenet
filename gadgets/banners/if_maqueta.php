@@ -26,6 +26,7 @@ if($_SESSION["estado"]=="Autenticado"){
 								</form>
 							</div>
 		</div>
+	</div>
 		<?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

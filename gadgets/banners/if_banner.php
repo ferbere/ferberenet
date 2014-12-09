@@ -55,7 +55,8 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 			</form>
 							</div>
 		</div>
-		</div>
+	</div>
+</div>
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
