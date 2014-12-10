@@ -68,6 +68,7 @@ if($_SESSION["estado"]=="Autenticado"){
 								<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar"></form>
 							</div>
 		</div>
+</div>		
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

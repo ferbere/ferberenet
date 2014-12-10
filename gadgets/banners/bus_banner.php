@@ -33,10 +33,17 @@ if(isset($_GET['ruta'])){
 			$pez=" where banners_index.nombre like '%" . $criterio . "%' or banners_index.imagen like '%" . $criterio . "%' or banners_dir.nombre like '%" . $criterio . "%' ";
 			$set='if_banner_a.php';
 			$ruta='bus_banner.php';
+			$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+			$url=mysql_fetch_array($sql_u);
+			if($url[1]==''){
+				$url_d='../'.$_SESSION["admin"].'/images/banners/';
+			}else{
+				$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/banners/';
+			}
 			$borra=1;
 			$clPag = new paginacion();
 			$clPag->cuantos($sql,$pez);
-			$clPag->pagina($pag,$sql,$pez,$set,$borra,$celdas,$self);
+			$clPag->pagina($pag,$sql,$pez,$set,$borra,$celdas,$self,$url_d);
 			$clPag->pie($pag,$sql,$pez,$self);
 ?>
 	</div>

@@ -11,6 +11,13 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 		if(isset($_GET['rubro'])){
 			$rubro=$_GET['rubro'];
 		}
+		$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+		$url=mysql_fetch_array($sql_u);
+		if($url[1]==''){
+			$url_d='../'.$_SESSION["admin"].'/images/articulos/';
+		}else{
+			$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/articulos/';
+		}
 ?>
 <form method="post" action="gadgets/articulos/ip_articulos_a.php" enctype="multipart/form-data">
  	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
@@ -34,7 +41,7 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 				<div id="maincontent-body">
 					<div><br><br>
 					<div style="text-align:center">
-						<img src="../<?php echo $_SESSION['admin']?>/images/articulos/<?php echo $imagen; ?>" height="200px"><br>
+						<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
 						<?php echo $imagen; ?>
 					</div><br><br>
 						Título:<br></h1>

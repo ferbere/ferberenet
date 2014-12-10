@@ -19,7 +19,7 @@ class paginacion {
 		</div>
 <?php
 	}
-	function pagina($pag,$sql,$pez,$set,$borra,$celdas,$self) {		
+	function pagina($pag,$sql,$pez,$set,$borra,$celdas,$self,$url_d) {		
 		if(isset($_GET['criterio'])){
 			$criterio=$_GET['criterio'];
 		}
@@ -58,7 +58,7 @@ class paginacion {
 				<div style="margin:0px auto;text-align:left;width:50%">
 				<div style="padding-right:10px;padding-bottom:20px;position:relative;float:left;">
 					<a href="<?php echo $self ?>.php?ruta=if_banner_a.php&rubro=<?php echo $row2[0];?>">
-					<img src="../<?php echo $_SESSION['admin']?>/images/banners/<?php echo $row2[5];?>" width="150px" class="rollover">
+					<img src="<?php echo $url_d.$row2[5];?>" width="150px" class="rollover">
 					</a>
 				</div>
 				<div><strong>Id: <?php echo $row2[0];?></strong></div>

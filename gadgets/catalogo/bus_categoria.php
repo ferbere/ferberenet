@@ -24,20 +24,21 @@ if(isset($_GET['ruta'])){
 		<input type="submit" value="Buscar">
 	</form>
 </div>
-	<div style="margin: 0px auto">
+<div style="margin: 0px auto">
 <?php
-			include_once("classes/sacar.class.php");
-			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");
-			include_once("classes/buscador.class.php");
-			$sql = "SELECT id,nombre,imagen,belong FROM catalogo_categoria WHERE id != 0 ";
-			$celdas=array(0=>'id',1=>'nombre',2=>'imagen',3=>'belong');
-			$pez=" and nombre like '%" . $criterio . "%' or imagen like '%" . $criterio . "%'";
-			$set='if_categoria_a.php';
-			$ruta='bus_categoria.php';
-			$borra=2;
-			$clPag = new paginacion();
-			$clPag->cuantos($sql,$pez);
-			$clPag->pagina($pag,$sql,$pez,$set,$borra,$celdas,$self);
-			$clPag->pie($pag,$sql,$pez,$self);
+	include_once("classes/sacar.class.php");
+	$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");
+	include_once("classes/buscador.class.php");
+	$sql = "SELECT id,nombre,imagen,belong FROM catalogo_categoria WHERE id != 0 ";
+	$celdas=array(0=>'id',1=>'nombre',2=>'imagen',3=>'belong');
+	$pez=" and nombre like '%" . $criterio . "%' or imagen like '%" . $criterio . "%'";
+	$set='if_categoria_a.php';
+	$ruta='bus_categoria.php';
+	$borra=2;
+	$clPag = new paginacion();
+	$clPag->cuantos($sql,$pez);
+	$clPag->pagina($pag,$sql,$pez,$set,$borra,$celdas,$self);
+	$clPag->pie($pag,$sql,$pez,$self);
 ?>
-	</div>
+</div>
+</div>

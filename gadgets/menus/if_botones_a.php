@@ -94,6 +94,7 @@ if($visible==1){
 			</form>
 						</div>
 		</div>
+	</div>
 	<?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

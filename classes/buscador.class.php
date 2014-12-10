@@ -16,6 +16,7 @@ class paginacion {
 		<div style="text-align: center; margin: 0px auto">
 			La búsqueda <?php echo "'".$txt_criterio."'" ?> arrojó <?php echo $hallados ?> resultados.<br><br>
 		</div>
+	</div>
 <?php
 	}
 	function pagina($pag,$sql,$pez,$set,$borra,$celdas,$self) {		

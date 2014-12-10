@@ -14,18 +14,18 @@ if($_SESSION["estado"]=="Autenticado"){
 			<div id="maincontent-tit">
 				Agregar categoría al catálogo
 			</div>
-				<div id="maincontent-body">
-					<div>
-						Nombre:<br>
-						<input type="text" name="nombre" size="30"><br>
-						Imagen:<br>
-						<input type="text" name="imagen" size="30">.jpg<br>
-					</div>
-
-							<div>
-								<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-								</form>
-							</div>
+			<div id="maincontent-body">
+				<div>
+					Nombre:<br>
+					<input type="text" name="nombre" size="30"><br>
+					Imagen:<br>
+					<input type="text" name="imagen" size="30">.jpg<br>
+				</div>
+				<div>
+					<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+					</form>
+				</div>
+			</div>
 		</div>
 		<?php
 	}else{

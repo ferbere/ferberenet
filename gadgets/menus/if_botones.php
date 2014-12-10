@@ -18,11 +18,11 @@ $link=Conectarse();
 					<div style="float:left">
 						Nombre:<br><input type="text" name="nombre" size="30">
 					</div>
-						<div style="float: left; position: relative; left: 50px">
-							Imagen:<br><input type="text" name="imagen" size="30">
-						</div>
-							<div style="float: left; position: relative; left: 80px">
-								Submenú:<br><select name="submenu">
+					<div style="float: left; position: relative; left: 50px">
+						Imagen:<br><input type="text" name="imagen" size="30">
+					</div>
+					<div style="float: left; position: relative; left: 80px">
+						Submenú:<br><select name="submenu">
 <?php
 
 	$sql=mysql_query("SELECT id,nombre FROM menus_submenu",$link);
@@ -31,14 +31,15 @@ $link=Conectarse();
 	}
 ?>
 						</select>
-							</div>
+					</div>
 				</div>
-					<div>
-						<div style="float: left; position: relative">
+				<div>
+					<div style="float: left; position: relative">
 							Ruta:<br><input type="text" name="ruta" size="30">
-						</div>
-							<div style="float: left; position: relative; left: 50px">
-								Posición:<br><select name="posicion">
+					</div>
+					<div style="float: left; position: relative; left: 50px">
+						Posición:<br>
+						<select name="posicion">
 <?php
 
 	$sql2=mysql_query("SELECT id,nombre FROM menus_posicion" ,$link);
@@ -48,9 +49,10 @@ $link=Conectarse();
 ?>
 						</select>
 
-							</div>
-								<div style="float: left; position: relative; left: 80px">
-	Privilegios:<br><select name="privilegios">
+					</div>
+					<div style="float: left; position: relative; left: 80px">
+						Privilegios:<br>
+						<select name="privilegios">
 	<?php
 
 		$sql3=mysql_query("SELECT id,nombre FROM usuario_privilegios" ,$link);
@@ -58,18 +60,19 @@ $link=Conectarse();
 			echo '<option value="'.$row3['id'].'">'."\n".$row3['nombre']."</a>   ";
 		}
 	?>
-							</select>
-							</div>
+						</select>
 					</div>
-						<div style="clear: both">
-							<br>Visible: <br>
-								<input type="radio" name="visible" value="1" checked>Sí
-								<input type="radio" name="visible" value="0">No<br><br>
-								<div>
-									<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-									</form>
-								</div>
+				</div>
+				<div style="clear: both">
+					<br>Visible: <br>
+					<input type="radio" name="visible" value="1" checked>Sí
+					<input type="radio" name="visible" value="0">No<br><br>
+					<div>
+						<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+				</form>
 					</div>
+				</div>
+			</div>
 <?php
 }else{
 	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
