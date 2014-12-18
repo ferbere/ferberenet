@@ -17,19 +17,17 @@ $gad=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");
 			<tr>
 <?php
 		while ($row=mysql_fetch_array($sql)){
-			if($row['ruta']=='pdf.php'){
-				$send="/olgadiaque/admin/gadgets/mensajes/".$row['ruta'];
-//				$send='corporativa.php?ruta=if_corporativa.php';
-			}else{
-				$send=$gad.'.php?ruta='.$row['ruta'];
-			}
-			echo '<td valign="center">
-					<a href="'.$send.'">
-						<img src="images/'.$row['imagen'].'.'.$row['ext'].'" class="rollover" width="16px">
-					</a>'."\n".$row['boton'].'
-				 </td>';	
-				echo '<td>
-					</td>';
+			$send=$gad.'.php?ruta='.$row['ruta'];
+			echo '<td valign="center">';
+			echo 	'<a href="'.$send.'">';
+//			echo 		'<img src="images/'.$row['imagen'].'.'.$row['ext'].'" class="rollover" width="16px">';
+			echo 		'<div id="btn_source" class="'.$row['imagen'].'"> ';
+			echo 			$row['boton'];
+			echo 		'</div>';
+			echo 	'</a>';
+			echo '</td>';	
+			echo '<td>';
+			echo '</td>';
 }
 ?>
 			</tr>

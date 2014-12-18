@@ -1,0 +1,73 @@
+<?php
+session_start();
+include_once('../../../classes/conex.php');
+$link=Conectarse();
+if(isset($_POST['rubro'])){
+	$rubro=$_POST['rubro'];	
+}
+if(isset($_POST['nombre'])){
+	$nombre=$_POST['nombre'];	
+}
+if(isset($_POST['texto'])){
+	$texto=$_POST['texto'];	
+}
+if(isset($_POST['categoria'])){
+	$categoria=$_POST['categoria'];	
+}
+if(isset($_POST['visible'])){
+	$visible=$_POST['visible'];	
+}
+if(isset($_POST['dip1'])){
+	$dip1=$_POST['dip1'];	
+}
+if(isset($_POST['dip2'])){
+	$dip2=$_POST['dip2'];	
+}
+if(isset($_POST['dip3'])){
+	$dip3=$_POST['dip3'];	
+}
+if(isset($_POST['dip4'])){
+	$dip4=$_POST['dip4'];	
+}
+if(isset($_POST['dip5'])){
+	$dip5=$_POST['dip5'];	
+}
+if(isset($_POST['dip6'])){
+	$dip6=$_POST['dip6'];	
+}
+if(isset($_POST['dip7'])){
+	$dip7=$_POST['dip7'];	
+}
+if(isset($_POST['dip8'])){
+	$dip8=$_POST['dip8'];	
+}
+if(isset($_POST['dip9'])){
+	$dip9=$_POST['dip9'];	
+}
+if(isset($_POST['dip10'])){
+	$dip10=$_POST['dip10'];	
+}
+if(isset($_POST['dip11'])){
+	$dip11=$_POST['dip11'];	
+}
+if(isset($_POST['dip12'])){
+	$dip12=$_POST['dip12'];	
+}
+if(isset($_POST['dip13'])){
+	$dip13=$_POST['dip13'];	
+}
+if(isset($_POST['dip14'])){
+	$dip14=$_POST['dip14'];	
+}
+for($i=1;$i<=14;$i++){
+	$dip[$i]=$dip[$i];
+	echo $dip[$i].'<br>';
+}
+echo $dip12;
+/*
+$mysql=mysql_query("UPDATE perfil_iniciativa SET  nombre = '$nombre', texto = '$texto', categoria = '$categoria',visible = '$visible' WHERE id = '$rubro'" ,$link);
+if(!$mysql){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+}else{
+	echo '<script>window.location.href="../../perfil.php?ruta=if_iniciativa_a.php&capturado=1";</script>';
+}*/
+?>

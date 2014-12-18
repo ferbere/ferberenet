@@ -10,12 +10,14 @@ if($_SESSION["privilegioss"]=="ferbere"){
 		$rubro=$_GET['rubro'];
 	}
 	if(empty($capturado)){
-		$sql=mysql_query("SELECT * FROM gadgets_index WHERE id = '$rubro' ",$link);
+		$sql=mysql_query("SELECT id,gadget,alias,ruta,visible,privilegios FROM gadgets_index WHERE id = '$rubro' ",$link);
 		while($row=mysql_fetch_array($sql)){
-			$gadget=$row['gadget'];
-			$ruta=$row['ruta'];
-			$visible=$row['visible'];
-			$privilegios=$row['privilegios'];
+			$id=$row[0];
+			$gadget=$row[1];
+			$alias=$row[2];
+			$ruta=$row[3];
+			$visible=$row[4];
+			$privilegios=$row[5];
 		}
 	?>
 	<div id="form-main">
@@ -26,6 +28,7 @@ if($_SESSION["privilegioss"]=="ferbere"){
 				<div id="maincontent-body">
 					<div>
 						Gadget:<br><input type="text" name="gadget" size="30" value="<?php echo $gadget; ?>"><br><br>
+						Alias:<br><input type="text" name="alias" size="30" value="<?php echo $alias; ?>"><br><br>
 						Ruta:<br><input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>"><br>
 	<?php
 	if($visible==1){

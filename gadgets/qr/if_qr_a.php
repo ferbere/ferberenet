@@ -16,6 +16,15 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 	<form method="post" action="gadgets/qr/ip_qr_a.php">
 	<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
 <?php
+$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+		$url=mysql_fetch_array($sql_u);
+		if(empty($url[1])){
+			$url_c='http://localhost/';
+		}else{
+			$url_c='http://'.$url[1].'/';
+		}
+		$path=$url_c.$_SESSION['admin'].'/images/fotos/';
+
 		$sql= mysql_query("SELECT id,qr,url,descripcion FROM qr_index WHERE id = '$rubro' ",$link);
 		while ($row = mysql_fetch_array($sql)){
 			$id				=	$row[0];
@@ -30,7 +39,7 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 				<div id="maincontent-body">
 					<div>
 						<div style="text-align:center"><br><br>
-							<img src="../images/fotos/<?php echo $qr ?>.png"><br><br>
+							<img src="<?php echo $path.$qr ?>.png"><br><br>
 						</div>
 						Nombre:<br></h1>
 						<input type="text" name="qr" style="width:95%" value="<?php echo $qr ?>" /><br><br>

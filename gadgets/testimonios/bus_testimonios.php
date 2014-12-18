@@ -27,7 +27,7 @@ if(isset($_GET['ruta'])){
 	<div style="margin: 0px auto">
 <?php
 			include_once("classes/sacar.class.php");
-			$self=sacar($_SERVER['PHP_SELF'],"admin/",".php");
+			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");
 			include_once("classes/buscador.class.php");
 			$sql = "SELECT testimonios_index.id,testimonios_index.titulo,general_visible.nombre,testimonios_index.fecha,testimonios_index.orden FROM testimonios_index INNER JOIN general_visible ON testimonios_index.visible = general_visible.id WHERE testimonios_index.id != 0 ";
 			$celdas=array(0=>'id',1=>'titulo',2=>'visible',3=>'fecha',4=>'orden');

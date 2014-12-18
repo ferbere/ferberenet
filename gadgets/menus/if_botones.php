@@ -3,6 +3,7 @@ session_start();
 if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 include("library/tinymce.php");
 include("library/confirm.php");
+include_once("classes/conex.php");
 if(isset($_GET['capturado'])){
 $capturado=$_GET['capturado'];
 }

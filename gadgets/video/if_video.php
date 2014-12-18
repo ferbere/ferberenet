@@ -2,8 +2,8 @@
 session_start();
 if($_SESSION["estado"]=="Autenticado"){
 	$link=Conectarse();
-	include("../library/tinymce.php");
-	include("../library/confirm.php");
+	include("library/tinymce.php");
+	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
@@ -41,4 +41,3 @@ if($_SESSION["estado"]=="Autenticado"){
 }else{
 echo "Usted no tiene acceso a esta seccción";
 }
-include("style/footer_admin.html"); ?>

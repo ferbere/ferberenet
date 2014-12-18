@@ -2,8 +2,8 @@
 session_start();
 if($_SESSION["estado"]=="Autenticado"){
 	$link=Conectarse();
-	include("../library/tinymce.php");
-	include("../library/confirm.php");
+	include("library/tinymce.php");
+	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
