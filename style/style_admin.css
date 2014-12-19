@@ -1,4 +1,4 @@
-@font-face {
+	@font-face {
   font-family: 'FontAwesome';
   src: url('fonts/fontawesome-webfont.eot?v=4.2.0');
   src:  url('fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'),
@@ -9,38 +9,37 @@
   font-style: normal;
 }
 body { 
+	color: #444444;
 	background-color: rgba(223,223,245,1);
+
+/*	background-color: rgba(223,223,245,1);*/
 	font-family: "Helvetica";
 	font-size: 20px;
-/*	color:rgba(113,80,132,1);*/
-/*	color: rgba(120,120,220,1);*/
-	color: rgba(80,80,80,1);
+
+/*	color: rgba(80,80,80,1);*/
 	height: 100%;
 	margin: 0px auto;
 	min-width: 100px;
 	width: 90%;
 }
+/*
 input,textarea{
-	background-color: rgba(223,223,245,1);
+
 	border-radius: 10px;
-	border: 2px dotted rgba(123,123,145,1);
 	font-size: 20px;
-	color: rgba(120,120,220,1);
-	width: 100%;
+	width: 500px;
 }
 input[type=submit]{
-	background-color: rgba(155,65,65,1);
-	border-radius: 20px;
-	border: 2px solid rgba(223,223,245,1);
-	font-size: 1em;
-	height: 2.5em;
-	color: rgba(223,223,245,1);
-	width: 30%;
+	background-color: rgba(200,65,65,1);
+	border-radius: 10px;
+	font-size: 0.9em;
+	height: 1.5em;
+	color: rgba(245,245,245,1);
+	width: 100px;
 }
 input[type=submit]:hover{
 	background-color: rgba(123,123,145,0.6);
-	font-size: 1.2em;
-	height: 2.5em;
+	height: 1.6em;
 	-webkit-transition: all 300ms ease-in-out;
 	-moz-transition: all 300ms ease-in-out;
 	-o-transition: all 300ms ease-in-out;
@@ -54,16 +53,17 @@ input[type=file]{
 input[type=radio]{
 	display: inline-block;
 }
+*/
 #header{
 	height: 200px;
 	width: 100%;
-	background:  url("images/ferbere.jpg") top left no-repeat;
+	background:  url("images/logo.png") top left no-repeat;
 	text-align: center;
 	margin: 0px auto ;
 
 }
 #pleca_header{
-	border-bottom: 2px dotted rgba(113,80,132,1);
+	border-bottom: 1px solid rgba(113,80,132,1);
 	position: relative;
 	top: 100px;
 	height: 40px;
@@ -90,7 +90,7 @@ font-size: 0.7em;
 }
 #footer{
 /*	box-shadow:1px 2px 3px 0px rgba(0,0,0,1);*/
-	border-top: 2px dotted;
+	border-top: 1px solid;
 	margin:0px auto;
 	text-align:center;
 	width:90%;
@@ -145,7 +145,7 @@ hr.line{
 	text-align: center;
 }
 #maincontent-body{
-	width: 90%;
+	width: 30%;
 	margin: 0px auto;
 	border: 0px solid;
 }

@@ -1,5 +1,5 @@
 <?php
-include_once('../../../classes/conex.php');
+include_once('../../classes/conex.php');
 $link=Conectarse();
 if(isset($_GET['borra'])){
 	$borra=$_GET['borra'];

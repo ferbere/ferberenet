@@ -1,0 +1,43 @@
+<?php
+session_start();
+include_once('../../../classes/conex.php');
+$link=Conectarse();
+if(isset($_POST["rubro"])){
+	$rubro=$_POST["rubro"];
+}
+if(isset($_POST["tema"])){
+	$tema=$_POST["tema"];
+}
+if(isset($_POST["subtema"])){
+	$subtema=$_POST["subtema"];
+}
+if(isset($_POST["tipo"])){
+	$tipo=$_POST["tipo"];
+}
+if(isset($_POST["imparte"])){
+	$imparte=$_POST["imparte"];
+}
+if(isset($_POST["dirigido"])){
+	$dirigido=$_POST["dirigido"];
+}
+if(isset($_POST["descripcion"])){
+	$descripcion=$_POST["descripcion"];
+}
+if(isset($_POST["lugar"])){
+	$lugar=$_POST["lugar"];
+}
+if(isset($_POST["dia"])){
+	$dia=$_POST["dia"];
+}
+if(isset($_POST["hora_i"])){
+	$hora_i=$_POST["hora_i"];
+}
+if(isset($_POST["hora_t"])){
+	$hora_t=$_POST["hora_t"];
+}
+$que=mysql_query("UPDATE programa SET tema='$tema', subtema = '$subtema', tipo = '$tipo', imparte = '$imparte', dirigido = '$dirigido', descripcion = '$descripcion', lugar = '$lugar', dia = '$dia', hora_i = '$hora_i', hora_t= '$hora_t' WHERE id = '$rubro' ",$link);
+if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+}else{
+	echo '<script>window.location.href="../../congreso.php?ruta=if_evento_a.php&capturado=1";</script>';
+}
+?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('../../../classes/conex.php');
+include_once('../../classes/conex.php');
 $link=Conectarse();
 if(isset($_POST['rubro'])){
 	$rubro=$_POST['rubro'];	

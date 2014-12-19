@@ -4,7 +4,7 @@ if($_SESSION["estado"]=="Autenticado"){
 	include_once("classes/mysql.php");
 	$mysql = new MySQL();
 	extract($_SESSION);	
-	$sql = $mysql->consulta("SELECT id,gadget,alias,ruta FROM gadgets_index WHERE privilegios >= ".$privilegioss_id);
+	$sql = $mysql->consulta("SELECT id,gadget,alias,ruta FROM gadgets_index WHERE visible = 1 AND privilegios >= ".$privilegioss_id);
 ?>	
 		
 <?php

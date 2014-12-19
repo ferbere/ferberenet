@@ -13,6 +13,13 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 		if(isset($_GET['rubro'])){
 			$rubro=$_GET['rubro'];
 		}
+				$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+		$url=mysql_fetch_array($sql_u);
+		if($url[1]==''){
+			$url_d='../'.$_SESSION["admin"].'/images/encuesta/';
+		}else{
+			$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/encuesta/';
+		}
 ?>
 <div id="form-main">
 	<form method="post" action="gadgets/quiz/ip_ques_a.php" enctype="multipart/form-data">
@@ -33,7 +40,7 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 	}
 	$sql_q=$mysql->consulta("SELECT id,nombre FROM quiz_index ORDER BY id ASC");
 ?>
-		<img src="../images/encuesta/<?php echo $imagen; ?>"><br><br>
+		<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
 		Pregunta:<br>
 		<input type="text" name="pregunta" style="width:400px" value="<?php echo $pregunta ?>"><br><br>
 		<select name="quiz">
