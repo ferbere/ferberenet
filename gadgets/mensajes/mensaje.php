@@ -2,7 +2,7 @@
 if(isset($_GET['rubro'])){
 	$rubro=$_GET['rubro'];
 }
-include_once('../../../classes/conex.php');
+include_once('classes/conex.php');
 $link=Conectarse();
 
 $leido=mysql_query("UPDATE mails_index SET status = 1 WHERE id = '$rubro' ",$link);
