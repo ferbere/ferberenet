@@ -1,18 +1,18 @@
 <?php
 session_start();
-include_once('../../../classes/conex.php');
+include_once('../../classes/conex.php');
 $link=Conectarse();
 if(isset($_POST["rubro"])){
 	$rubro=$_POST["rubro"];
 }
-if(isset($_POST["tema"])){
-	$tema=$_POST["tema"];
+if(isset($_POST["titulo"])){
+	$titulo=$_POST["titulo"];
 }
-if(isset($_POST["subtema"])){
-	$subtema=$_POST["subtema"];
+if(isset($_POST["subtitulo"])){
+	$subtitulo=$_POST["subtitulo"];
 }
-if(isset($_POST["tipo"])){
-	$tipo=$_POST["tipo"];
+if(isset($_POST["categoria"])){
+	$categoria=$_POST["categoria"];
 }
 if(isset($_POST["imparte"])){
 	$imparte=$_POST["imparte"];
@@ -35,9 +35,9 @@ if(isset($_POST["hora_i"])){
 if(isset($_POST["hora_t"])){
 	$hora_t=$_POST["hora_t"];
 }
-$que=mysql_query("INSERT INTO programa (tema,subtema,tipo,imparte,dirigido,descripcion,lugar,dia,hora_i,hora_t) VALUES ('{$tema}','{$subtema}','{$tipo}','{$imparte}','{$dirigido}','{$descripcion}','{$lugar}','{$dia}','{$hora_i}','{$hora_t}')",$link);
+$que=mysql_query("INSERT INTO agenda_programa (titulo,subtitulo,categoria,imparte,dirigido,descripcion,lugar,dia,hora_i,hora_t) VALUES ('{$titulo}','{$subtitulo}','{$categoria}','{$imparte}','{$dirigido}','{$descripcion}','{$lugar}','{$dia}','{$hora_i}','{$hora_t}')",$link);
 if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 }else{
-	echo '<script>window.location.href="../../congreso.php?ruta=if_evento.php&capturado=1";</script>';
+	echo '<script>window.location.href="../../agenda.php?ruta=if_evento.php&capturado=1";</script>';
 }
 ?>

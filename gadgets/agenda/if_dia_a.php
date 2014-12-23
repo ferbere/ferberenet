@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../library/confirm.php");
+include("library/confirm.php");
 if($_SESSION['privilegioss']=="ferbere"){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
@@ -12,14 +12,14 @@ if($_SESSION['privilegioss']=="ferbere"){
 		}
 ?>
 <div id="form-main">
-			<form method="post" action="gadgets/congreso/ip_dia_a.php">
+			<form method="post" action="gadgets/agenda/ip_dia_a.php">
 	<div id="maincontent-tit">
 		Modificar nombre del día<br><br>
 	</div>
 		<div id="maincontent-body">
 			<div>
 <?php
-	$sql=mysql_query("SELECT * FROM congreso_dia WHERE id = '$rubro' ",$link);
+	$sql=mysql_query("SELECT * FROM agenda_dia WHERE id = '$rubro' ",$link);
 	while($row=mysql_fetch_array($sql)){
 		$nombre=$row['nombre'];
 	}

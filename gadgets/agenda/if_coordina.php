@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../library/confirm.php");
+include("library/confirm.php");
 if($_SESSION['privilegioss']=="ferbere"){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
@@ -10,16 +10,17 @@ if($_SESSION['privilegioss']=="ferbere"){
 		if(isset($_GET['rubro'])){
 			$rubro=$_GET['rubro'];
 		}
-		$sql_dia=mysql_query("SELECT * FROM congreso_dia WHERE id = '$rubro' ",$link);
+		$sql_dia=mysql_query("SELECT id,nombre,congreso FROM agenda_dia WHERE id = '$rubro' ",$link);
 		while($row_dia=mysql_fetch_array($sql_dia)){
-			$id=$row_dia['id'];
-			$nombre=$row_dia['nombre'];
+			$id			=	$row_dia[0];
+			$nombre		=	$row_dia[1];
+			$congreso	=	$row_dia[2];
 		}
-		$sql_coordina=mysql_query("SELECT congreso_coordina.id,imparte.imparte FROM imparte,congreso_coordina WHERE imparte.id=congreso_coordina.coordinador_id AND congreso_coordina.dia_id = '$id'",$link);
-		$sql_imparte=mysql_query("SELECT id,imparte FROM imparte",$link);
+		$sql_coordina=mysql_query("SELECT agenda_coordina.id,agenda_imparte.nombre FROM agenda_imparte,agenda_coordina WHERE agenda_imparte.id=agenda_coordina.coordinador_id AND agenda_coordina.dia_id = '$id'",$link);
+		$sql_imparte=mysql_query("SELECT id,nombre FROM agenda_imparte",$link);
 ?>
 <div id="form-main">
-			<form method="post" action="gadgets/congreso/ip_coordina.php">
+			<form method="post" action="gadgets/agenda/ip_coordina.php">
 	<div id="maincontent-tit">
 		¿Quién coordina el <?echo $nombre ?>?<br><br>
 	</div>
@@ -28,9 +29,9 @@ if($_SESSION['privilegioss']=="ferbere"){
 			<table style="margin:0px auto; text-align:center">
 			<?php
 			while($row_c=mysql_fetch_array($sql_coordina)){
-				echo '<tr><td style="width:300px; text-align:left; border-bottom:1px dotted">'.$row_c['imparte'].'</td>';
+				echo '<tr><td style="width:300px; text-align:left; border-bottom:1px dotted">'.$row_c[1].'</td>';
 				echo '<td></td>';
-				echo '<td style="width:100px"><a href="congreso.php?ruta=borra.php&borra=4&rubro='.$row_c['id'].'">borrar</a></td></tr>';
+				echo '<td style="width:100px"><a href="agenda.php?ruta=borra.php&borra=4&rubro='.$row_c[0].'">borrar</a></td></tr>';
 			}
 			?>
 			</table>
@@ -40,7 +41,7 @@ if($_SESSION['privilegioss']=="ferbere"){
 		<option value="0">ninguno</option>
 <?php
 	while($row_imparte=mysql_fetch_array($sql_imparte)){
-		echo '<option value="'.$row_imparte['id'].'">'.$row_imparte['imparte'].'</option>';
+		echo '<option value="'.$row_imparte['id'].'">'.$row_imparte['nombre'].'</option>';
 	}
 ?>
 	</select><br><br>

@@ -17,7 +17,7 @@ if(isset($_GET['ruta'])){
 	}
 ?>
 <div align="center">
-	<form action="congreso.php" method="get">
+	<form action="agenda.php" method="get">
 	Criterio de búsqueda:
 		<input type="hidden" name="ruta" value="<?php echo $ruta ?>">
 		<input type="text" name="criterio" size="22" maxlength="150">
@@ -27,11 +27,11 @@ if(isset($_GET['ruta'])){
 	<div style="margin: 0px auto">
 <?php
 			include_once("classes/sacar.class.php");
-			$self=sacar($_SERVER['PHP_SELF'],"admin/",".php");	
+			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");	
 			include_once("classes/buscador.class.php");
-			$sql = "SELECT id,tema,dia FROM programa ";
-			$celdas=array(0=>'id',1=>'tema',2=>'dia');
-			$pez=" where tema like '%" . $criterio . "%' or subtema like '%" . $criterio . "%' or dia like '%" . $criterio . "%'";
+			$sql = "SELECT id,titulo,dia FROM agenda_programa ";
+			$celdas=array(0=>'id',1=>'titulo',2=>'dia');
+			$pez=" where titulo like '%" . $criterio . "%' or subtitulo like '%" . $criterio . "%' or dia like '%" . $criterio . "%'";
 			$set='if_evento_a.php';
 			$ruta='bus_evento.php';
 			$borra=1;

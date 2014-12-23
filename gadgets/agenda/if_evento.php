@@ -11,16 +11,16 @@ if($_SESSION["estado"]=="Autenticado"){
 	if(empty($capturado)){
 ?>
 		<div id="form-main">
-		<form method="post" action="gadgets/congreso/ip_evento.php" name="fvalida">
-			<div id="maincontent-tit">
-				Crear evento en el Congreso
+		<form method="post" action="gadgets/agenda/ip_evento.php" name="fvalida">
+		<div id="maincontent-tit">
+				Crear evento del Candidato
 			</div>
 				<div id="maincontent-body">
 					<div>
-						Tema:<br>
-						<textarea name="tema" rows=10 cols=70 width:300px height:40px></textarea><br>
-						Subtema:<br>
-				<input type="text" name="subtema" size="80%"><br>
+						Titulo:<br>
+						<input type="text" name="titulo"  size="80%"><br>
+						Subtitulo:<br>
+				<input type="text" name="subtitulo" size="80%"><br>
 						Imparte:<br>
 				<input type="text" name="imparte" size="80%"><br>
 						Dirigido a:<br>
@@ -43,7 +43,7 @@ if($_SESSION["estado"]=="Autenticado"){
 				<select name="dia">
 					<option value="0">No programado</a>
 <?php
-$sql_dia=mysql_query("SELECT id,nombre FROM congreso_dia", $link);
+$sql_dia=mysql_query("SELECT id,nombre FROM agenda_dia", $link);
 while($row_dia=mysql_fetch_array($sql_dia)){
 	echo '<option value="'.$row_dia['id'].'">'.$row_dia['nombre'].'</a>';
 }

@@ -6,9 +6,9 @@ if(isset($_POST["nombre"])){
 	$nombre=$_POST["nombre"];
 }
 
-$que=mysql_query("INSERT INTO congreso_dia (nombre) VALUES ('{$nombre}')",$link);
+$que=mysql_query("INSERT INTO agenda_dia (nombre) VALUES ('{$nombre}')",$link);
 if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 }else{
-	echo '<script>window.location.href="../../congreso.php?ruta=if_dia.php&capturado=1";</script>';
+	echo '<script>window.location.href="../../agenda.php?ruta=if_dia.php&capturado=1";</script>';
 }
 ?>

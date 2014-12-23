@@ -1,21 +1,21 @@
 <?php
 session_start();
 if($_SESSION["estado"]=="Autenticado"){
-	include("../library/confirm.php");
+	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
 	if(empty($capturado)){
 ?>
 		<div id="form-main">
-		<form method="post" action="gadgets/congreso/ip_imparte.php" name="fvalida">
+		<form method="post" action="gadgets/agenda/ip_imparte.php" name="fvalida">
 			<div id="maincontent-tit">
-				Agregar ponente al Congreso
+				Agregar ponente a la Agenda
 			</div>
 				<div id="maincontent-body">
 					<div>
 						<br><br>Ponente:<br>
-				<input type="text" name="imparte" size="80%"><br>
+				<input type="text" name="nombre" size="80%"><br>
 						Perfil:<br>
 				<input type="text" name="perfil" size="80%"><br>
 						Ficha curricular:<br>

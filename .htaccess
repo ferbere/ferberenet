@@ -1,0 +1,1 @@
+ErrorDocument 404 /ferberenet/error404.php?ruta=index.php

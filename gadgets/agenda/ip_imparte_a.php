@@ -18,6 +18,6 @@ if(isset($_POST["curri"])){
 $que=mysql_query("UPDATE imparte SET imparte='$imparte', perfil = '$perfil', curri = '$curri' WHERE id = '$rubro' ",$link);
 if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 }else{
-	echo '<script>window.location.href="../../congreso.php?ruta=if_imparte_a.php&capturado=1";</script>';
+	echo '<script>window.location.href="../../agenda.php?ruta=if_imparte_a.php&capturado=1";</script>';
 }
 ?>

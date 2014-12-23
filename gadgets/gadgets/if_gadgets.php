@@ -16,7 +16,8 @@ if($_SESSION["privilegioss"]=="ferbere"){
 					<h1>Agregar gadget</h1>
 				</div>
 					<div>
-						Gadget:<br><input type="text" name="gadget" size="30">.jpg<br>
+						Gadget:<br><input type="text" name="gadget" size="30"><br>
+						Alias:<br><input type="text" name="alias" size="30"><br>
 						Ruta:<br><input type="text" name="rutas" size="30"><br>
 				</div>
 					<div>

@@ -12,7 +12,7 @@ if($_SESSION['privilegioss']=="ferbere"){
 		}
 ?>
 <div id="form-main">
-			<form method="post" action="gadgets/congreso/ip_imparte_a.php">
+			<form method="post" action="gadgets/agenda/ip_imparte_a.php">
 	<div id="maincontent-tit">
 		Modificar información del Ponente<br><br>
 	</div>

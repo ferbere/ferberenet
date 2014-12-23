@@ -6,18 +6,16 @@ if (isset($_GET['pag'])){
 }
 if(isset($_GET['criterio'])){
 	$criterio = $_GET['criterio'];
-}else{
-	$criterio='';
 }
 if(isset($_GET['ruta'])){
 	$ruta = $_GET['ruta'];
 }
 	if(empty($ruta)){
-		$ruta='bus_imparte.php';
+		$ruta='bus_codigo.php';
 	}
 ?>
 <div align="center">
-	<form action="agenda.php" method="get">
+	<form action="codigo.php" method="get">
 	Criterio de búsqueda:
 		<input type="hidden" name="ruta" value="<?php echo $ruta ?>">
 		<input type="text" name="criterio" size="22" maxlength="150">
@@ -29,12 +27,11 @@ if(isset($_GET['ruta'])){
 			include_once("classes/sacar.class.php");
 			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");	
 			include_once("classes/buscador.class.php");
-			$sql = "SELECT id,nombre FROM agenda_imparte ";
-			$celdas=array(0=>'id',1=>'nombre');
-			$pez=" where nombre like '%" . $criterio . "%' or perfil like '%" . $criterio . "%' or curri like '%" . $criterio . "%'";
-			$set='if_imparte_a.php';
-			$ruta='bus_imparte.php';
-			$borra=2;
+			$sql = "SELECT codigo_index.id,codigo_index.nombre,codigo_categoria.nombre,codigo_index.contenido FROM codigo_index INNER JOIN codigo_categoria ON codigo_index.categoria = codigo_categoria.id ";
+			$celdas=array(0=>'id',1=>'nombre',2=>'categoria');
+			$pez=" where codigo_index.nombre like '%" . $criterio . "%' or codigo_index.contenido like '%" . $criterio . "%' or codigo_categoria.nombre like '%" . $criterio . "%'";
+			$set='if_codigo_a.php';
+			$borra=1;
 			$clPag = new paginacion();
 			$clPag->cuantos($sql,$pez);
 			$clPag->pagina($pag,$sql,$pez,$set,$borra,$celdas,$self);

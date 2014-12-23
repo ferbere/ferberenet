@@ -38,6 +38,6 @@ if(isset($_POST["hora_t"])){
 $que=mysql_query("UPDATE programa SET tema='$tema', subtema = '$subtema', tipo = '$tipo', imparte = '$imparte', dirigido = '$dirigido', descripcion = '$descripcion', lugar = '$lugar', dia = '$dia', hora_i = '$hora_i', hora_t= '$hora_t' WHERE id = '$rubro' ",$link);
 if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 }else{
-	echo '<script>window.location.href="../../congreso.php?ruta=if_evento_a.php&capturado=1";</script>';
+	echo '<script>window.location.href="../../agenda.php?ruta=if_evento_a.php&capturado=1";</script>';
 }
 ?>

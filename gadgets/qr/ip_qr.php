@@ -7,7 +7,7 @@ $link=Conectarse();
 $qr=$_POST["qr"];
 $url=$_POST["url"];
 $descripcion=$_POST["descripcion"];
-
+/*
 $sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
 		$row_u=mysql_fetch_array($sql_u);
 		if(empty($row_u[1])){
@@ -16,7 +16,14 @@ $sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
 			$url_c='http://'.$row_u[1].'/';
 		}
 		$path=$url_c.$_SESSION['admin'].'/images/fotos/';
-
+*/
+$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+$row_u=mysql_fetch_array($sql_u);
+if($row_u[1]==''){
+	$path=$row_u[0].'/'.$_SESSION['admin'].'/images/fotos/';
+}else{
+	$path=$row_u[0].'/'.$row_u[1].'/'.$_SESSION['admin'].'/images/fotos/';
+}
 QRcode::png($url,$path.$qr.'.png');
 
 
