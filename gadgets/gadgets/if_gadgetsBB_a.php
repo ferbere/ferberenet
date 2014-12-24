@@ -1,8 +1,7 @@
 <?php
 session_start();
 if($_SESSION["privilegioss"]=="ferbere"){
-	include_once("classes/mysql.php");
-	$mysql=new MySQL();
+	$link=Conectarse();
 	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
@@ -11,8 +10,8 @@ if($_SESSION["privilegioss"]=="ferbere"){
 		$rubro=$_GET['rubro'];
 	}
 	if(empty($capturado)){
-		$sql=$mysql->consulta("SELECT id,gadget,alias,ruta,visible,privilegios FROM gadgets_index WHERE id = '$rubro' ");
-		while($row=$mysql->fetch_array($sql)){
+		$sql=mysql_query("SELECT id,gadget,alias,ruta,visible,privilegios FROM gadgets_index WHERE id = '$rubro' ",$link);
+		while($row=mysql_fetch_array($sql)){
 			$id=$row[0];
 			$gadget=$row[1];
 			$alias=$row[2];
@@ -26,7 +25,7 @@ if($_SESSION["privilegioss"]=="ferbere"){
 			<div id="maincontent-tit">
 				Modificar Gadget
 			</div>
-				<div id="maincontent-body" style="width:100%">
+				<div id="maincontent-body">
 					<div>
 						Gadget:<br><input type="text" name="gadget" size="30" value="<?php echo $gadget; ?>"><br><br>
 						Alias:<br><input type="text" name="alias" size="30" value="<?php echo $alias; ?>"><br><br>
@@ -45,30 +44,18 @@ if($_SESSION["privilegioss"]=="ferbere"){
 							<input type="radio" name="visible" value="0" <?echo $higno ?>>No<br><br>
 						Privilegios: <br>
 <?php
-$privv= decbin($privilegios);
-/*
-echo $privilegios.'<br>';
-echo $privv.'<br><br>';*/
-$sql_privi=$mysql->consulta("SELECT nombre FROM usuario_privilegios ORDER BY id DESC");
-$cuenta=$mysql->num_rows($sql_privi);
-
-$privv_def=str_pad($privv,$cuenta,'0',STR_PAD_LEFT);
-
-echo '<br>';
-$h=$cuenta;
-$j=1;
-while($row_privi=$mysql->fetch_array($sql_privi)){
-	if($privv_def{$j-1}==1){
+$sql_privi=mysql_query("SELECT * FROM usuario_privilegios",$link);
+$cuenta_privi=mysql_num_rows($sql_privi);
+while($row_privi=mysql_fetch_array($sql_privi)){
+	if($row_privi['id']==$privilegios){
 		$high='checked';
 	}else{
 		$high='nain';
 	}
-	echo '<input type="checkbox" name="privilegios[]" value="'.$j.'"'.$high.'>'.$row_privi[0].'  ';
-	$h=$h-1;
-	$j=$j+1;
+?>
+						<input type="radio" name="privilegios" value="<?php echo $row_privi['id'] ?>" <?echo $high ?>><?php echo $row_privi['nombre'];
 }
 ?>
-						<input type="hidden" name="cuenta" value="<?php echo $cuenta ?>">
 						<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
 					</div>
 						<div>

@@ -1,3 +1,3 @@
 <?php
-		include("main_index.php");
+include("main_index.php");
 ?>

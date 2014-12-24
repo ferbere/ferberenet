@@ -1,8 +1,8 @@
-<!--<!DOCTYPE html>-->
+<!DOCTYPE html>
 <html>
 <head>
 <title>{title}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 <link rel="stylesheet" type="text/css" href="style/style_admin.css" />
 <link rel="stylesheet" type="text/css" href="http://localhost/{css}/style/style_admin.css" />
 <link rel="stylesheet" type="text/css" href="style/font-awesome.css" />
