@@ -20,14 +20,14 @@ if($_SESSION["estado"]=="Autenticado"){
 			<input type="text" name="nombre" size="50"><br><br>
 							Fecha:<br>
 			<input type="text" name="fecha" size="50"><br><br>
-							Descripción:<br>
+							DescripciÃ³n:<br>
 			<textarea name="descripcion" rows=19 cols=70 width:300px height:40px></textarea><br>
 							Liga:<br>
 			<input type="text" name="liga" size="50"><br></br>
 
 							Visible:</br>
 			<input type="radio" name="visible" value="0" checked>No  
-			<input type="radio" name="visible" value="1">Sí  
+			<input type="radio" name="visible" value="1">SÃ­  
 						</div>
 							<div>
 			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
@@ -36,8 +36,8 @@ if($_SESSION["estado"]=="Autenticado"){
 		</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }

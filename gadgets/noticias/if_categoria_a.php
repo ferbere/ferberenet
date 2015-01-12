@@ -2,8 +2,8 @@
 session_start();
 if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 	$link=Conectarse();
-	include("../library/tinymce.php");
-	include("../library/confirm.php");
+	include("library/tinymce.php");
+	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
@@ -20,7 +20,7 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 		<div id="form-main">
 			<form method="post" action="gadgets/noticias/ip_categoria_a.php">
 			<div id="maincontent-tit">
-				Modificar categoría<br><br>
+				Modificar categorÃ­a<br><br>
 			</div>
 				<div id="maincontent-body">
 					<div>
@@ -37,9 +37,9 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 		</div>
 		<?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

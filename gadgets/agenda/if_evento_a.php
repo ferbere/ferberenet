@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../library/confirm.php");
+include("library/confirm.php");
 if($_SESSION['privilegioss']=="ferbere"){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
@@ -17,27 +17,31 @@ if($_SESSION['privilegioss']=="ferbere"){
 		Modificar evento de la Agenda<br><br>
 	</div>
 		<div id="maincontent-body">
-			<div>
+			<div id="a" style="margin-left:30px;">
 <?php
-	$sql=mysql_query("SELECT * FROM programa WHERE id = '$rubro' ",$link);
-	$sql_imparte=mysql_query("SELECT id,imparte FROM imparte",$link);
+	$sql=mysql_query("SELECT id,titulo,subtitulo,categoria,imparte,dirigido,descripcion,lugar,dia,hora_i,hora_t FROM agenda_programa WHERE id = '$rubro' ",$link);
+	$sql_imparte=mysql_query("SELECT id,nombre FROM agenda_imparte",$link);
 	while($row=mysql_fetch_array($sql)){
-		$tema=$row['tema'];
-		$subtema=$row['subtema'];
-		$imparte=$row['imparte'];
-		$dirigido=$row['dirigido'];
-		$tipo=$row['tipo'];
-		$lugar=$row['lugar'];
-		$fecha=$row['dia'];
-		$hora_i=$row['hora_i'];
-		$hora_t=$row['hora_t'];
-
+		$id=$row[0];
+		$titulo=$row[1];
+		$subtitulo=$row[2];
+		$categoria=$row[3];
+		$imparte=$row[4];
+		$dirigido=$row[5];
+		$descripcion=$row[6];
+		$lugar=$row[7];
+		$dia=$row[8];
+		$hora_i=$row[9];
+		$hora_t=$row[10];
 	}
 ?>
-		Tema:<br>
-		<textarea name="tema" rows=10 cols=70 width:300px height:40px><?php echo $tema ?></textarea><br>
-		Subtema:<br>
-		<input type="text" name="subtema" style="width:400px" value="<?php echo $subtitulo ?>"><br>
+		T√≠tulo:<br>
+		<textarea name="titulo" style="width:80%"><?php echo $titulo ?></textarea><br>
+		Subt√≠tulo:<br>
+		<input type="text" name="subtitulo" value="<?php echo $subtitulo ?>" style="width:80%">
+			</div>
+			<div id="b">
+				<div id="b1">
 		Imparte:<br>
 		<select name="imparte">
 <?php
@@ -47,45 +51,79 @@ if($_SESSION['privilegioss']=="ferbere"){
 		}else{
 			$hig="selected";
 		}
-	echo '<option value="'.$row_imparte['id'].'"'.$hig.'>'.$row_imparte['imparte'].'</option>';
+	echo '<option value="'.$row_imparte[0].'"'.$hig.'>'.$row_imparte[1].'</option>';
 	}
 ?>
-		</select><br><br>
+		</select>
+				</div>
+				<div id="b2">
 		Dirigido a:<br>
 		<select name="dirigido">
 		<option value="0" <?php if ($dirigido == "0"){ echo "selected"; } ?>>Indeterminado</a>
-		</select><br><br>
-		Tipo:<br>
-		<select name="tipo" size="2" style="width:150px">
-		<option value="0" <?php if ($tipo == "0"){ echo "selected"; } ?>>Conferencia</a>
-		<option value="1" <?php if ($tipo == "1"){ echo "selected"; } ?>>LogÌstico</a>
-		<option value="2" <?php if ($tipo == "2"){ echo "selected"; } ?>>Act. acadÈmica</a>
-			</select><br><br>
-		DescripciÛn:<br>
-		<textarea name="descripcion" rows=19 cols=70 width:300px height:40px><?php echo $metatags; ?></textarea><br><br>
-		Lugar:<br>
-		<select name="lugar" size="5" style="width:150px">
-		<option value="0" <?php if ($lugar == "0"){ echo "selected"; } ?>>Indeterminado</a>
-		</select><br><br>
-		DÌa:<br>
-		<input type="text" name="dia" style="width:35%" value="<?php echo $fecha ?>" /><br><br>
-		Hora inicio:<br>
-		<input type="text" name="hora_i" style="width:35%" value="<? echo $hora_i ?>" /><br><br>
-		Hora tÈrmino:<br>
-		<input type="text" name="hora_t" style="width:35%" value="<? echo $hora_t ?>" /><br><br>
-		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-			</div>
-				<div>
-					<input type="submit"  value="enviar"><br><br>
-			</form>
+		</select>
 				</div>
+				<div id="b3">
+		Categor√≠a:<br>
+		<select name="categoria">
+		<option value="0" <?php if ($categoria == "0"){ echo "selected"; } ?>>Conferencia</a>
+		<option value="1" <?php if ($categoria == "1"){ echo "selected"; } ?>>Log√≠stico</a>
+		<option value="2" <?php if ($categoria == "2"){ echo "selected"; } ?>>Act. acad√©mica</a>
+			</select>
+				</div>
+			</div>
+			<div id="c">
+				<div id="c1">
+		Descripci√≥n:<br>
+		<textarea name="descripcion"><?php echo $metatags; ?></textarea>
+				</div>
+				<div id="c2">
+		Lugar:<br>
+		<select name="lugar">
+		<option value="0" <?php if ($lugar == "0"){ echo "selected"; } ?>>Indeterminado</a>
+		</select>
+				</div>
+			</div>
+			<div id="d">
+				<div id="d1">
+		<select name="dia">
+			<option value="0">No programado</a>
+<?php
+		$sql_dia=mysql_query("SELECT id,fecha FROM agenda_dia", $link);
+		while($row_dia=mysql_fetch_array($sql_dia)){
+			if($dia==$row_dia[0]){
+				$hid='selected';
+			}else{
+				$hid='none';
+			}
+			echo '<option value="'.$row_dia[0].'" '.$hid.'>'.$row_dia[1].'</a>';
+		}
+?>
+		</select>
+				</div>
+				<div id="d2">
+		Hora inicio:<br>
+		<input type="text" name="hora_i" style="width:35%" value="<? echo $hora_i ?>" />
+				</div>
+				<div id="d2">
+		Hora t√©rmino:<br>
+		<input type="text" name="hora_t" style="width:35%" value="<? echo $hora_t ?>" />
+				</div>
+			</div>
+			<div id="e">
+				<div id="e1">
+		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+		<input type="submit"  value="enviar"><br><br>
+				</div>
+			</div>
+			</form>
 		</div>
+	</div>
 </div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. °Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. ¬°Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta secciÛn";
+echo "Usted no tiene acceso a esta secci√≥n";
 }
 ?>

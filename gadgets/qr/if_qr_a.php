@@ -45,7 +45,7 @@ $sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
 						<input type="text" name="qr" style="width:95%" value="<?php echo $qr ?>" /><br><br>
 						Url:<br></h1>
 						<input type="text" name="url" style="width:95%" value="<?php echo $url ?>" /><br><br>
-						Descripcion:<br>
+						Descripci√≥n:<br>
 						<textarea name="descripcion" rows=19 cols=80 width:300px height:40px><?php echo $descripcion ?></textarea>
 					</div>
 						<div>
@@ -56,9 +56,9 @@ $sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
 </div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. °Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. ¬°Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta secciÛn";
+echo "Usted no tiene acceso a esta secci√≥n";
 }		
 ?>

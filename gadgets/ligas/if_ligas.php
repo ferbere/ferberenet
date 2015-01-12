@@ -1,9 +1,8 @@
 <?php
 session_start();
-if($_SESSION["privilegioss"]=="ferbere"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 	$link=Conectarse();
-	include("../library/tinymce.php");
-	include("../library/confirm.php");
+	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
@@ -12,7 +11,7 @@ if($_SESSION["privilegioss"]=="ferbere"){
 		<div id="form-main">
 		<form method="post" action="gadgets/ligas/ip_ligas.php" name="fvalida">
 			<div id="maincontent-tit">
-				Agregar liga
+				Agregar ligar
 			</div>
 				<div id="maincontent-body">
 					<div>
@@ -32,9 +31,9 @@ if($_SESSION["privilegioss"]=="ferbere"){
 				</div>
 <?php
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

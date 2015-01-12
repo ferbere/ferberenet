@@ -36,7 +36,7 @@ if(empty($respuesto)){
 		echo "Nnnnnnnnnneeeeel, baaaa-boooo-sooo<br><br>";
 		echo '<a href="quiz.php?rubro='.$rubro.'">Intentar de nuevo</a>'.$rubro;
 	}else{
-		echo "¡Vaya, una!<br><br>";
+		echo "Â¡Vaya, una!<br><br>";
 		echo '<a href="quiz.php?rubro='.$suma.'">Siguiente</a>'.$rubro;
 	}
 }

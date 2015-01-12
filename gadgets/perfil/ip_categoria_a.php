@@ -16,9 +16,8 @@ if(isset($_POST['belong'])){
 }
 
 $mysql=mysql_query("UPDATE perfil_categoria SET  nombre = '$nombre',imagen = '$imagen',belong = '$belong' WHERE id = '$rubro'" ,$link);
-if(!$mysql){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$mysql){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../perfil.php?ruta=if_categoria_a.php&capturado=1";</script>';
 }
-include("style/footer_admin.html");
 ?>

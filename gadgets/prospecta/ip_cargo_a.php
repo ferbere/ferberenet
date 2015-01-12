@@ -14,7 +14,7 @@ if(isset($_POST["visible"])){
 
 $que=mysql_query("UPDATE prospecta_cargo SET nombre = '$nombre', visible = '$visible'  WHERE id = '$rubro'",$link);
 if(!$que){
-	die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+	die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../prospecta.php?ruta=if_cargo_a.php&capturado=1";</script>';
 }

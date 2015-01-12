@@ -2,6 +2,9 @@
 session_start();
 if($_SESSION["privilegioss"]=="ferbere"){
 include("library/confirm.php");
+include_once("classes/mysql.php");
+$mysql = new MySQL();
+$mysql2 = new MySQL();
 if(isset($_GET['capturado'])){
 	$capturado=$_GET['capturado'];
 }
@@ -10,22 +13,26 @@ if(isset($_GET['rubro'])){
 }
 
 if(empty($capturado)){
-	$sql_botones_admin=mysql_query("SELECT * FROM gadgets_botones_admin WHERE id = '$rubro' ",$link);
-	while($row_botones_admin=mysql_fetch_array($sql_botones_admin)){
-		$boton=$row_botones_admin['boton'];
-		$imagen=$row_botones_admin['imagen'];
-		$ext=$row_botones_admin['ext'];
-		$ruta=$row_botones_admin['ruta'];
-		$gadget=$row_botones_admin['gadget'];
-		$privilegios=$row_botones_admin['privilegios'];
-		$visible=$row_botones_admin['visible'];
+	$sql_botones_admin=$mysql->consulta("SELECT boton,imagen,ext,ruta,gadget,privilegios,visible FROM gadgets_botones_admin WHERE id = '$rubro' ");
+	while($row_botones_admin=$mysql->fetch_array($sql_botones_admin)){
+		$boton 			=		$row_botones_admin[0];
+		$imagen 		=		$row_botones_admin[1];
+		$ext 			=		$row_botones_admin[2];
+		$ruta 			=		$row_botones_admin[3];
+		$gadget 		=		$row_botones_admin[4];
+		$privilegios 	=		$row_botones_admin[5];
+		$visible 		= 		$row_botones_admin[6];
 	}
 ?>
-<table border="0" cellpadding="0" width="600" align="center">
-<form method="post" action="gadgets/gadgets/ip_botones_admin_a.php">
-<tr><td colspan="2"><h1>Editar Botones del Admin</h1></td></tr>
-<tr><td colspan="2">Botón:<br><input type="text" name="boton" size="30" value="<?php echo $boton; ?>"></td></tr>
-<tr><td>Imagen:<br><input type="text" name="imagen" size="30" value="<?php echo $imagen; ?>"></td>
+<div>
+<form method="get" action="gadgets/gadgets/ip_botones_admin_a.php">
+	<td colspan="2"><h1>Editar Botones del Admin</h1></div>
+	<div>
+		BotÃ³n:<br><input type="text" name="boton" size="30" value="<?php echo $boton; ?>">
+	</div>
+	<div>
+		Imagen:<br><input type="text" name="imagen" size="30" value="<?php echo $imagen; ?>">
+	</div>
 <?php
 	if($ext=='jpg'){
 		$opjpg='selected';
@@ -35,71 +42,84 @@ if(empty($capturado)){
 		$oppng='selected';
 	}
 ?>
-<td>Extensión  <select name="ext">
-<option value="jpg" <?php echo $opjpg ?>>.jpg</a>
-<option value="png" <?php echo $oppng ?>>.png</a>
-</select>
-</td></tr>
-<tr><td>Ruta:<br><input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>">
-</td></tr>
-<tr>
-<td>Gadget:  <select name="gadget">
-<?php
-$sql2=mysql_query("SELECT id,gadget FROM gadgets_index" ,$link);
-while ($row2=mysql_fetch_array($sql2)){
-	if($gadget==$row2['id']){
-		$hig='selected';
-	}else{
-		$hig='nain';
+	<div>
+		ExtensiÃ³n
+		<select name="ext">
+			<option value="jpg" <?php echo $opjpg ?>>.jpg</a>
+			<option value="png" <?php echo $oppng ?>>.png</a>
+		</select>
+	</div>
+	<div>
+		Ruta:<br><input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>">
+	</div>
+<div>
+	<div>Gadget:  <select name="gadget">
+	<?php
+	$sql2=$mysql->consulta("SELECT id,gadget FROM gadgets_index");
+	while ($row2=$mysql->fetch_array($sql2)){
+		if($gadget==$row2['id']){
+			$hig='selected';
+		}else{
+			$hig='nain';
+		}
+	echo '<option value="'.$row2['id'].'"'.$hig.'>'."\n".$row2['gadget']."</a>   ";
 	}
-echo '<option value="'.$row2['id'].'"'.$hig.'>'."\n".$row2['gadget']."</a>   ";
+	?>
+	</select>
+	</div>
+</div>
+<div>
+Privilegios: <br>
+<?php
+$privv= decbin($privilegios);
+/*
+echo $privilegios.'<br>';
+echo $privv.'<br><br>';*/
+
+
+$sql_privi=$mysql2->consulta("SELECT nombre FROM usuario_privilegios ORDER BY id DESC");
+$cuenta=$mysql2->num_rows($sql_privi);
+$privv_def=str_pad($privv,$cuenta,'0',STR_PAD_LEFT);
+echo '<br>';
+$h=$cuenta;
+$j=1;
+while($row_privi=$mysql2->fetch_array($sql_privi)){
+	if($privv_def{$j-1}==1){
+		$high='checked';
+	}else{
+		$high='nain';
+	}
+	echo '<input type="checkbox" name="privilegios[]" value="'.$j.'"'.$high.'>'.$row_privi[0].'  ';
+	$h=$h-1;
+	$j=$j+1;
 }
 ?>
-</select>
-
-</td>
-</tr>
-<tr>
-<td>Privilegios:  <select name="privilegios">
-<?php
-$sql3=mysql_query("SELECT id,nombre FROM usuario_privilegios" ,$link);
-while ($row3=mysql_fetch_array($sql3)){
-	if($privilegios==$row3['id']){
-		$hig_p='selected';
-	}else{
-		$hig_p='nain';
-	}
-echo '<option value="'.$row3['id'].'"'.$hig_p.'>'."\n".$row3['nombre']."</a>   ";
-}
-?>
-</select>
-
-</td>
-</tr>
-<tr><td>
+</div>
+<div>
 	Visible:<br>
 <?php
 if($visible==1){
 	$viSi='checked';
 	$viNo='';
-}else{
+}elseif($visible==0){
 	$viSi='';
 	$viNo='checked';	
 }
 ?>
-Sí <input	type="radio" name="visible" value="1"<?php echo $viSi; ?>>
+SÃ­ <input	type="radio" name="visible" value="1"<?php echo $viSi; ?>>
 No <input	type="radio" name="visible" value="0"<?php echo $viNo; ?>><br><br>
-</td></tr>
-<tr><td valign="bottom">
+</div>
+<div>
+	<input type="hidden" name="cuenta" value="<?php echo $cuenta; ?>">
 	<input type="hidden" name="rubro" value="<?php echo $rubro; ?>">
 	<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar"></form></td>
-<td></td></tr>
-</table>
+</div>
+
 <?php
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

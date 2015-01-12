@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 	$link=Conectarse();
 	include("library/tinymce.php");
 	include("library/confirm.php");
@@ -23,7 +23,7 @@ if($_SESSION["estado"]=="Autenticado"){
 		<div id="form-main">
 			<form method="post" action="gadgets/perfil/ip_asigna_boton_a.php">
 			<div id="maincontent-tit">
-				Modificar Asignación de Comisiones<br><br>
+				Edita botÃ³n social<br><br>
 			</div>
 				<div id="maincontent-body">
 					<div>
@@ -42,7 +42,7 @@ if($_SESSION["estado"]=="Autenticado"){
 ?>
 			</select><br><br>
 			
-						Botón social:<br>
+						BotÃ³n social:<br>
 			<select name="boton_social">
 <?php
 	$sql_comi=mysql_query("SELECT id,nombre FROM perfil_boton_social ORDER BY id ASC",$link);
@@ -70,9 +70,9 @@ if($_SESSION["estado"]=="Autenticado"){
 		</div>
 		<?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

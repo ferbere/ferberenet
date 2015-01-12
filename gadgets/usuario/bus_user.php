@@ -22,7 +22,7 @@ if($_SESSION["estado"]=="Autenticado"){
 	?>
 	<div align="center">
 		<form action="usuario.php" method="get">
-		Criterio de búsqueda:
+		Criterio de bÃºsqueda:
 			<input type="hidden" name="ruta" value="<?php echo $ruta ?>">
 			<input type="text" name="criterio" size="22" maxlength="150">
 			<input type="submit" value="Buscar">
@@ -53,6 +53,6 @@ if($_SESSION["estado"]=="Autenticado"){
 		</div>
 <?php
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 class paginacion {
-	var $regxpag = 25;	// registros por página
+	var $regxpag = 25;	// registros por pÃ¡gina
 	function cuantos($sql,$pez){
 		if(isset($_GET['criterio'])){
 			$criterio = $_GET['criterio'];
@@ -14,7 +14,7 @@ class paginacion {
 ?>
 	<div style="border: 0px solid">
 		<div style="text-align: center; margin: 0px auto">
-			La búsqueda <?php echo "'".$txt_criterio."'" ?> arrojó <?php echo $hallados ?> resultados.<br><br>
+			La bÃºsqueda <?php echo "'".$txt_criterio."'" ?> arrojÃ³ <?php echo $hallados ?> resultados.<br><br>
 		</div>
 	</div>
 <?php

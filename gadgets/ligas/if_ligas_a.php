@@ -1,8 +1,7 @@
 <?php
 session_start();
-include("../library/tinymce.php");
-include("../library/confirm.php");
-if($_SESSION['privilegioss']=="ferbere"){
+include("library/confirm.php");
+if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
@@ -30,9 +29,9 @@ while ($row = mysql_fetch_array($sql)){
 		<div id="maincontent-body">
 			<div>
 					Nombre<br>
-				<input type="text" name="nombre" style="width:95%" value="<?php echo $row['nombre'] ?>" />
+				<input type="text" name="nombre" style="width:95%" value="<?php echo $row['nombre'] ?>" /><br><br>
 					Ruta:<br>
-				<input type="text" name="ruta" style="width:95%" value="<?php echo $row['ruta'] ?>" />
+				<input type="text" name="ruta" style="width:95%" value="<?php echo $row['ruta'] ?>" /><br><br>
 					Imagen:
 				<input type="text" name="imagen" size="30" value="<?php echo $row['imagen'] ?>" /><br><br>
 					Contenido:<br><textarea name="contenido" rows=19 cols=70 width:300px height:40px><?php echo $row['contenido'] ?>
@@ -47,7 +46,7 @@ while ($row = mysql_fetch_array($sql)){
 	}
 ?>
 					visible:<br>
-					Sí <input type="radio" name="visible" value="1" size="30" <?php echo $publisi ?>>
+					SÃ­ <input type="radio" name="visible" value="1" size="30" <?php echo $publisi ?>>
 					No <input type="radio" name="visible" value="0" size="30" <?php echo $publino ?>>
 					</div>
 						<div>
@@ -62,9 +61,9 @@ while ($row = mysql_fetch_array($sql)){
 	</div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }
 ?>

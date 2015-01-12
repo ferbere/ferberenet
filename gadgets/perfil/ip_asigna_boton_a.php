@@ -19,7 +19,7 @@ if(isset($_POST['url'])){
 }
 
 $mysql=mysql_query("UPDATE perfil_asigna_boton SET  diputado = '$diputado',boton_social = '$boton_social', cuenta = '$cuenta', url = '$url' WHERE id = '$rubro'" ,$link);
-if(!$mysql){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$mysql){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../perfil.php?ruta=if_asigna_boton_a.php&capturado=1";</script>';
 }

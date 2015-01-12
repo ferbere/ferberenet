@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("../library/tinymce.php");
-include("../library/confirm.php");
+include("library/tinymce.php");
+include("library/confirm.php");
 if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
@@ -30,13 +30,13 @@ while ($row = mysql_fetch_array($sql)){
 }
 ?>
 	<div id="maincontent-tit">
-		Editar artículo
+		Editar noticia
 	</div>
 		<div id="maincontent-body">
 			<div>
-			Título:<br>
+			TÃ­tulo:<br>
 		<input type="text" name="titulo" style="width:95%" value="<?php echo $titulo ?>" /><br>
-			Subtítulo:<br>
+			SubtÃ­tulo:<br>
 		<input type="text" name="subtitulo" style="width:95%" value="<?php echo $subtitulo ?>" /><br>
 			Fecha:<br>
 		<input type="date" name="fecha" value="<?php echo $fecha ?>" /><br><br>
@@ -49,7 +49,7 @@ while ($row = mysql_fetch_array($sql)){
 			Imagen: <b><?php echo $imagen; ?></b><br>
 			<a href="gadgets/noticias/borra_imagen.php?rubro=<?php echo $id; ?>">Borrar y cargar otra imagen</a><br><br><br>	
 <?php } ?>			
-			Categoría:<br>
+			CategorÃ­a:<br>
 			<select name="categoria">
 <?php
 $sqlCat=mysql_query("SELECT id,nombre FROM noticias_categoria ORDER BY id ASC ",$link);
@@ -78,7 +78,7 @@ if($publicado==0){
 }
 ?><br>
 			Publicado:<br>
-		Sí <input type="radio" name="publicado" value="1" size="30" <?php echo $publisi ?>>
+		SÃ­ <input type="radio" name="publicado" value="1" size="30" <?php echo $publisi ?>>
 		No <input type="radio" name="publicado" value="0" size="30" <?php echo $publino ?>><br><br>
 		<?php
 		if($categoria==2){
@@ -86,9 +86,9 @@ if($publicado==0){
 			$ejemplo = strlen($cadena);
 			echo "El texto mide: $ejemplo caracteres (con espacios), y";
 			if($ejemplo<400){
-				echo ' aparecerá completo en la página principal.';
+				echo ' aparecerÃ¡ completo en la pÃ¡gina principal.';
 			}else{
-				echo ' un extracto del texto aparecerá en la página principal, y la liga a "leer más."';
+				echo ' un extracto del texto aparecerÃ¡ en la pÃ¡gina principal, y la liga a "leer mÃ¡s."';
 			}
 		}
 		?><br><br>
@@ -104,9 +104,9 @@ if($publicado==0){
 <?php
 		
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }		
 ?>

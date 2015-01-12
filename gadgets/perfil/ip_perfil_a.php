@@ -42,7 +42,7 @@ if(isset($_POST["orden"])){
 	$orden=$_POST["orden"];
 }
 $que=mysql_query("UPDATE perfil_index SET nombre = '$nombre', descripcion = '$descripcion', imagen = '$imagen', nacido = '$nacido', categoria = '$categoria', visible='$visible', ext='$ext', email='$email', sala='$sala', telefonos='$telefonos', enlace='$enlace', orden='$orden' WHERE id = '$rubro'",$link);
-if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$que){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../perfil.php?ruta=if_perfil_a.php&capturado=1";</script>';
 }

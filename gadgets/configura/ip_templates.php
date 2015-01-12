@@ -54,7 +54,7 @@ if(isset($_POST["bann0"])){
 	$bann0=$_POST["bann0"];
 }
 $que=mysql_query("INSERT INTO template_index (pagina,css,title,header,navbar,logo,tit_maincontent,maincontent,main_object,detail,footer,bann1,bann2,bann3,bann4,bann0) VALUES ('{$pagina}','{$css}','{$title}','{$header}','{$navbar}','{$logo}','{$tit_maincontent}','{$maincontent}','{$main_object}','{$detail}','{$footer}','{$bann1}','{$bann2}','{$bann3}','{$bann4}','{$bann0}')",$link);
-if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$que){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../configura.php?ruta=if_templates.php&capturado=1";</script>';
 }

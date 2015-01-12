@@ -24,9 +24,9 @@ if(isset($_GET['ruta'])){
 	<div style="margin: 0px auto">
 <?php
 			include_once("classes/sacar.class.php");
-			$self=sacar($_SERVER['PHP_SELF'],"admin/",".php");	
+			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");	
 			include_once("classes/buscador_ip.class.php");
-			$sql = "SELECT id,ip,fecha,hora FROM contador ";
+			$sql = "SELECT id,ip,fecha,hora FROM contador_index ";
 			$celdas=array(0=>'id',1=>'ip',2=>'fecha',3=>'hora');
 //			$pez=" where titulo like '%" . $criterio . "%' or subtitulo like '%" . $criterio . "%' or contenido like '%" . $criterio . "%'";
 			$set='http://www.elhacker.net/geolocalizacion.html?host=';

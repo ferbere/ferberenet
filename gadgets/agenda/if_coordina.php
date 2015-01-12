@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("library/confirm.php");
-if($_SESSION['privilegioss']=="ferbere"){
+if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
@@ -10,7 +10,7 @@ if($_SESSION['privilegioss']=="ferbere"){
 		if(isset($_GET['rubro'])){
 			$rubro=$_GET['rubro'];
 		}
-		$sql_dia=mysql_query("SELECT id,nombre,congreso FROM agenda_dia WHERE id = '$rubro' ",$link);
+		$sql_dia=mysql_query("SELECT id,nombre,campagna FROM agenda_dia WHERE id = '$rubro' ",$link);
 		while($row_dia=mysql_fetch_array($sql_dia)){
 			$id			=	$row_dia[0];
 			$nombre		=	$row_dia[1];
@@ -22,7 +22,7 @@ if($_SESSION['privilegioss']=="ferbere"){
 <div id="form-main">
 			<form method="post" action="gadgets/agenda/ip_coordina.php">
 	<div id="maincontent-tit">
-		¿Quién coordina el <?echo $nombre ?>?<br><br>
+		Â¿QuiÃ©n coordina el <?echo $nombre ?>?<br><br>
 	</div>
 		<div id="maincontent-body">
 			<div style="text-align:center;margin:0px auto"><h2>Coordinadores registrados</h2><br>
@@ -56,9 +56,9 @@ if($_SESSION['privilegioss']=="ferbere"){
 </div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }
 ?>

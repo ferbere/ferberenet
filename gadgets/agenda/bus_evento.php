@@ -29,9 +29,9 @@ if(isset($_GET['ruta'])){
 			include_once("classes/sacar.class.php");
 			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");	
 			include_once("classes/buscador.class.php");
-			$sql = "SELECT id,titulo,dia FROM agenda_programa ";
+			$sql = "SELECT agenda_programa.id,agenda_programa.titulo,agenda_dia.fecha FROM agenda_programa INNER JOIN agenda_dia ON agenda_programa.dia = agenda_dia.id ";
 			$celdas=array(0=>'id',1=>'titulo',2=>'dia');
-			$pez=" where titulo like '%" . $criterio . "%' or subtitulo like '%" . $criterio . "%' or dia like '%" . $criterio . "%'";
+			$pez=" where agenda_programa.titulo like '%" . $criterio . "%' or agenda_programa.subtitulo like '%" . $criterio . "%' or agenda_dia.fecha like '%" . $criterio . "%'";
 			$set='if_evento_a.php';
 			$ruta='bus_evento.php';
 			$borra=1;

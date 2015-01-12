@@ -14,19 +14,19 @@ if($_SESSION["estado"]=="Autenticado"){
    	 <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> 
 			<?php
 			$sql=mysql_query("SELECT id,nombre FROM articulos_categoria",$link);
-			$sql2=mysql_query("SELECT id,nombre FROM usuario_index" ,$link);
+			$sql2=mysql_query("SELECT id,nombre FROM perfil_index" ,$link);
 			?>
 			<div id="maincontent-tit">
-				Artículo nuevo
+				ArtÃ­culo nuevo
 			</div>
 			<div id="maincontent-body">
 				<div>
-					Título:<br><input type="text" name="titulo" size="80%"><br>
-					Subtítulo:<br><input type="text" name="subtitulo" size="80%"><br><br>
+					TÃ­tulo:<br><input type="text" name="titulo" size="80%"><br>
+					SubtÃ­tulo:<br><input type="text" name="subtitulo" size="80%"><br><br>
 				</div>
 					<div style="width:500px; height: 50px">
 						<div style="float: left; position: relative">
-							Sección:<br><select name="categoria">
+							SecciÃ³n:<br><select name="categoria">
 			<?php
 			while ($row=mysql_fetch_array($sql)){
 			echo '<option value="'.$row['id'].'">'."\n".$row['nombre']."</a>   ";
@@ -50,7 +50,7 @@ if($_SESSION["estado"]=="Autenticado"){
 	if(($_SESSION['privilegioss']=='ferbere')OR($_SESSION['privilegioss']=='admin')){
 ?>
 							Publicado:<br>
-							Sí <input type="radio" name="publicado" value="1" size="30">
+							SÃ­ <input type="radio" name="publicado" value="1" size="30">
 							No <input type="radio" name="publicado" value="0" size="30" checked>
 <?php } ?>
 						</div>
@@ -71,9 +71,9 @@ if($_SESSION["estado"]=="Autenticado"){
 </div>		
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

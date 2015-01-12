@@ -1,45 +1,48 @@
 <?php
 session_start();
 if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
-include("library/tinymce.php");
 include("library/confirm.php");
-include_once("classes/conex.php");
 if(isset($_GET['capturado'])){
 $capturado=$_GET['capturado'];
 }
 if(empty($capturado)){
-$link=Conectarse();	
+include_once("classes/mysql.php");
+$mysql=new MySQL();
+$sql=$mysql->consulta("SELECT nombre FROM usuario_privilegios ORDER BY id DESC");
+$cuenta=$mysql->num_rows($sql);
+
 ?>
 	<div id="form-main">
 			<div>
 				<form method="post" action="gadgets/menus/ip_botones.php">
-				<h1>Agregar Botones al Menú</h1>
+					<input type="hidden" name="cuenta" value="<?php echo $cuenta ?>">
+				<h1>Agregar Botones al MenÃº</h1>
 			</div>
-				<div align="justify" style="height:80px">
-					<div style="float:left">
+				<div id="a">
+					<div id="a1">
 						Nombre:<br><input type="text" name="nombre" size="30">
 					</div>
-					<div style="float: left; position: relative; left: 50px">
+					<div id="a2">
 						Imagen:<br><input type="text" name="imagen" size="30">
 					</div>
-					<div style="float: left; position: relative; left: 80px">
-						Submenú:<br><select name="submenu">
+					<div id="a3">
+						SubmenÃº:<br><select name="submenu">
 <?php
 
-	$sql=mysql_query("SELECT id,nombre FROM menus_submenu",$link);
-	while ($row=mysql_fetch_array($sql)){
-		echo '<option value="'.$row['id'].'">'."\n".$row['nombre']."</a>";
+	$sql2=$mysql->consulta("SELECT id,nombre FROM menus_submenu");
+	while ($row2=$mysql->fetch_array($sql2)){
+		echo '<option value="'.$row2['id'].'">'."\n".$row2['nombre']."</a>";
 	}
 ?>
 						</select>
 					</div>
 				</div>
-				<div>
-					<div style="float: left; position: relative">
+				<div id="b">
+					<div id="b1">
 							Ruta:<br><input type="text" name="ruta" size="30">
 					</div>
-					<div style="float: left; position: relative; left: 50px">
-						Posición:<br>
+					<div id="b2">
+						PosiciÃ³n:<br>
 						<select name="posicion">
 <?php
 
@@ -51,24 +54,26 @@ $link=Conectarse();
 						</select>
 
 					</div>
-					<div style="float: left; position: relative; left: 80px">
-						Privilegios:<br>
-						<select name="privilegios">
-	<?php
-
-		$sql3=mysql_query("SELECT id,nombre FROM usuario_privilegios" ,$link);
-		while ($row3=mysql_fetch_array($sql3)){
-			echo '<option value="'.$row3['id'].'">'."\n".$row3['nombre']."</a>   ";
-		}
-	?>
-						</select>
-					</div>
 				</div>
-				<div style="clear: both">
-					<br>Visible: <br>
-					<input type="radio" name="visible" value="1" checked>Sí
-					<input type="radio" name="visible" value="0">No<br><br>
-					<div>
+				<div id="c">
+					<div id="c1">
+						Privilegios:<br>
+	<?php
+	$i=1;
+	while($row=mysql_fetch_array($sql)){
+		echo '<input type="checkbox" name="privilegios[]" value="'.$i.'">'.$row[0].'  ';
+		$i=$i+1;
+	}?>
+
+					</div>
+				<div id="c2">
+					Visible: <br>
+					<input type="radio" name="visible" value="1" checked>SÃ­
+					<input type="radio" name="visible" value="0">No
+				</div>
+			</div>
+			<div id="d">
+				<div id="c1">
 						<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
 				</form>
 					</div>
@@ -76,9 +81,9 @@ $link=Conectarse();
 			</div>
 <?php
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

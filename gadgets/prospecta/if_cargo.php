@@ -18,7 +18,7 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 						Nombre:<br>
 				<input type="text" name="nombre" size="80%"><br><br>
 						Visible:<br>
-				Sí <input type="radio" name="visible" value="1" size="30">
+				SÃ­ <input type="radio" name="visible" value="1" size="30">
 				No <input type="radio" name="visible" value="0" size="30" checked><br><br>
 				</div>
 						<div>
@@ -28,9 +28,9 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 				</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

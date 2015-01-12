@@ -1,9 +1,9 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 $link=Conectarse();
-include("../library/tinymce.php");
-include("../library/confirm.php");
+include("library/tinymce.php");
+include("library/confirm.php");
 if(isset($_GET['capturado'])){
 $capturado=$_GET['capturado'];
 }
@@ -19,7 +19,7 @@ if(empty($capturado)){
 	</tr>
 	<tr>
 		<td colspan="3">
-			Título:<br>
+			TÃ­tulo:<br>
 			<input type="text" name="titulo" size="80%"><br><br>
 			Pregunta:<br>
 			<textarea name="pregunta" rows=19 cols=80 width:300px height:40px>
@@ -27,7 +27,7 @@ if(empty($capturado)){
 			Respuesta:<br>
 			<textarea name="respuesta" rows=19 cols=80 width:300px height:40px>
 			</textarea><br><br>
-			Categoría:<br><select name="categoria">
+			CategorÃ­a:<br><select name="categoria">
 <?php
 while ($row=mysql_fetch_array($sql)){
 	echo '<option value="'.$row['id'].'">'."\n".$row['nombre']."</a>   ";
@@ -41,9 +41,9 @@ while ($row=mysql_fetch_array($sql)){
 </table>
 <?php
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

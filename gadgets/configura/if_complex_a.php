@@ -42,7 +42,7 @@ if($_SESSION["estado"]=="Autenticado"){
 			}
 			?>
 					<br>visible:<br>
-					Sí <input type="radio" name="visible" value="1" size="30" <?php echo $visisi ?>>
+					SÃ­ <input type="radio" name="visible" value="1" size="30" <?php echo $visisi ?>>
 					No <input type="radio" name="visible" value="0" size="30" <?php echo $visino ?>>
 <br><br>
 
@@ -55,9 +55,9 @@ if($_SESSION["estado"]=="Autenticado"){
 				</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

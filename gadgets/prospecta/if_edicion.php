@@ -11,18 +11,18 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 		<div id="form-main">
 		<form method="post" action="gadgets/prospecta/ip_edicion.php" name="fvalida">
 			<div id="maincontent-tit">
-				Agregar Edición
+				Agregar EdiciÃ³n
 			</div>
 				<div id="maincontent-body">
 					<div>
-						Número:<br>
+						NÃºmero:<br>
 				<input type="number" name="numero" size="80%"><br><br>
 						Desde:<br>
 				<input type="date" name="desde" placeholder="AAAA/MM/DD"><br><br>
 						Hasta:<br>
 				<input type="date" name="hasta" placeholder="AAAA/MM/DD"><br><br>
 						Visible:<br>
-				Sí <input type="radio" name="visible" value="1" size="30">
+				SÃ­ <input type="radio" name="visible" value="1" size="30">
 				No <input type="radio" name="visible" value="0" size="30" checked><br><br>
 				</div>
 						<div>
@@ -32,9 +32,9 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 				</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

@@ -27,7 +27,7 @@ if(isset($_POST["metatags"])){
 	$metatags=$_POST["metatags"];
 }
 $que=mysql_query("UPDATE template_general SET titulo = '$titulo', subtitulo = '$subtitulo',pagina='$pagina',url='$url', dia = '$dia', noche = '$noche', correo1 = '$correo1', metatags = '$metatags' ",$link);
-if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$que){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../configura.php?ruta=if_configura_a.php&capturado=1";</script>';
 }

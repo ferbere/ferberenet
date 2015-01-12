@@ -14,7 +14,7 @@ if($_SESSION['privilegioss']=="ferbere"){
 <div id="form-main">
 			<form method="post" action="gadgets/configura/ip_configura_a.php">
 	<div id="maincontent-tit">
-		Configuración General<br><br>
+		ConfiguraciÃ³n General<br><br>
 	</div>
 		<div id="maincontent-body">
 			<div>
@@ -32,17 +32,17 @@ if($_SESSION['privilegioss']=="ferbere"){
 		$pagina		= $row[8];
 	}
 ?>
-		Título de la página:<br>
+		TÃ­tulo de la pÃ¡gina:<br>
 		<input type="text" name="titulo" style="width:400px" value="<?php echo $titulo ?>"><br>
-		Subtitulo de la página:<br>
+		Subtitulo de la pÃ¡gina:<br>
 		<input type="text" name="subtitulo" style="width:400px" value="<?php echo $subtitulo ?>"><br>
-		Página:<br>
+		PÃ¡gina:<br>
 		<input type="text" name="pagina" style="width:200px" value="<?php echo $pagina ?>"><br>
 		Url:<br>
 		<input type="text" name="url" style="width:200px" value="<?php echo $url ?>"><br>
-		Inicio día en la página:<br>
+		Inicio dÃ­a en la pÃ¡gina:<br>
 		<input type="text" name="dia" style="width:400px" value="<?php echo $dia ?>"><br>
-		Inicio noche en la página:<br>
+		Inicio noche en la pÃ¡gina:<br>
 		<input type="text" name="noche" style="width:400px" value="<?php echo $noche ?>"><br>
 		Correo:<br>
 		<input type="text" name="correo1" style="width:200px" value="<?php echo $correo1 ?>"><br>
@@ -57,9 +57,9 @@ if($_SESSION['privilegioss']=="ferbere"){
 </div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }
 ?>

@@ -3,7 +3,8 @@ include_once("classes/path.class.php");
 $pth=new path();
 $url = $pth->the_path();
 
-$path  = $url[0].'/'.$url[1].$_SESSION['admin'].'/respaldos/';
+//$path  = $url[0].'/'.$url[1].$_SESSION['admin'].'/respaldos/';
+$path='../'.$url[1].$_SESSION['admin'].'/respaldos/';
 $path2 = 'http://'.$url[1].$_SESSION['admin'].'/respaldos/';
 $directorio = opendir($path); //ruta actual
 	while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente

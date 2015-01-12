@@ -18,7 +18,7 @@ if(isset($_GET['ruta'])){
 ?>
 <div align="center">
 	<form action="faq.php" method="get">
-	Criterio de búsqueda:
+	Criterio de bÃºsqueda:
 		<input type="hidden" name="ruta" value="<?php echo $ruta ?>">
 		<input type="text" name="criterio" size="22" maxlength="150">
 		<input type="submit" value="Buscar">
@@ -27,7 +27,7 @@ if(isset($_GET['ruta'])){
 	<div style="margin: 0px auto">
 <?php
 			include_once("classes/sacar.class.php");
-			$self=sacar($_SERVER['PHP_SELF'],"admin/",".php");	
+			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");	
 			include_once("classes/buscador.class.php");
 			$sql = "SELECT id,titulo FROM faq_index ";
 			$celdas=array(0=>'id',1=>'titulo');

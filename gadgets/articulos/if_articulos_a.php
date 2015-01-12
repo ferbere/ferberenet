@@ -23,7 +23,7 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
  	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
 	<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
 <?php
-		$sql= mysql_query("SELECT articulos_index.titulo,articulos_index.subtitulo,articulos_categoria.nombre,articulos_index.imagen,articulos_index.contenido,articulos_index.publicado,usuario_index.nombre,articulos_index.fecha FROM articulos_index INNER JOIN articulos_categoria ON articulos_index.categoria = articulos_categoria.id INNER JOIN usuario_index ON articulos_index.autor = usuario_index.id WHERE articulos_index.id = '$rubro' ",$link);
+		$sql= mysql_query("SELECT articulos_index.titulo,articulos_index.subtitulo,articulos_categoria.nombre,articulos_index.imagen,articulos_index.contenido,articulos_index.publicado,perfil_index.nombre,articulos_index.fecha FROM articulos_index INNER JOIN articulos_categoria ON articulos_index.categoria = articulos_categoria.id INNER JOIN perfil_index ON articulos_index.autor = perfil_index.id WHERE articulos_index.id = '$rubro' ",$link);
 		while ($row = mysql_fetch_array($sql)){
 			$titulo		=	$row[0];
 			$subtitulo	=	$row[1];
@@ -36,7 +36,7 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 		}
 		?>
 			<div id="maincontent-tit">
-				Editar artículo
+				Editar artÃ­culo
 			</div>
 				<div id="maincontent-body">
 					<div><br><br>
@@ -44,15 +44,15 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 						<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
 						<?php echo $imagen; ?>
 					</div><br><br>
-						Título:<br></h1>
+						TÃ­tulo:<br></h1>
 						<input type="text" name="titulo" style="width:95%" value="<?php echo $titulo ?>" /><br><br>
-						Subtítulo:<br>
+						SubtÃ­tulo:<br>
 						<input type="text" name="subtitulo" style="width:95%" value="<?php echo $subtitulo ?>"/><br><br>
 						Fecha: <?php echo $fecha; ?>
 					</div>
 						<div style="width:500px; height: 50px"><br>
 							<div >
-								Sección:
+								SecciÃ³n:
 								<select name="categoria">
 <?php
 $sqlCat=mysql_query("SELECT id,nombre FROM articulos_categoria ORDER BY id ASC ",$link);
@@ -96,13 +96,13 @@ if($categoria!=$rowCat['nombre']){
 			}
 			?>
 									<br>Publicado:<br>
-									Sí <input type="radio" name="publicado" value="1" size="30" <?php echo $publisi ?>>
+									SÃ­ <input type="radio" name="publicado" value="1" size="30" <?php echo $publisi ?>>
 									No <input type="radio" name="publicado" value="0" size="30" <?php echo $publino ?>>
 									</div>
 									<div style="position:relative;left:150px">
 									<br>Autor:<br><select name="autor">
 			<?php
-			$sqlaut=mysql_query("SELECT id,nombre FROM usuario_index ORDER BY id ASC ",$link);
+			$sqlaut=mysql_query("SELECT id,nombre FROM perfil_index ORDER BY id ASC ",$link);
 			while($rowaut=mysql_fetch_array($sqlaut)){
 			if($autor!=$rowaut[1]){
 				$aut= 'nain';
@@ -121,9 +121,9 @@ if($categoria!=$rowCat['nombre']){
 			</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }		
 ?>

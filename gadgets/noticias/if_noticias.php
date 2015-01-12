@@ -19,13 +19,13 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 	</div>
 	<div id="maincontent-body">
 		<div>
-				Título:<br>
+				TÃ­tulo:<br>
 			<input type="text" name="titulo" size="100"><br>
-				Subtítulo:<br>
+				SubtÃ­tulo:<br>
 			<input type="text" name="subtitulo" size="100"><br>
 				Fecha:<br>
 				<input type="date" name="fecha" placeholder="YYYY-MM-DD"><br>							
-				Categoría:<br><select name="categoria">
+				CategorÃ­a:<br><select name="categoria">
 <?php
 while ($row_cat=mysql_fetch_array($sql_cat)){
 echo '<option value="'.$row_cat[0].'">'."\n".$row_cat[1]."</a>   ";
@@ -37,7 +37,7 @@ echo '<option value="'.$row_cat[0].'">'."\n".$row_cat[1]."</a>   ";
 				Contenido:<br>
 			<textarea name="contenido" rows=19 cols=80 width:300px height:40px></textarea><br>
 				Publicado:<br>
-			Sí <input type="radio" name="publicado" value="1" size="30">
+			SÃ­ <input type="radio" name="publicado" value="1" size="30">
 			No <input type="radio" name="publicado" value="0" size="30" checked><br><br>
 
 			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
@@ -46,13 +46,13 @@ echo '<option value="'.$row_cat[0].'">'."\n".$row_cat[1]."</a>   ";
 		</div>
 <?php
 	}elseif($capturado==1){
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}elseif($capturado==0){
-		echo "Algo pasó. Así nomás, algo pasó.";
+		echo "Algo pasÃ³. AsÃ­ nomÃ¡s, algo pasÃ³.";
 	}elseif($capturado==2){
 		echo "hay un problema con la foto.";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
  ?>

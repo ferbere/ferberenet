@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 	$link=Conectarse();
 	include("library/tinymce.php");
 	include("library/confirm.php");
@@ -12,7 +12,7 @@ if($_SESSION["estado"]=="Autenticado"){
 		<div id="form-main">
 		<form method="post" action="gadgets/perfil/ip_categoria.php">
 			<div id="maincontent-tit">
-				Agregar categoría al perfil
+				Agregar categorÃ­a al perfil
 			</div>
 				<div id="maincontent-body">
 					<div>
@@ -29,9 +29,9 @@ if($_SESSION["estado"]=="Autenticado"){
 		</div>
 		<?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

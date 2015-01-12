@@ -2,7 +2,7 @@
 session_start();
 if($_SESSION["estado"]=="Autenticado"){
 $link=Conectarse();
-include("../library/confirm.php");
+include("library/confirm.php");
 if(isset($_GET['capturado'])){
 	$capturado=$_GET['capturado'];
 }
@@ -26,12 +26,12 @@ if(empty($capturado)){
 			<tr>
 				<td>
 					Visible <br>
-					Sí<input type="radio" name="visible" value="1">
+					SÃ­<input type="radio" name="visible" value="1">
 					No<input type="radio" name="visible" value="0" checked>
 				</td>
 					<td>Disponibilidad<br>
 						<select name="disponible">
-							<option value="2">Súperadmin</a>
+							<option value="2">SÃºperadmin</a>
 							<option value="3">Usuarios</a>
 							<option value="4">Prensa</a>
 						</select>
@@ -48,9 +48,9 @@ if(empty($capturado)){
 </table>
 <?php
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. ?Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccci?n";
 }
 ?>

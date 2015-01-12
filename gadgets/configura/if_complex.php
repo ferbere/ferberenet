@@ -17,7 +17,7 @@ if($_SESSION["estado"]=="Autenticado"){
 						Contenedor:<br>
 						<input type="text" name="content" size="80%"><br><br>
 						Publicado:<br><br>
-						Sí <input type="radio" name="visible" value="1" size="30">
+						SÃ­ <input type="radio" name="visible" value="1" size="30">
 						No <input type="radio" name="visible" value="0" size="30" checked><br><br>
 						Orden:
 						<input type="number" name="orden"><br><br>
@@ -29,9 +29,9 @@ if($_SESSION["estado"]=="Autenticado"){
 				</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

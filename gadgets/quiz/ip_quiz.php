@@ -18,12 +18,12 @@ $path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/encuesta/';
 $nombre_archivo = $_FILES['imagen']['name']; 
 $tipo_archivo = $_FILES['imagen']['type']; 
 $tamano_archivo = $_FILES['imagen']['size']; 
-//compruebo si las características del archivo son las que deseo 
+//compruebo si las caracterÃ­sticas del archivo son las que deseo 
 
 if(empty($nombre_archivo)){
 	$que=mysql_query("INSERT INTO quiz_index (nombre,contenido,visible) VALUES ('{$nombre}','{$contenido}','{$visible}')",$link);
 			if(!$que){
-				die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+				die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 				echo '<script>window.location.href="../../quiz.php?ruta=if_quiz.php&capturado=0";</script>';				
 			}else{
 			echo 	'<script>window.location.href="../../quiz.php?ruta=if_quiz.php&capturado=1";</script>';
@@ -35,7 +35,7 @@ if(empty($nombre_archivo)){
 	   	if (move_uploaded_file($_FILES['imagen']['tmp_name'], $path.$nombre_archivo)){ 
 			$que=mysql_query("INSERT INTO quiz_index (nombre,imagen,contenido,visible) VALUES ('{$nombre}','{$nombre_archivo}','{$contenido}','{$visible}')",$link);
 					if(!$que){
-						die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+						die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 						echo '<script>window.location.href="../../quiz.php?ruta=if_quiz.php&capturado=0";</script>';				
 					}else{
 					echo 	'<script>window.location.href="../../quiz.php?ruta=if_quiz.php&capturado=1";</script>';

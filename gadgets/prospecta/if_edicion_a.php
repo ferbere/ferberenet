@@ -28,7 +28,7 @@ while ($row = mysql_fetch_array($sql)){
 	</div>
 		<div id="maincontent-body">
 			<div>
-					Número
+					NÃºmero
 				<input type="number" name="numero" value="<?php echo $row[1] ?>" /><br><br>
 					Desde:
 				<input type="text" name="desde" value="<?php echo $row[2] ?>" /><br><br>
@@ -44,7 +44,7 @@ while ($row = mysql_fetch_array($sql)){
 	}
 ?>
 					Visible:<br>
-					Sí <input type="radio" name="visible" value="1" size="30" <?php echo $publisi ?>>
+					SÃ­ <input type="radio" name="visible" value="1" size="30" <?php echo $publisi ?>>
 					No <input type="radio" name="visible" value="0" size="30" <?php echo $publino ?>><br><br>
 					</div>
 						<div>
@@ -59,9 +59,9 @@ while ($row = mysql_fetch_array($sql)){
 	</div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }
 ?>

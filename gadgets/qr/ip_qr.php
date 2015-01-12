@@ -28,7 +28,7 @@ QRcode::png($url,$path.$qr.'.png');
 
 
 $que=mysql_query("INSERT INTO qr_index (qr,url,descripcion) values ('{$qr}','{$url}','{$descripcion}') ",$link);
-if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$que){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../qr.php?ruta=if_qr.php&capturado=1";</script>';
 }

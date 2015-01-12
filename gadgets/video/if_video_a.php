@@ -62,11 +62,11 @@ if($_SESSION["estado"]=="Autenticado"){
 				?>-->
 								Visible:<br>
 					<input type="radio" name="visible" value="0" <?php echo $visi_no ?>>No
-					<input type="radio" name="visible" value="1" <?php echo $visi_si ?>>Sí<br>			
+					<input type="radio" name="visible" value="1" <?php echo $visi_si ?>>SÃ­<br>			
 					<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
 				</div>
 							<div style="clear:both; text-align:center">
-								<br><br>Descripción:<br>
+								<br><br>DescripciÃ³n:<br>
 				<textarea name="descripcion" rows=19 cols=70 width:300px height:40px><?php echo $row['descripcion'] ?></textarea><br><br>
 				<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
 				</form>
@@ -78,9 +78,9 @@ if($_SESSION["estado"]=="Autenticado"){
 <?php
 		}//Termina while(principal)
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

@@ -15,7 +15,7 @@ $datos = $mysql ->fetch_array($sql);
 <?php
 echo $datos['nombre'];
 if($datos['user']!=$user OR $datos['passwd']!=$passwd){
-	echo "¡Chin! Los datos están incorrectos";
+	echo "Â¡Chin! Los datos estÃ¡n incorrectos";
 }else{
 	$_SESSION['id']=$datos[0];
 	$_SESSION['user']=$datos[1];
@@ -24,7 +24,7 @@ if($datos['user']!=$user OR $datos['passwd']!=$passwd){
 	$_SESSION['estado']='Autenticado';
 	echo "<div align='center'> Bienvenido ".$_SESSION['user'];
 ?>
-	<br><a href="destroy.php">Terminar sesión</a></div>
+	<br><a href="destroy.php">Terminar sesiÃ³n</a></div>
 <?php
 }
 ?>

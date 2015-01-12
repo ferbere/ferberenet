@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../library/confirm.php");
+include("library/confirm.php");
 if($_SESSION['privilegioss']=="ferbere"){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
@@ -14,27 +14,38 @@ if($_SESSION['privilegioss']=="ferbere"){
 <div id="form-main">
 			<form method="post" action="gadgets/agenda/ip_imparte_a.php">
 	<div id="maincontent-tit">
-		Modificar información del Ponente<br><br>
+		Modificar informaciÃ³n del Ponente<br><br>
 	</div>
 		<div id="maincontent-body">
-			<div>
+			<div id="a">
 <?php
-	$sql=mysql_query("SELECT * FROM imparte WHERE id = '$rubro' ",$link);
+	$sql=mysql_query("SELECT nombre,perfil,curri FROM agenda_imparte WHERE id = '$rubro' ",$link);
 	while($row=mysql_fetch_array($sql)){
-		$imparte=$row['imparte'];
-		$perfil=$row['perfil'];
-		$curri=$row['curri'];
+		$nombre 	= 	$row[0];
+		$perfil 	=	$row[1];
+		$curri 		=	$row[2];
 	}
 ?>
+			<div id="a1">
 		Ponente:<br>
-		<input type="text" name="imparte" style="width:400px" value="<?php echo $imparte ?>"><br>
+		<input type="text" name="nombre" value="<?php echo $nombre ?>">
+			</div>
+		</div>
+		<div id="b">
+			<div id="b1">
 		Perfil:<br>
-		<input type="text" name="perfil" style="width:400px" value="<?php echo $perfil ?>"><br><br>
+		<input type="text" name="perfil" value="<?php echo $perfil ?>">
+			</div>
+		</div>
+		<div id="c">
+			<div id="c1">
 		Ficha curricular:<br>
 		<textarea name="curri" rows=19 cols=70 width:300px height:40px><?php echo $curri; ?></textarea><br><br>
 		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
 			</div>
-				<div>
+		</div>
+			<div id="d">
+				<div id="d1">
 					<input type="submit"  value="enviar"><br><br>
 			</form>
 				</div>
@@ -42,9 +53,9 @@ if($_SESSION['privilegioss']=="ferbere"){
 </div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }
 ?>

@@ -12,17 +12,17 @@ if(empty($capturado)){
 <table width="600" align="center">
 	<form method="post" action="gadgets/qr/ip_qr.php">
 	<tr>
-		<td colspan="2"><h1>Código QR nuevo</h1></td>
+		<td colspan="2"><h1>CÃ³digo QR nuevo</h1></td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			Nombre: (use guiones en lugar de espacios, y sólo minúsculas)<br>
+			Nombre: (use guiones en lugar de espacios, y sÃ³lo minÃºsculas)<br>
 			<input type="text" name="qr" size="80%"><br>
 
 			URL:<br>
 			<input type="url" name="url" size="80%"><br>
-			Inserte la url que se traducirá a código QR<br><br>
-			Descripción:<br>
+			Inserte la url que se traducirÃ¡ a cÃ³digo QR<br><br>
+			DescripciÃ³n:<br>
 			<textarea name="descripcion" rows=19 cols=70 width:300px height:40px></textarea><br>
 		</td>
 	</tr>
@@ -35,9 +35,9 @@ if(empty($capturado)){
 </table>
 <?php
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

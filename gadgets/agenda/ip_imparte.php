@@ -18,6 +18,6 @@ if(isset($_POST["curri"])){
 $que=mysql_query("INSERT INTO agenda_imparte (nombre,perfil,curri) VALUES ('{$nombre}','{$perfil}','{$curri}')",$link);
 if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 }else{
-	echo '<script>window.location.href="../../agenda.php?ruta=if_nombre.php&capturado=1";</script>';
+	echo '<script>window.location.href="../../agenda.php?ruta=if_imparte.php&capturado=1";</script>';
 }
 ?>

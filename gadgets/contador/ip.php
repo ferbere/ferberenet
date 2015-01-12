@@ -1,5 +1,5 @@
 <?php
-include_once('../../../classes/conex.php');
+include_once('../../classes/conex.php');
 $link=Conectarse();
 $ip = $REMOTE_ADDR; 
 $fecha = date("D d M Y"); 
@@ -11,7 +11,7 @@ $resta = $segundos-$can;
 $linea = $segundos+$can_linea; 
 //se asignan la variables 
 $sql = "SELECT segundos, ip "; 
-$sql.= "FROM contador WHERE segundos >= $resta AND ip LIKE '$ip' "; 
+$sql.= "FROM contador_index WHERE segundos >= $resta AND ip LIKE '$ip' "; 
 $rst = mysql_query($sql, $link) or die("Error al leer base de datos: ".mysql_error); 
 //se buscan los registros que num de seg mayor a num de seg hace una hora e ip 
 if(mysql_num_rows($rst)>0) 
@@ -19,13 +19,13 @@ if(mysql_num_rows($rst)>0)
 } 
 else 
 { 
-$sql = "INSERT INTO contador (id, ip, fecha, hora, segundos) "; 
+$sql = "INSERT INTO contador_index (id, ip, fecha, hora, segundos) "; 
 $sql.= "VALUES ('','$ip','$fecha','$hora','$segundos')"; 
 $rst = mysql_query($sql, $link) or die("Error al grabar un mensaje: ".mysql_error); 
 } 
 //creamos el condicionamiendo para loguearlo o no. 
 $sql = "SELECT * "; 
-$sql.= "FROM contador WHERE id "; 
+$sql.= "FROM contador_index WHERE id "; 
 $rst = mysql_query($sql, $link) or die("Error al leer base de datos: ".mysql_error); 
 $visitas = mysql_num_rows($rst); 
 $men=$men . 

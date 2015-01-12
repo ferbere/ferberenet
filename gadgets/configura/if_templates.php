@@ -14,11 +14,11 @@ if($_SESSION["estado"]=="Autenticado"){
 			</div>
 				<div id="maincontent-body">
 					<div>
-						P·gina:<br>
+						P√°gina:<br>
 				<input type="pagina" name="pagina" size="80%"><br>
 						Hoja de estilo:<br>
 				<input type="text" name="css" size="80%"><br>
-						TÌtulo:<br>
+						T√≠tulo:<br>
 				<input type="text" name="title" size="80%"><br>
 						Cabezal:<br>
 				<input type="text" name="header" size="30"><br><br>
@@ -26,7 +26,7 @@ if($_SESSION["estado"]=="Autenticado"){
 				<input type="text" name="navbar" size="80%"><br>
 						Logotipo:<br>
 				<input type="text" name="logo" size="80%" ><br>
-						TÌtulo de contenido:<br>
+						T√≠tulo de contenido:<br>
 				<input type="text" name="tit_maincontent" size="80%"><br>
 						Contenido principal:<br>
 				<input type="text" name="maincontent" size="80%"><br>
@@ -34,7 +34,7 @@ if($_SESSION["estado"]=="Autenticado"){
 				<input type="text" name="main_object" size="80%"><br>
 						Detalle:<br>
 				<input type="text" name="detail" size="80%" ><br>
-						Pie de p·gina:<br>
+						Pie de p√°gina:<br>
 				<input type="text" name="footer" size="80%" ><br>
 				</div>
 					<div><h2>banners</h2>
@@ -57,9 +57,9 @@ if($_SESSION["estado"]=="Autenticado"){
 				</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. °Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. ¬°Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccciÛn";
+	echo "Usted no tiene acceso a esta seccci√≥n";
 }
 ?>

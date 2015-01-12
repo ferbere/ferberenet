@@ -1,12 +1,17 @@
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:53 articulos
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:53 banners
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:53 calendario
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 catalogo
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 descargas
-drwxrwxrwx   2 ferbere0 ferbere      4096 Jun 13 16:18 fotos
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 ligas
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 noticias
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 opinion
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 perfil
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 publicaciones
-drwxr-xr-x   2 ferbere0 ferbere      4096 Jun 12 20:55 testimonios
+<?php
+session_start();
+header("Location: ".$_SERVER['HTTP_REFERER']);
+include_once('../../classes/conex.php');
+//$link=Conectarse();
+if(isset($_GET['rubro'])){
+	$rubro=$_GET['rubro'];
+}
+if(isset($_GET['borra'])){
+	$borra=$_GET['borra'];
+}
+if($borra==1){
+	mysql_query("DELETE FROM fotos_index WHERE id = '$rubro' ", $link);
+}elseif($borra==2){
+	mysql_query("DELETE FROM fotos_categoria WHERE id = '$rubro' ", $link);
+}
+?>

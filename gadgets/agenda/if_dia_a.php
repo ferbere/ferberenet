@@ -14,32 +14,36 @@ if($_SESSION['privilegioss']=="ferbere"){
 <div id="form-main">
 			<form method="post" action="gadgets/agenda/ip_dia_a.php">
 	<div id="maincontent-tit">
-		Modificar nombre del día<br><br>
+		Modificar fecha<br><br>
 	</div>
 		<div id="maincontent-body">
-			<div>
+			<div id="a">
 <?php
-	$sql=mysql_query("SELECT * FROM agenda_dia WHERE id = '$rubro' ",$link);
+	$sql=mysql_query("SELECT id,fecha,congreso FROM agenda_dia WHERE id = '$rubro' ",$link);
 	while($row=mysql_fetch_array($sql)){
-		$nombre=$row['nombre'];
+		$id 		=	$row[0];
+		$fecha 		=	$row[1];
+		$congreso 	=	$row[2];
 	}
 ?>
-		Nombre:<br>
-		<input type="text" name="nombre" style="width:400px" value="<?php echo $nombre ?>"><br>
-<br><br>
-		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+				<div id="a1">
+		fecha:<br>
+		<input type="text" name="fecha" value="<?php echo $fecha ?>"><br>
+				</div>
 			</div>
-				<div>
-					<input type="submit"  value="enviar"><br><br>
+			<div id="b">
+				<div id="b1">
+		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+		<input type="submit"  value="enviar"><br><br>
 			</form>
 				</div>
 		</div>
 </div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Ã‚Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }
 ?>

@@ -42,7 +42,7 @@ while ($row = mysql_fetch_array($sql)){
 			<div id="maincontent-body">
 				<div>
 					<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
-					Título:<br>
+					TÃ­tulo:<br>
 						<input type="text" name="titulo" style="width:95%" value="<?php echo $titulo ?>" /><br>
 					<?php
 		if(empty($imagen)){?>
@@ -64,7 +64,7 @@ if($visible==0){
 }
 ?>
 						Publicado:<br>
-						Sí <input type="radio" name="visible" value="1" size="30" <?php echo $publisi ?>>
+						SÃ­ <input type="radio" name="visible" value="1" size="30" <?php echo $publisi ?>>
 						No <input type="radio" name="visible" value="0" size="30" <?php echo $publino ?>><br>
 						Contenido:<br>
 						<textarea name="contenido" rows=19 cols=70 width:300px height:40px>
@@ -78,9 +78,9 @@ if($visible==0){
 	</div>
 <?
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 }
 }else{
-echo "Usted no tiene acceso a esta sección";
+echo "Usted no tiene acceso a esta secciÃ³n";
 }		
 ?>

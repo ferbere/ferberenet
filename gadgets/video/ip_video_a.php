@@ -25,9 +25,8 @@ if(isset($_POST['visible'])){
 	$visible=$_POST['visible'];
 }
 $mysql=mysql_query("UPDATE video_index SET  liga = '$liga', nombre = '$nombre', descripcion = '$descripcion', fecha = '$fecha', visible='$visible' WHERE id = '$rubro'" ,$link);
-if(!$mysql){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$mysql){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../video.php?ruta=if_video_a.php&capturado=1";</script>';
 }
-include("style/footer_admin.html");
 ?>

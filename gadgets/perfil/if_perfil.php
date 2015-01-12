@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 	include_once('classes/conex.php');
 	$link=Conectarse();
 	include("library/tinymce.php");
@@ -24,8 +24,8 @@ if($_SESSION["estado"]=="Autenticado"){
 			<input type="text" name="nacido" size="80%"><br>
                         Visible:
 			<input type="radio" name="visible" value="0">No  
-			<input type="radio" name="visible" value="1" checked>Sí<br><br>
-						Elección:<br>
+			<input type="radio" name="visible" value="1" checked>SÃ­<br><br>
+						ElecciÃ³n:<br>
 			<select name="categoria">
 <?php
 	while ($row_cat=mysql_fetch_array($sql_cat)){
@@ -33,7 +33,7 @@ if($_SESSION["estado"]=="Autenticado"){
 	}
 ?>
 			</select><br><br>
-                        Descripción:<br>
+                        DescripciÃ³n:<br>
 			<textarea name="descripcion" rows=10 cols=80 ></textarea><br><br>
                         Imagen:<br>
 			<input type="text" name="imagen">
@@ -48,11 +48,11 @@ if($_SESSION["estado"]=="Autenticado"){
 			<br><br>
 	                Sala:<br>
 		<input type="text" name="sala"><br><br>
-	                Teléfonos:<br>
+	                TelÃ©fonos:<br>
 		<input type="text" name="telefonos"><br><br>
 	                e-mail:<br>
 		<input type="text" name="email"><br><br>
-	                Casa de campaña:<br>
+	                Casa de campaÃ±a:<br>
 		<textarea name="enlace" cols="80" rows="4"></textarea><br><br>
 					</div>
 						<div>
@@ -62,9 +62,9 @@ if($_SESSION["estado"]=="Autenticado"){
 	</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
  ?>

@@ -78,7 +78,7 @@ echo '</pre>';
 	<input type="hidden" name="sub" value="<?php echo ($sub+1);?>">
 	<?php
 	if($nomb==$tot_preg){
-		echo 'Se acabó';
+		echo 'Se acabÃ³';
 	}else{
 		echo '<input type="submit" value="siguiente">';
 	}

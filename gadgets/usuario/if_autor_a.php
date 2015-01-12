@@ -39,7 +39,7 @@ if(empty($capturado)){
 				<input type="text" name="nombre" size="100" value="<?php echo $row['nombre']; ?>"><br><br>
 				domicilio:<br>
 				<input type="text" name="domicilio" size="100" value="<?php echo $row['domicilio']; ?>"><br><br>
-				Población:<br>
+				PoblaciÃ³n:<br>
 				<input type="text" name="poblacion" size="100" value="<?php echo $row['poblacion']; ?>"><br><br>
 			<div>
 				<div>
@@ -48,11 +48,11 @@ if(empty($capturado)){
 			<input type="text" name="maill" size="25" value="<?php echo $row['maill']; ?>"><br>
 					</div>
 						<div style="float: left; position: relative; left: 50px">
-							Teléfono:<br>
+							TelÃ©fono:<br>
 			<input type="text" name="telefono" size="15" value="<?php echo $row['telefono']; ?>"><br><br>
 						</div>
 							<div style="float: left; position: relative; left: 120px">
-								Teléfono celular:<br>
+								TelÃ©fono celular:<br>
 			<input type="text" name="celular" size="15" value="<?php echo $row['celular']; ?>">
 							</div>
 				</div>
@@ -85,16 +85,16 @@ if(empty($capturado)){
 							<h2>Ajustes avanzados</h2>
 						</div>
 							<div class="changelog"><br><br>
-								<a href="javascript:ventanaSecundaria('gadgets/usuario/changelog.php?rubro=<?php echo $rubro ?>')"> cambiar contraseña</a> 
+								<a href="javascript:ventanaSecundaria('gadgets/usuario/changelog.php?rubro=<?php echo $rubro ?>')"> cambiar contraseÃ±a</a> 
 							</div>
 					</div>
 					
 <?php
 	}
 		}else{
-			echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+			echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 		}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

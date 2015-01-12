@@ -15,7 +15,7 @@ if(isset($_POST["visible"])){
 	$visible=$_POST["visible"];
 }
 $que=mysql_query("UPDATE template_complex SET content = '$content',orden= '$orden',visible= '$visible' WHERE id = '$rubro' ",$link);
-if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$que){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 	echo '<script>window.location.href="../../configura.php?ruta=if_complex_a.php&capturado=1";</script>';
 }

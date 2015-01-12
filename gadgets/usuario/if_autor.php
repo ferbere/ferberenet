@@ -27,7 +27,7 @@ if($_SESSION["privilegioss"]>=$orr){
 						<input type="text" name="user">
 					</div>
 						<div style="float: left; position: relative; left: 50px">
-						Contraseña:<br>
+						ContraseÃ±a:<br>
 						<input type="password" name="passwd">
 						</div>
 				</div>
@@ -37,7 +37,7 @@ if($_SESSION["privilegioss"]>=$orr){
 							<input type="text" name="nombre" size="100"><br><br>
 							domicilio:<br>
 							<input type="text" name="domicilio" size="100"><br><br>
-							Población:<br>
+							PoblaciÃ³n:<br>
 							<input type="text" name="poblacion" size="100"><br><br><br><br>
 						</div>
 							<div style="float: left">
@@ -45,11 +45,11 @@ if($_SESSION["privilegioss"]>=$orr){
 								<input type="text" name="maill" size="25"><br>
 							</div>
 								<div style="float: left; position: relative; left: 50px">
-									Teléfono:<br>
+									TelÃ©fono:<br>
 									<input type="text" name="telefono" size="15"><br><br>
 								</div>
 									<div style="float: left; position: relative; left: 120px">
-										Teléfono celular:<br>
+										TelÃ©fono celular:<br>
 										<input type="text" name="celular" size="15"><br><br>
 									</div>
 						</div>
@@ -61,9 +61,9 @@ if($_SESSION["privilegioss"]>=$orr){
 		</div>
 <?php
 		}else{
-			echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+			echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 		}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

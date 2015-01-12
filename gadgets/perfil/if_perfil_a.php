@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 	include_once('classes/conex.php');
 	$link=Conectarse();
 	include("library/tinymce.php");
@@ -66,9 +66,9 @@ if($_SESSION["estado"]=="Autenticado"){
 		}
 ?>
 						Visible:
-					<input type="radio" name="visible" value="1" <?php echo $vis_si ?>>Sí
+					<input type="radio" name="visible" value="1" <?php echo $vis_si ?>>SÃ­
 					<input type="radio" name="visible" value="0" <?php echo $vis_no ?>>No<br><br>
-					Categoría:<br><br><select name="categoria">
+					CategorÃ­a:<br><br><select name="categoria">
 					<?php
 					$sqlCat=mysql_query("SELECT id,nombre FROM perfil_categoria ORDER BY id ASC ",$link);
 					while($rowCat=mysql_fetch_array($sqlCat)){
@@ -84,7 +84,7 @@ if($_SESSION["estado"]=="Autenticado"){
 		</td>
 	<tr>
 </table><div>		
-                        Descripción:<br>
+                        DescripciÃ³n:<br>
 		<textarea name="descripcion" rows=10 cols=80 ><?php echo $descripcion ?></textarea><br><br>
                         Imagen:<br>
 		<input type="text" name="imagen" size="40%" value="<?php echo $imagen; ?>">
@@ -105,8 +105,8 @@ if($_SESSION["estado"]=="Autenticado"){
 					</select><br><br>
                     e-mail:<br><input type="text" name="email" size="50%" value="<?php echo $email ?>"><br><br>                        
                     Sala:<br><input type="text" name="sala" size="30%" value="<?php echo $sala ?>"><br><br>                        
-                    Teléfonos:<br><input type="text" name="telefonos" size="100%" value="<?php echo $telefonos ?>"><br><br>			                 
-                	Casa de campaña:<br><textarea name="enlace" rows="20" cols="80" ><?php echo $enlace ?></textarea><br><br>
+                    TelÃ©fonos:<br><input type="text" name="telefonos" size="100%" value="<?php echo $telefonos ?>"><br><br>			                 
+                	Casa de campaÃ±a:<br><textarea name="enlace" rows="20" cols="80" ><?php echo $enlace ?></textarea><br><br>
                     Orden:<br><input type="number" name="orden" value="<?php echo $orden ?>"><br><br>			                 
 
 					</div>
@@ -118,9 +118,9 @@ if($_SESSION["estado"]=="Autenticado"){
 		</div>
 <?php
     }else{
-	    echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	    echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
     }
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

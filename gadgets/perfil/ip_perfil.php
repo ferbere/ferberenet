@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('classes/conex.php');
+include_once('../../classes/conex.php');
 $link=Conectarse();
 $nombre=$_POST["nombre"];
 $descripcion=$_POST["descripcion"];
@@ -17,7 +17,7 @@ $enlace=$_POST["$enlace"];
 
 
 $que=mysql_query("INSERT INTO perfil_index (nombre,descripcion,imagen,nacido,categoria,visible,ext,email,sala,telefonos,enlace) VALUES ('{$nombre}','{$descripcion}','{$imagen}','{$nacido}','{$categoria}','{$visible}','{$ext}','{$email}','{$sala}','{$telefonos}','{$enlace}') ",$link);
-if(!$que){die ("Pos no se capturó el contenido, parece que: " .mysql_error());
+if(!$que){die ("Pos no se capturÃ³ el contenido, parece que: " .mysql_error());
 }else{
 echo '<script>window.location.href="../../perfil.php?ruta=if_perfil.php&capturado=1";</script>';
 }
