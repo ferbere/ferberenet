@@ -24,7 +24,7 @@ $sql.= "VALUES ('','$ip','$fecha','$hora','$segundos')";
 $rst = mysql_query($sql, $link) or die("Error al grabar un mensaje: ".mysql_error); 
 } 
 //creamos el condicionamiendo para loguearlo o no. 
-$sql = "SELECT * "; 
+$sql = "SELECT id,ip,hora,fecha,segundos "; 
 $sql.= "FROM contador_index WHERE id "; 
 $rst = mysql_query($sql, $link) or die("Error al leer base de datos: ".mysql_error); 
 $visitas = mysql_num_rows($rst); 

@@ -1,5 +1,5 @@
 <?php
-include_once('../../../classes/conex.php');
+include_once('../../classes/conex.php');
 include_once('../../classes/sacar.class.php');
 $link=Conectarse();
 if(isset($_GET['dirigido'])){
@@ -27,7 +27,7 @@ $sql=mysql_query("INSERT INTO mails_index (nombre,titulo,mensaje,email,dirigido,
 if(!$sql){
 die ("chispas:" .mysql_error());
 }else{
-	$pagina= sacar($_SERVER['PHP_SELF'],"/","admin");
+	$pagina= sacar($_SERVER['PHP_SELF'],"/","ferberenet");
 	$liga= "/".$pagina."contacto.php?mensaje=enviado";
 	echo '<script>window.location.href="'.$liga.'";</script>';
 }

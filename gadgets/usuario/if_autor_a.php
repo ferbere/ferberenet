@@ -23,48 +23,51 @@ if($_SESSION["estado"]=="Autenticado"){
 	} 
 	</script>
 <?php
-if(empty($capturado)){
-	$sql=mysql_query("SELECT * FROM usuario_index WHERE id = '$rubro' ",$link);
-	while($row=mysql_fetch_array($sql)){
+	if(empty($capturado)){
+		$sql=mysql_query("SELECT id,user,nombre,imagen,nombramiento,maill,telefono,celular,domicilio,poblacion,colaborador,privilegios,cp,pais,rfc FROM usuario_index WHERE id = '$rubro' ",$link);
+		while($row=mysql_fetch_array($sql)){
+			$id=$row[0];
+			$user=$row[1];
+			$nombre=$row[2];
+			$imagen=$row[3];
+			$nombramiento=$row[4];
+			$maill=$row[5];
+			$telefono=$row[6];
+			$celular=$row[7];
+			$domicilio=$row[8];
+			$poblacion=$row[9];
+			$colaborador=$row[10];
+			$privilegios=$row[11];
+			$cp=$row[12];
+			$pais=$row[13];
+			$rfc=$row[14];
+		}
 ?>
-	<div id="form-main">
 		<form method="post" action="gadgets/usuario/ip_autor_a.php">
-		<div id="maincontent-tit">
-			Editar usuario<br><br>
-		</div>
-			<div id="maincontent-body">
-				Usuario:<br>
-				<input type="text" name="user" value="<?php echo $row['user']; ?>"><br><br>
-				Nombre completo:<br>
-				<input type="text" name="nombre" size="100" value="<?php echo $row['nombre']; ?>"><br><br>
-				domicilio:<br>
-				<input type="text" name="domicilio" size="100" value="<?php echo $row['domicilio']; ?>"><br><br>
-				Población:<br>
-				<input type="text" name="poblacion" size="100" value="<?php echo $row['poblacion']; ?>"><br><br>
-			<div>
-				<div>
-					<div style="float: left">
-						e-mail:<br>
-			<input type="text" name="maill" size="25" value="<?php echo $row['maill']; ?>"><br>
-					</div>
-						<div style="float: left; position: relative; left: 50px">
-							Teléfono:<br>
-			<input type="text" name="telefono" size="15" value="<?php echo $row['telefono']; ?>"><br><br>
-						</div>
-							<div style="float: left; position: relative; left: 120px">
-								Teléfono celular:<br>
-			<input type="text" name="celular" size="15" value="<?php echo $row['celular']; ?>">
-							</div>
-				</div>
-					<div style="clear: both">
+		<h1>Editar usuario</h1>
+		<label>Usuario:</label>
+		<input type="text" name="user" value="<?php echo $user; ?>">
+		<label>Nombre completo:</label>
+		<input type="text" name="nombre" value="<?php echo $nombre; ?>">
+		<label>domicilio:</label>
+		<input type="text" name="domicilio" value="<?php echo $domicilio; ?>">
+		<label>Población:</label>
+		<input type="text" name="poblacion" value="<?php echo $poblacion; ?>">
+		<label>e-mail:</label>
+		<input type="text" name="maill" value="<?php echo $maill; ?>">
+		<label>Teléfono:</label>
+		<input type="text" name="telefono" size="15" value="<?php echo $telefono; ?>">
+		<label>Teléfono celular:</label>
+		<input type="text" name="celular" size="15" value="<?php echo $celular; ?>">
 	<?php
 		if($_SESSION['privilegioss_id']<=2){
 			?>
-			Privilegios:  <select name="privilegios">
+			<label>Privilegios:</label>
+			<select name="privilegios">
 			<?php
 			$sql3=mysql_query("SELECT id,nombre FROM usuario_privilegios" ,$link);
 			while ($row3=mysql_fetch_array($sql3)){
-				if($row['privilegios']==$row3['id']){
+				if($privilegios==$row3['id']){
 					$hig_p='selected';
 				}else{
 					$hig_p='nain';
@@ -73,27 +76,28 @@ if(empty($capturado)){
 			}
 			?>
 			</select>
-	<?php	}	?>
-						<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-						<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-						</form><br><br>
+	<?php	}else{?>
+
+		<input type="hidden" name="privilegios" value="<?php echo $_SESSION['privilegioss_id'] ?>">
+<?php	}	?>
+		<input type="hidden" name="rubro" value="<?php echo $id ?>">
+		<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+		</form>
+		<div style="margin:0px auto;">
+			<hr class="line">
+			<div style="margin:0px auto;width:40%">
+				<h2>Ajustes avanzados</h2>
+				<a href="javascript:ventanaSecundaria('gadgets/usuario/changelog.php?rubro=<?php echo $id ?>')">
+					<div class="changelog">
+						cambiar contraseña
 					</div>
-				</div>
-		</div>
-					<div style="width:100%">
-						<div align="center"><hr class="line"><br><br>
-							<h2>Ajustes avanzados</h2>
-						</div>
-							<div class="changelog"><br><br>
-								<a href="javascript:ventanaSecundaria('gadgets/usuario/changelog.php?rubro=<?php echo $rubro ?>')"> cambiar contraseña</a> 
-							</div>
-					</div>
-					
+				</a> 
+			</div>
+	</div>					
 <?php
+	}else{
+		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
 	}
-		}else{
-			echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
-		}
 }else{
 echo "Usted no tiene acceso a esta seccción";
 }

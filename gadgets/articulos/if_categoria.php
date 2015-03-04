@@ -9,41 +9,22 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 	}
 	if(empty($capturado)){
 ?>
-		<div id="form-main">
-		<form method="post" action="gadgets/articulos/ip_categoria.php">
-			<div id="maincontent-tit">
-				Agregar categoría
-			</div>
-				<div id="maincontent-body">
-					<div>
-						Nombre:<br>
-						<input type="text" name="nombre" size="30"><br>
-						Imagen:<br>
-						<input type="text" name="imagen" size="30">.jpg<br>
-					</div>
-						<div>
-<!--							Pertenece a:<br>
-							<select name="belong">
-								<option value="0">ninguno</a>
-<?php
-		$sql=mysql_query("SELECT * FROM gadgets_botones WHERE id = 4 OR id > 5",$link);
-		while ($row=mysql_fetch_array($sql)){
-			echo '<option value="'.$row['id'].'">'.$row['nombre'].'</a>';
-		}
-		?>
-							</select>-->
-							<br><br>
-						</div>
-							<div>
-								<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-								</form>
-							</div>
-		</div>
+		<form method="post" action="gadgets/articulos/ip_categoria.php" enctype="multipart/form-data">
+			<input type="hidden" name="MAX_FILE_SIZE" value="1000000"> 
+			<h1>Agregar categorÃ­a</h1>
+			<label>Nombre</label>
+			<input type="text" name="nombre">
+			<fieldset>
+				<legend>Imagen:</legend>
+				<input type="file" name="imagen" >
+			</fieldset>
+			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+		</form>
 		<?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

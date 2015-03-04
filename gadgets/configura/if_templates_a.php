@@ -32,58 +32,44 @@ if($_SESSION["estado"]=="Autenticado"){
 			$bann0=$row['bann0'];
 		}
 ?>
-		<div id="form-main">
 		<form method="post" action="gadgets/configura/ip_templates_a.php" name="fvalida">
-			<div id="maincontent-tit">
-				Editar hoja de estilo
-			</div>
-				<div id="maincontent-body">
-					<div>
-						Página:<br>
-				<input type="text" name="pagina" size="80%" value="<?php echo $pagina; ?>"><br>
-
-						Hoja de estilo:<br>
-				<input type="text" name="css" size="80%" value="<?php echo $css; ?>"><br>
-						Título:<br>
-				<input type="text" name="title" size="80%" value="<?php echo $title; ?>"><br>
-						Cabezal:<br>
-				<input type="text" name="header" size="30" value="<?php echo $header; ?>"><br><br>
-						Botonera:<br>
-				<input type="text" name="navbar" size="80%" value="<?php echo $navbar; ?>"><br>
-						Logotipo:<br>
-				<input type="text" name="logo" size="80%" value="<?php echo $logo; ?>"><br>
-						Título de contenido:<br>
-				<input type="text" name="tit_maincontent" size="80%" value="<?php echo $tit_maincontent; ?>"><br>
-						Contenido principal:<br>
-				<input type="text" name="maincontent" size="80%" value="<?php echo $maincontent; ?>"><br>
-						Objeto principal:<br>
-				<input type="text" name="main_object" size="80%" value="<?php echo $main_object; ?>"><br>
-						Detalle:<br>
-				<input type="text" name="detail" size="80%" value="<?php echo $detail; ?>"><br>
-						Pie de página:<br>
-				<input type="text" name="footer" size="80%" value="<?php echo $footer; ?>"><br>
-				<input type="hidden" name="rubro" value="<?php echo $rubro ?>" size="80%"><br>
-
-				</div>
-					<div><h2>banners</h2>
-						Banner 1:<br>
-				<input type="text" name="bann1" size="80%" value="<?php echo $bann1; ?>"><br>
-						Banner 2:<br>
-				<input type="text" name="bann2" size="80%" value="<?php echo $bann2; ?>"><br>
-						Banner 3:<br>
-				<input type="text" name="bann3" size="80%" value="<?php echo $bann3; ?>"><br>
-						Banner 4:<br>
-				<input type="text" name="bann4" size="80%" value="<?php echo $bann4; ?>"><br>
-						Banner 0:<br>
-				<input type="text" name="bann0" size="80%" value="<?php echo $bann0; ?>"><br>
-
-					</div>
-
-						<div>
-							<input type="submit" value="enviar">
-					</form>
-						</div>
-				</div>
+		<h1>Editar hoja de estilo</h1>
+		<label>Página</label>
+		<input type="text" name="pagina" value="<?php echo $pagina; ?>">
+		<label>Hoja de estilo</label>
+		<input type="text" name="css" value="<?php echo $css; ?>">
+		<label>Título</label>
+		<input type="text" name="title" value="<?php echo $title; ?>">
+		<label>Cabezal</label>
+		<input type="text" name="header" size="30" value="<?php echo $header; ?>">
+		<label>Botonera</label>
+		<input type="text" name="navbar" value="<?php echo $navbar; ?>">
+		<label>Logotipo</label>
+		<input type="text" name="logo" value="<?php echo $logo; ?>">
+		<label>Título de contenido</label>
+		<input type="text" name="tit_maincontent" value="<?php echo $tit_maincontent; ?>">
+		<label>Contenido principal</label>
+		<input type="text" name="maincontent" value="<?php echo $maincontent; ?>">
+		<label>Objeto principal</label>
+		<input type="text" name="main_object" value="<?php echo $main_object; ?>">
+		<label>Detalle</label>
+		<input type="text" name="detail" value="<?php echo $detail; ?>">
+		<label>Pie de página</label>
+		<input type="text" name="footer" value="<?php echo $footer; ?>">
+		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+		<h2>banners</h2>
+		<label>Banner 1</label>
+		<input type="text" name="bann1" value="<?php echo $bann1; ?>">
+		<label>Banner 2</label>
+		<input type="text" name="bann2" value="<?php echo $bann2; ?>">
+		<label>Banner 3</label>
+		<input type="text" name="bann3" value="<?php echo $bann3; ?>">
+		<label>Banner 4</label>
+		<input type="text" name="bann4" value="<?php echo $bann4; ?>">
+		<label>Banner 0</label>
+		<input type="text" name="bann0" value="<?php echo $bann0; ?>">
+		<input type="submit" value="enviar">
+		</form>
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	include_once('classes/conex.php');
 	$link=Conectarse();
 	include("library/tinymce.php");
@@ -9,49 +9,47 @@ if($_SESSION["estado"]=="Autenticado"){
 		$capturado=$_GET['capturado'];
 	}
 	if(empty($capturado)){
-			$sql=mysql_query("SELECT * FROM fotos_categoria",$link);
+			$sql=mysql_query("SELECT id,nombre FROM fotos_categoria",$link);
 ?>
-		<div id="form-main">
-			<form method="post" action="gadgets/fotos/ip_fotos.php" enctype="multipart/form-data">
+		<form method="post" action="gadgets/fotos/ip_fotos.php" enctype="multipart/form-data" name="fvalida">
 		   	 <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> 
-			<div id="maincontent-tit">
-				Agregar Foto
-			</div>
-				<div id="maincontent-body">
-					<div>
-                        Nombre:<br>
-			<input type="text" name="nombre" size="80%"><br><br>
-                        Subnombre:<br>
-			<input type="text" name="subnombre" size="80%"><br>
-						Fecha:<br>
-			<input type="date" name="fecha" placeholder="YYYY-MM-DD"><br>							
-                        Visible:
-			<input type="radio" name="visible" value="0">No  
-			<input type="radio" name="visible" value="1" checked>Sí<br><br>
-						Categoría:<br>
+			<h1>Agregar Foto</h1>
+			<label>Nombre:</label>
+			<input type="text" name="nombre">
+			<label>Subnombre</label>
+			<input type="text" name="subnombre">
+			<label>Fecha:</label>
+			<input type="date" name="fecha" placeholder="YYYY-MM-DD">
+			<fieldset>
+				<div class="radio">
+					<legend>Visible</legend>
+					<label for ="0" class="not">No</label>
+					<input type="radio" class="not2" name="visible" value="0">
+					<label for ="1" class="not">SÃ­</label>
+					<input type="radio" class="not2" name="visible" value="1" checked>
+				</div>
+			</fieldset>
+			<label>CategorÃ­a</label>
 			<select name="categoria">
 <?php
 	while ($row=mysql_fetch_array($sql)){
-		echo '<option value="'.$row['id'].'">'.$row['nombre'].'</a>';
+		echo '<option value="'.$row[0].'">'.$row[1].'</a>';
 	}
 ?>
-			</select><br><br>
-                        Descripción:<br>
-			<textarea name="descripcion" rows=10 cols=80 ></textarea><br><br>
-                        Imagen:<br>
-			<input type="file" name="imagen">
-			<br><br>
-					</div>
-						<div>
-							<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+			</select>
+			<label>DescripciÃ³n</label>
+			<textarea name="descripcion"></textarea>
+			<fieldset>
+				<legend>Imagen</legend>
+				<input type="file" name="imagen">
+			</fieldset>
+			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
 		</form>
-					</div>
-	</div>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
  ?>

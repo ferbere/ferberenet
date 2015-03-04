@@ -1,120 +1,98 @@
 <?php
 class paginacion {
 	var $regxpag = 25;	// registros por página
-	function cuantos($sql,$pez){
+	public function __construct($pez,$self){
+		$sql=$sql;
+		$this->pez=$pez;
+		$this->self=$self;
 		if(isset($_GET['criterio'])){
-			$criterio = $_GET['criterio'];
+			$this->criterio = $_GET['criterio'];
 		}else{
-			$criterio='';
+			$this->criterio='';
 		}
-		$txt_criterio = $criterio;
-		$sql.=$pez;
+		$this->txt_criterio = $this->criterio;
+		if(isset($_GET['ruta'])){
+			$ruta=$_GET['ruta'];
+		}
+		$this->ruta=$ruta;
+	}
+	function cuantos($sql){
+		$sql.=$this->pez;
 		$rs=mysql_query($sql);
 		$hallados=mysql_num_rows($rs);
-?>
-	<div style="border: 0px solid">
-		<div style="text-align: center; margin: 0px auto">
-			La búsqueda <?php echo "'".$txt_criterio."'" ?> arrojó <?php echo $hallados ?> resultados.<br><br>
-		</div>
-	</div>
-<?php
+		$catch1[0]  =	'<div style="text-align: center; margin: 0px auto">';
+		$catch1[0] .=		'La búsqueda "'.$this->txt_criterio.'" arrojó '.$hallados.' resultados.<br><br>';
+		$catch1[0] .=	'</div>';
+		$catch1[1]  =	$hallados;
+		$this->qty 	=	$hallados;
+	return $catch1;
 	}
-	function pagina($pag,$sql,$pez,$set,$borra,$celdas,$self) {		
-		if(isset($_GET['criterio'])){
-			$criterio=$_GET['criterio'];
-		}
-		if(isset($_GET['criterios'])){
-			$criterios=$_GET['criterios'];
-		}
-        if (empty($criterio)){
-			$criterio='';
-		}
-	$txt_criterio = $criterio;
-	$pagina=$this->regxpag*$pag;
-	$txt_criterio = $criterio;
-	$sql.=$pez;
-	$sql.=" ORDER BY id LIMIT $pagina,$this->regxpag";
-	$rs=mysql_query($sql);
-	$total=(count($celdas))-1;	
-	$percent= 100/($total+1);
-	?>
-		<div id="galeria" style="text-align: center;  width: 90%; margin: 0px auto; border: 0px solid">
-			<table>
-				<tr>
-	<?php
+	function pagina($pag,$sql,$set,$order,$borra,$celdas) {
+		$pagina=$this->regxpag*$pag;
+		$sql.=$this->pez;
+		$sql.=$order."$pagina,$this->regxpag";
+		$rs=mysql_query($sql);
+		$total=(count($celdas))-1;	
+		$percent= 100/($total+1);
+		$catch2	 =	'<div id="galeria">
+						<table>
+							<tr>';
 		for($e=0; $e<=$total;$e++){
-	?>
-					<td style="text-align: left; border-bottom: 0px dotted; width: <?php echo $percent ?>%; height: 20px;">
-				<big><strong><?php echo $celdas[$e]; ?></strong></big>
-					</td>
-<?php } ?>
-				</tr>
-<?php
-				while($row2=mysql_fetch_array($rs)){
-					if($row2[0]!=0){
-					?>
-				<tr>
-		<?php
-					for($i=0; $i<=$total;$i++){
-		?>
-						<td style="text-align: left; border-bottom: 1px dotted; width: <?php echo $percent ?>%; height: 30px;">
-							<a href="<?php echo $self ?>.php?ruta=<?php echo $set ?>&rubro=<?php echo $row2[0] ?>"><?php echo $row2[$i] ?></a>
-						</td>
-<?php
+			$catch2	.=			'<td class="strong">'.$celdas[$e].'</td>';
+		}
+		while($row=mysql_fetch_array($rs)){
+			if($row[0]!=0){
+				$catch2	.=	'<tr>';
+				for($i=0; $i<=$total;$i++){
+					if($i==0){
+						$tre=($row[0]-$this->qty);
+					}else{
+						$tre=$row[$i];
 					}
-?>
-	<td style=" border-bottom: 1px dotted; width: 0px">
-		<a href="<?php echo $self ?>.php?ruta=borra.php&borra=<?php echo $borra ?>&rubro=<?php echo $row2[0] ?>">Borrar</a><br>
-	</td>
-
-<?php
+					$catch2	.=		'<td>
+										<a href="'.$this->self.'.php?ruta='.$set.'&rubro='.$row[$total+1].'">';
+					$catch2 .=				$tre;
+					$catch2	.=			'</a>
+									</td>';
 				}
+					$catch2 .= 		'<td>';
+					$catch2 .= 			'<a href="'.$this->self.'.php?ruta=borra.php&borra='.$borra.'&rubro='.$row['id'].'">';
+					$catch2 .= 				'borra';
+					$catch2	.=			'</a>';
+					$catch2 .= 		'</td>';
 			}
-?>
-</tr></table>
-<?php		
+		}
+				$catch2	.=	'</tr>
+						</table>';
+		$catch2	 .=	'</div>';
+		return $catch2;
 	}
-		function pie($pag,$sql,$pez,$self) {
-			if(isset($_GET['criterio'])){
-				$criterio=$_GET['criterio'];
-			}else{
-				$criterio='';
-			}
-			if(isset($_GET['ruta'])){
-				$ruta=$_GET['ruta'];
-			}
-			$txt_criterio = $criterio;
+		function pie($pag,$sql) {
 			$pagina=$this->regxpag*$pag;
-			$sql.=$pez;
+			$sql.=$this->pez;
 			$rs=mysql_query($sql);
 			$totxlet=mysql_num_rows($rs);
 			$pagxlet=ceil($totxlet/$this->regxpag);
-?>
-		<div style="text-align: center; border: 0px solid; margin: 20px"><br>
-<?php
+			$catch3	 =	'<div>';
 			if ($pagxlet > 1) {
-?>
-			<div id="gal-indice" "style: border: 0px solid; margin: 0px auto">
-<?php
+			$catch3	.= 		'<div id="gal-indice">';
 				for ($i=0;$i<$pagxlet;$i++) {
 		         	if ($i==$pag){
-							echo ($i+1)."\n";
+						$catch3	.= ($i+1)."\n";
 					}else{
-	echo "<a href='".$self.".php?ruta=".$ruta."&criterio=".$criterio."&pag=$i'>".($i+1)."</a>";
+						$catch3	.= "<a href='".$this->self.".php?ruta=".$this->ruta."&criterio=".$this->criterio."&pag=$i'>";
+						$catch3	.=		($i+1);
+						$catch3	.=	"</a>";
 						if ($i!=($pagxlet-1)){
-							echo "&nbsp;|&nbsp;";
+						$catch3	.= "&nbsp;|&nbsp;";
 						}
 					}
 				}
-?>
-			</div>
-		</div>
-<?php
-			}
-			?>
-		</div>
-	</div>
-<?php
+
+			$catch3	.=		'</div>
+						</div>';
+			return $catch3;
+		}
 	}
 }
 ?>

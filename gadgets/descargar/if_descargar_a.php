@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("../library/confirm.php");
-if($_SESSION['privilegioss']=="ferbere"){
+include("library/confirm.php");
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
@@ -16,83 +16,72 @@ if($_SESSION['privilegioss']=="ferbere"){
 		$imagen 	= $row[1];
 		$visible 	= $row[2];
 		$disponible = $row[3];
-?>
-<table cellpadding="0" width="600" align="center">
-<form method="post" action="gadgets/descargar/ip_descargar_a.php" 	enctype="multipart/form-data">
-	 <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-	<tr>
-		<td colspan="2">
-			<h1>Editar material</h1>
-		</td>
-	</tr>
-		<tr>
-			<td rowspan="3">
-				<img src="../images/descargas/<?php echo $imagen; ?>" width="150px">		
-			</td>
-			<td>
-				<?php
-				if(empty($imagen)){?>
-					Imagen: 
-					<input type="file" name="imagen" ><br><br><br>
+	}
 
-				<?php
-				}else{?>
-					Imagen: <b><?php echo $imagen; ?></b><br>
-					<a href="gadgets/descargar/borra_imagen.php?rubro=<?php echo $id; ?>">Borrar y cargar otra imagen</a><br><br><br>	
-				<?php
-				} ?>
-			</td>
-		</tr>
-			<tr>
-				<td>
+		$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+		$url=mysql_fetch_array($sql_u);
+		if($url[1]==''){
+			$url_d='../'.$_SESSION["admin"].'/images/descargas/';
+		}else{
+			$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/descargas/';
+		}
+?>
+	<form method="post" action="gadgets/descargar/ip_descargar_a.php" 	enctype="multipart/form-data">
+		<input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+		<h1>Editar material</h1>
+		<img src="<?php echo $url_d.$imagen; ?>" width="200px">
+		<fieldset>
+			<legend>Imagen</legend>
+	<?php
+			if(empty($imagen)){?>
+				<input type="file" name="imagen">
+
+	<?php		}else{?>
+			<?php echo $imagen; ?>
+				<a href="gadgets/descargar/borra_imagen.php?rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a>
+	<?php } ?>			
+		</fieldset>
 			<?php
-			if($row[2]==1){
+			if($visible==1){
 				$vissi='checked';
 				$visno='nain';
-			}elseif($row[2]==0){
+			}elseif($visible==0){
 				$vissi='nain';
 				$visno='checked';
 			}
 			?>
-					Visible <br>
-					Sí<input type="radio" name="visible" value="1" <?php echo $vissi  ?>>
-					No<input type="radio" name="visible" value="0" <?php echo $visno  ?>>
-				</td>
-				</tr>
-				<tr>
-					<td>Disponibilidad<br>
-					<select name="disponible">
-					<?php
-					$usuario = array(2=>'Súperadmin',3=>'Usuarios',4=>'Prensa');
-					for($i=2;$i<=4;$i++){
-						if($row[3]==$i){
-							$dispo='selected';
-						}else{
-							$dispo='';
-						}
-						echo '<option value="'.$i.'"'.$dispo.'>'.$usuario[$i].'</a>';
-					}
-					
-					?>
-						</select>
-					</td>
-			</tr>
-				<tr>
-					<td valign="bottom">
-						<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-						</form>
-					</td>
-						<td>
-						</td>
-				</tr>
-</table>
+		<fieldset>
+			<legend>Visible</legend>
+			<div id="radio">
+				<label for="1" class="not">SÃ­</label>
+				<input type="radio" name="visible" value="1" class="not2" <?php echo $vissi ?>>
+				<label for="0" class="not">No</label>
+				<input type="radio" name="visible" value="0" class="not2" <?php echo $visno ?>>
+			</div>
+		</fieldset>
+		<label>Disponibilidad</label>
+		<select name="disponible">
+	<?php
+	$sql_d=mysql_query("SELECT id,nombre FROM usuario_privilegios WHERE id > 2 ORDER BY id ASC ",$link);
+	while($row_d=mysql_fetch_array($sql_d)){
+		if($disponible!=$row_d[0]){
+			$cat= 'nain';
+		}else{
+			$cat="selected";
+		}?>
+		<option value="<?php echo $row_d[0]; ?>"<?php echo $cat;?>>
+			<?php echo $row_d[1];?>
+		</option>
+<?php } ?>
+		</select>
+		<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+	</form>
 <?php
-}
+	}else{
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
+	}
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
-}
-}else{
-echo "Usted no tiene acceso a esta seccción";
+echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

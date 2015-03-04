@@ -24,15 +24,12 @@ if(empty($capturado)){
 		$visible 		= 		$row_botones_admin[6];
 	}
 ?>
-<div>
 <form method="get" action="gadgets/gadgets/ip_botones_admin_a.php">
-	<td colspan="2"><h1>Editar Botones del Admin</h1></div>
-	<div>
-		Botón:<br><input type="text" name="boton" size="30" value="<?php echo $boton; ?>">
-	</div>
-	<div>
-		Imagen:<br><input type="text" name="imagen" size="30" value="<?php echo $imagen; ?>">
-	</div>
+<h1>Editar Botones del Admin</h1>
+<label>Botón:</label>
+<input type="text" name="boton" size="30" value="<?php echo $boton; ?>">
+<label>Imagen:</label>
+<input type="text" name="imagen" size="30" value="<?php echo $imagen; ?>">
 <?php
 	if($ext=='jpg'){
 		$opjpg='selected';
@@ -42,18 +39,15 @@ if(empty($capturado)){
 		$oppng='selected';
 	}
 ?>
-	<div>
-		Extensión
-		<select name="ext">
-			<option value="jpg" <?php echo $opjpg ?>>.jpg</a>
-			<option value="png" <?php echo $oppng ?>>.png</a>
-		</select>
-	</div>
-	<div>
-		Ruta:<br><input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>">
-	</div>
-<div>
-	<div>Gadget:  <select name="gadget">
+<label>Extensión</label>
+<select name="ext">
+	<option value="jpg" <?php echo $opjpg ?>>.jpg</a>
+	<option value="png" <?php echo $oppng ?>>.png</a>
+</select>
+<label>Ruta:</label>
+<input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>">
+<label>Gadget:</label>
+<select name="gadget">
 	<?php
 	$sql2=$mysql->consulta("SELECT id,gadget FROM gadgets_index");
 	while ($row2=$mysql->fetch_array($sql2)){
@@ -66,21 +60,19 @@ if(empty($capturado)){
 	}
 	?>
 	</select>
-	</div>
-</div>
-<div>
-Privilegios: <br>
 <?php
 $privv= decbin($privilegios);
 /*
 echo $privilegios.'<br>';
 echo $privv.'<br><br>';*/
-
-
+?>
+<fieldset>
+	<legend>Privilegios:</legend>
+	<div class="radio">
+<?php
 $sql_privi=$mysql2->consulta("SELECT nombre FROM usuario_privilegios ORDER BY id DESC");
 $cuenta=$mysql2->num_rows($sql_privi);
 $privv_def=str_pad($privv,$cuenta,'0',STR_PAD_LEFT);
-echo '<br>';
 $h=$cuenta;
 $j=1;
 while($row_privi=$mysql2->fetch_array($sql_privi)){
@@ -94,9 +86,7 @@ while($row_privi=$mysql2->fetch_array($sql_privi)){
 	$j=$j+1;
 }
 ?>
-</div>
-<div>
-	Visible:<br>
+</fieldset><br><br>
 <?php
 if($visible==1){
 	$viSi='checked';
@@ -106,15 +96,19 @@ if($visible==1){
 	$viNo='checked';	
 }
 ?>
-Sí <input	type="radio" name="visible" value="1"<?php echo $viSi; ?>>
-No <input	type="radio" name="visible" value="0"<?php echo $viNo; ?>><br><br>
-</div>
-<div>
-	<input type="hidden" name="cuenta" value="<?php echo $cuenta; ?>">
-	<input type="hidden" name="rubro" value="<?php echo $rubro; ?>">
-	<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar"></form></td>
-</div>
-
+<fieldset>
+	<legend>Visible:</legend>
+	<div class="radio">
+		<label class="not" for="1">Sí</label>
+		<input type="radio" name="visible" value="1" class="not2" <?php echo $viSi; ?>>
+		<label class="not" for=0>No</label>
+		<input type="radio" name="visible" value="0" class="not2" <?php echo $viNo; ?>>
+	</div>
+</fieldset><br><br>
+<input type="hidden" name="cuenta" value="<?php echo $cuenta; ?>">
+<input type="hidden" name="rubro" value="<?php echo $rubro; ?>">
+<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+</form>
 <?php
 }else{
 	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

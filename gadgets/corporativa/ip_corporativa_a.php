@@ -22,9 +22,13 @@ if(isset($_POST["contenido"])){
 if(isset($_POST["orden"])){
 	$orden=$_POST["orden"];
 }
-$sql=mysql_query("SELECT url FROM template_general",$link);
+$sql=mysql_query("SELECT url,pagina FROM template_general",$link);
 $url=mysql_fetch_array($sql);
-$path=$url[0].'/'.$_SESSION['admin'].'/images/corporativa/';
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/corporativa/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/corporativa/';
+}
 
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 

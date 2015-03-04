@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	include_once('classes/conex.php');
 	$link=Conectarse();
 	include("library/tinymce.php");
@@ -23,29 +23,25 @@ if($_SESSION["estado"]=="Autenticado"){
 			$visible	 	= $row[6];
 			$fecha			= $row[7];
 		}
+		$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+		$url=mysql_fetch_array($sql_u);
+		if($url[1]==''){
+			$url_d='../'.$_SESSION["admin"].'/images/fotos/';
+		}else{
+			$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/fotos/';
+		}
 ?>
-	<div id="form-main">
 		<form method="post" action="gadgets/fotos/ip_fotos_a.php" enctype="multipart/form-data">
 		 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
-			<input type="hidden" name="rubro" value="<?php echo $rubro ?>"><br><br>
-		<div id="maincontent-tit">
-			Modificar cat·logo<br><br>
-		</div>
-			<div id="maincontent-body">
-				<table>
-					<tr>
-						<td rowspan="2">
-							<img src="../<?php echo $_SESSION['admin']?>/images/fotos/<?php echo $imagen; ?>" width="150px">
-						</td>
-						<td></td>
-					<tr>
-						<td></td><td>
-                        Nombre:<br>
-					<input type="text" name="nombre" size="40%" value="<?php echo $nombre ?>"><br><br>
-                    	Subnombre:<br>
-					<input type="text" name="subnombre" size="60%" value="<?php echo $subnombre ?>"><br><br>
-						Fecha:<br>
-					<input type="date" name="fecha" placeholder="YYYY-MM-DD" value="<?php echo $fecha ?>" /><br><br>
+			<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+			<h1>Modificar cat√°logo</h1>
+			<img src="<?php echo $url_d.$imagen; ?>" width="150px">
+			<label>Nombre:</label>
+			<input type="text" name="nombre" value="<?php echo $nombre ?>">
+			<label>Subnombre:</label>
+			<input type="text" name="subnombre" value="<?php echo $subnombre ?>">
+			<label>Fecha:</label>
+			<input type="date" name="fecha" placeholder="YYYY-MM-DD" value="<?php echo $fecha ?>" />
 <?php
 		if($visible==1){
 			$vis_si='checked';
@@ -56,10 +52,16 @@ if($_SESSION["estado"]=="Autenticado"){
 			
 		}
 ?>
-						Visible:
-					<input type="radio" name="visible" value="1" <?php echo $vis_si ?>>SÌ
-					<input type="radio" name="visible" value="0" <?php echo $vis_no ?>>No<br><br>
-					CategorÌa:<br><br><select name="categoria">
+		<fieldset>
+		<legend>Visible</legend>
+		<div class="radio">
+			<input type="radio" class="not" name="visible" value="1" <?php echo $vis_si ?>>
+			<label for="1" class="not2">S√≠</label>
+			<input type="radio" class="not" name="visible" value="0" <?php echo $vis_no ?>><label for="0" class="not2">No</label>
+		</div>
+		</fieldset>
+		<label>Categor√≠a</label>
+		<select name="categoria">
 					<?php
 					$sqlCat=mysql_query("SELECT id,nombre FROM fotos_categoria ORDER BY id ASC ",$link);
 					while($rowCat=mysql_fetch_array($sqlCat)){
@@ -68,34 +70,27 @@ if($_SESSION["estado"]=="Autenticado"){
 							}else{$hig="selected";}
 								echo '<option value="'.$rowCat[0].'"'.$hig.'>'.$rowCat[1].'</option>';
 							}
-					echo '</select>';
-?><br><br>
-		</td>
-	<tr>
-</table><div>		
-                        DescripciÛn:<br>
-		<textarea name="descripcion" rows=10 cols=80 ><?php echo $descripcion ?></textarea><br><br>
-				<?php
-				if(empty($imagen)){?>
-					Imagen: 
-					<input type="file" name="imagen" ><br><br><br>
-
-		<?php		}else{?>
-					Imagen: <b><?php echo $imagen; ?></b><br>
-					<a href="gadgets/fotos/borra_imagen.php?rubro=<?php echo $id; ?>">Borrar y cargar otra imagen</a><br><br><br>	
-		<?php } ?>
-                    		</div>
-                            	<div>
-                                    <input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-			</form>
-                                </div>
-			</div>
-		</div>
+?>
+		</select>
+		<label>Descripci√≥n</label>
+		<textarea name="descripcion"><?php echo $descripcion ?></textarea><br>
+		<fieldset>
+			<legend>Imagen</legend> 
+		<?php
+		if(empty($imagen)){?>
+			<input type="file" name="imagen"/>
+<?php		}else{?>
+			<?php echo $imagen; ?>
+			<a href="gadgets/fotos/borra_imagen.php?rubro=<?php echo $id; ?>">Borrar y cargar otra imagen</a>
+<?php } ?>
+		</fieldset>
+		<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+	</form>
 <?php
     }else{
-	    echo "El contenido ha sido capturado, debidamente. °Muy bien!";
+	    echo "El contenido ha sido capturado, debidamente. ¬°Muy bien!";
     }
 }else{
-echo "Usted no tiene acceso a esta seccciÛn";
+	echo "Usted no tiene acceso a esta seccci√≥n";
 }
 ?>

@@ -38,7 +38,11 @@ if(isset($_POST["orden"])){
 
 $sql=mysql_query("SELECT url,pagina FROM template_general",$link);
 $url=mysql_fetch_array($sql);
-$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/catalogo/';
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/catalogo/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/catalogo/';
+}
 
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 

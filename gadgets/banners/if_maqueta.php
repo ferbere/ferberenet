@@ -1,32 +1,23 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	$link=Conectarse();
-	include("library/tinymce.php");
 	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
 	if(empty($capturado)){
 ?>
-		<div id="form-main">
 		<form method="post" action="gadgets/banners/ip_maqueta.php">
-			<div id="maincontent-tit">
-				Agregar banner a la maqueta
-			</div>
-				<div id="maincontent-body">
-					<div>
-						Nombre:<br>
-						<input type="text" name="nombre" size="30"><br>
-						Imagen:<br>
-						<input type="text" name="imagen" size="30">.jpg<br>
-					</div>
-							<div>
-								<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-								</form>
-							</div>
-		</div>
-	</div>
+			<h1>Agregar banner a la maqueta</h1>
+			<label>Nombre</label>
+			<input type="text" name="nombre">
+			<fieldset>
+				<legend>Imagen</legend>
+				<input type="file" name="imagen" >
+			</fieldset>
+			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+		</form>
 		<?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

@@ -20,6 +20,7 @@ if($_SESSION["estado"]=="Autenticado"){
 			$ruta='bus_usuario.php';
 		}
 	?>
+	<h1>Edita Usuario</h1>
 	<div align="center">
 		<form action="usuario.php" method="get">
 		Criterio de búsqueda:
@@ -33,7 +34,8 @@ if($_SESSION["estado"]=="Autenticado"){
 				include_once("classes/sacar.class.php");
 				$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");
 				include_once("classes/buscador.class.php");
-				$sql = "SELECT usuario_index.id,usuario_index.user,usuario_privilegios.nombre FROM usuario_index INNER JOIN usuario_privilegios ON usuario_index.privilegios = usuario_privilegios.id WHERE usuario_index.privilegios >= '$privilegioss_id' ";
+				mysql_query('set @numero=0');
+				$sql = "SELECT @numero:=@numero+1 AS orden,usuario_index.user,usuario_privilegios.nombre,usuario_index.id FROM usuario_index INNER JOIN usuario_privilegios ON usuario_index.privilegios = usuario_privilegios.id WHERE usuario_index.privilegios >= '$privilegioss_id' ";
 				if($privilegioss=='ferbere'){
 					$pez=" AND usuario_index.user like '%" . $criterio . "%'";	
 				}elseif($privilegioss=='admin'){
@@ -41,14 +43,18 @@ if($_SESSION["estado"]=="Autenticado"){
 				}else{
 					$pez=" AND usuario_index.user = '$user'";
 				}
-				$celdas=array(0=>'id',1=>'user',2=>'privilegios');
+				$celdas=array(0=>'orden',1=>'user',2=>'privilegios');
 				$set='if_autor_a.php';
 				$ruta='bus_usuario.php';
+				$order=' ORDER BY id DESC LIMIT ';
 				$borra=1;
-				$clPag = new paginacion();
-				$clPag->cuantos($sql,$pez);
-				$clPag->pagina($pag,$sql,$pez,$set,$borra,$celdas,$self);
-				$clPag->pie($pag,$sql,$pez,$self);
+				$clPag = new paginacion($pez,$self);
+				$clPag1=$clPag->cuantos($sql);
+				$clPag2=$clPag->pagina($pag,$sql,$set,$order,$borra,$celdas);
+				$clPag3=$clPag->pie($pag,$sql);
+				echo  $clPag1[0];
+				echo  $clPag2;
+				echo  $clPag3;
 	?>
 		</div>
 <?php

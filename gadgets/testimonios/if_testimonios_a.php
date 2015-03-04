@@ -21,38 +21,38 @@ if($_SESSION["estado"]=="Autenticado"){
 			$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/testimonios/';
 		}
 
-$sql= mysql_query("SELECT id,titulo,contenido,fecha,orden,imagen,visible FROM testimonios_index WHERE id = '$rubro' ",$link);
+$sql= mysql_query("SELECT id,titulo,subtitulo,contenido,fecha,orden,imagen,visible FROM testimonios_index WHERE id = '$rubro' ",$link);
 while ($row = mysql_fetch_array($sql)){
 	$id=$row[0]; 
 	$titulo=$row[1];
-	$contenido=$row[2];
-	$fecha=$row[3];
-	$orden=$row[4];
-	$imagen=$row[5];
-	$visible=$row[6];
+	$subtitulo=$row[2];
+	$contenido=$row[3];
+	$fecha=$row[4];
+	$orden=$row[5];
+	$imagen=$row[6];
+	$visible=$row[7];
 }
 ?>
 	<div id="form-main">
 	<form method="post" action="gadgets/testimonios/ip_testimonios_a.php" enctype="multipart/form-data">
  	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
 	<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-		<div id="maincontent-tit">
-			Modificar testimonio<br><br>
-		</div>
-			<div id="maincontent-body">
-				<div>
-					<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
-					Título:<br>
-						<input type="text" name="titulo" style="width:95%" value="<?php echo $titulo ?>" /><br>
-					<?php
+	<h1>Modificar testimonio</h1>
+	<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
+	<label>Título</label>
+	<input type="text" name="titulo" value="<?php echo $titulo ?>"/>
+	<label>Subtítulo</label>
+	<input type="text" name="subtitulo" value="<?php echo $subtitulo ?>"/>
+	<fieldset>
+		<legend>Imagen</legend>
+<?php
 		if(empty($imagen)){?>
-			Imagen: 
-			<input type="file" name="imagen" ><br><br><br>
-
+			<input type="file" name="imagen" >
 <?php		}else{?>
-			Imagen: <b><?php echo $imagen; ?></b><br>
-			<a href="gadgets/testimonios/borra_imagen.php?rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a><br><br><br>	
-<?php } ?>			
+			<?php echo $imagen; ?>
+			<a href="gadgets/testimonios/borra_imagen.php?rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a>
+<?php } ?>
+	</fieldset>
 
 <?php
 if($visible==0){
@@ -63,19 +63,20 @@ if($visible==0){
 	$publisi="checked";
 }
 ?>
-						Publicado:<br>
-						Sí <input type="radio" name="visible" value="1" size="30" <?php echo $publisi ?>>
-						No <input type="radio" name="visible" value="0" size="30" <?php echo $publino ?>><br>
-						Contenido:<br>
-						<textarea name="contenido" rows=19 cols=70 width:300px height:40px>
-							<?php echo $contenido; ?>
-						</textarea><br>
-				</div>
-					<div>
-						<input type="submit"  value="enviar"></form></td>
-					</div>
-		</div>
-	</div>
+		<fieldset>
+				<legend>Visible</legend>
+			<div id="radio">
+				<label for="1" class="not">Sí</label>
+				<input type="radio" name="visible" value="1" class="not2" <?php echo $publisi ?>>
+				<label for="0" class="not">No <input type="radio" name="visible" value="0" class="not2" <?php echo $publino ?>>
+			</div>
+		</fieldset>
+		<label>Contenido</label>
+		<textarea name="contenido"><?php echo $contenido; ?></textarea>
+		<label>Orden</label>
+		<input type="number" name="orden" value="<?php echo $orden ?>"/>
+		<input type="submit"  value="enviar">
+	</form>
 <?
 }else{
 	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

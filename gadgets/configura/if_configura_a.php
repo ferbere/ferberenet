@@ -11,13 +11,8 @@ if($_SESSION['privilegioss']=="ferbere"){
 			$rubro=$_GET['rubro'];
 		}
 ?>
-<div id="form-main">
-			<form method="post" action="gadgets/configura/ip_configura_a.php">
-	<div id="maincontent-tit">
-		Configuración General<br><br>
-	</div>
-		<div id="maincontent-body">
-			<div>
+		<form method="post" action="gadgets/configura/ip_configura_a.php">
+		<h1>Configuración General</h1>
 <?php
 	$sql=mysql_query("SELECT id,titulo,subtitulo,correo1,metatags,dia,noche,url,pagina FROM template_general",$link);
 	while($row=mysql_fetch_array($sql)){
@@ -32,29 +27,24 @@ if($_SESSION['privilegioss']=="ferbere"){
 		$pagina		= $row[8];
 	}
 ?>
-		Título de la página:<br>
-		<input type="text" name="titulo" style="width:400px" value="<?php echo $titulo ?>"><br>
-		Subtitulo de la página:<br>
-		<input type="text" name="subtitulo" style="width:400px" value="<?php echo $subtitulo ?>"><br>
-		Página:<br>
-		<input type="text" name="pagina" style="width:200px" value="<?php echo $pagina ?>"><br>
-		Url:<br>
-		<input type="text" name="url" style="width:200px" value="<?php echo $url ?>"><br>
-		Inicio día en la página:<br>
-		<input type="text" name="dia" style="width:400px" value="<?php echo $dia ?>"><br>
-		Inicio noche en la página:<br>
-		<input type="text" name="noche" style="width:400px" value="<?php echo $noche ?>"><br>
-		Correo:<br>
-		<input type="text" name="correo1" style="width:200px" value="<?php echo $correo1 ?>"><br>
-		Palabras Clave:<br>
-		<textarea name="metatags" rows=19 cols=70 width:300px height:40px><?php echo $metatags; ?></textarea>
-			</div>
-				<div>
-					<input type="submit"  value="enviar"><br><br>
-			</form>
-				</div>
-		</div>
-</div>
+		<label>Título de la página</label>
+		<input type="text" name="titulo" value="<?php echo $titulo ?>">
+		<label>Subtitulo de la página</label>
+		<input type="text" name="subtitulo" value="<?php echo $subtitulo ?>">
+		<label>Página</label>
+		<input type="text" name="pagina" value="<?php echo $pagina ?>">
+		<label>Url</label>
+		<input type="text" name="url" value="<?php echo $url ?>">
+		<label>Inicio día en la página</label>
+		<input type="text" name="dia" value="<?php echo $dia ?>">
+		<label>Inicio noche en la página</label>
+		<input type="text" name="noche" value="<?php echo $noche ?>">
+		<label>Correo</label>
+		<input type="text" name="correo1" value="<?php echo $correo1 ?>">
+		<label>Palabras Clave</label>
+		<textarea name="metatags"><?php echo $metatags; ?></textarea>
+		<input type="submit"  value="enviar">
+		</form>
 <?
 }else{
 	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

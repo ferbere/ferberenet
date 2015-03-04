@@ -24,21 +24,15 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 			$visible=$row[6];
 		}
 	?>
-<div id="form-main">
+
 	<form method="post" action="gadgets/menus/ip_botones_a.php">
-		<div id="maincontent-tit">
-			Modificar botones
-		</div>
-			<div id="maincontent-body">
-				<div id="a">
-					<div id="a1">
-						Nombre:<br><input type="text" name="nombre" size="30" value="<?php echo $nombre; ?>">
-					</div>
-					<div id="a2">
-						Imagen:<br><input type="text" name="imagen" size="30" value="<?php echo $imagen; ?>">
-					</div>
-					<div id="a3">Submenú<br>
-						<select name="submenu">
+	<h1>Modificar botones</h1>
+	<label>Nombre:</label>
+	<input type="text" name="nombre" size="30" value="<?php echo $nombre; ?>">
+	<label>Imagen:</label>
+	<input type="text" name="imagen" size="30" value="<?php echo $imagen; ?>">
+	<label>Submenú</label>
+	<select name="submenu">
 	<?php
 	while($row_menus = mysql_fetch_array($sql_menus)){
 		if($submenu==$row_menus[1]){
@@ -49,13 +43,9 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 						echo '<option value="'.$row_menus[0].'"'.$f.'>'.$row_menus[1].'</a>';
 	}
 	?>
-						</select>
-					</div>
-				</div>
-				<div id="b">
-					<div id="b1">
-						Posicion:<br>
-						<select name="posicion">
+	</select>
+	<label>Posicion:</label>
+	<select name="posicion">
 	<?php
 	while($row_pos = mysql_fetch_array($sql_pos)){
 		if($posicion==$row_pos[1]){
@@ -66,15 +56,11 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 						echo '<option value="'.$row_pos[0].'"'.$p.'>'.$row_pos[1].'</a>';
 	}
 	?>
-						</select>
-					</div>
-					<div id="b2">
-						Ruta:<br><input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>"><br>
-					</div>
-				</div>
-				<div id="c">
-					<div id="c1">
-						Privilegios: <br>
+	</select>
+	<label>Ruta:</label>
+	<input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>">
+	<fieldset>
+	<legend>Privilegios:</legend>
 <?php
 $privv= decbin($privilegios);
 /*
@@ -98,7 +84,10 @@ while($row_privi=$mysql->fetch_array($sql_privi)){
 	$j=$j+1;
 }
 ?>
-					</div>
+	</fieldset>
+	<fieldset>
+		<div id="radio">
+	<legend>Visible:</legend>
 <?php
 if($visible==1){
 	$higsi='checked';
@@ -108,22 +97,16 @@ if($visible==1){
 		$higno='checked';
 	}
 ?>
-					<div id="c2">
-						Visible: <br>
-						<input type="radio" name="visible" value="1" <?echo $higsi ?>>Sí
-						<input type="radio" name="visible" value="0" <?echo $higno ?>>No<br><br>
-					</div>
-				</div>
-				<div id="d">
-					<div id="d1">
-
-						<input type="hidden" name="cuenta" value="<?php echo $cuenta ?>">
-						<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-						<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-			</form>
-					</div>
-		</div>
-	</div>
+	<input type="radio" class="not" name="visible" value="1" <?echo $higsi ?>>
+	<label class="not2" for="1" >Sí</label>
+	<input type="radio" class="not" name="visible" value="0" <?echo $higno ?>>
+	<label class="not2" for="0" >No</label>
+</div>
+	</fieldset>
+	<input type="hidden" name="cuenta" value="<?php echo $cuenta ?>">
+	<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+	<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+	</form>
 	<?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

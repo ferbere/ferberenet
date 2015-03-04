@@ -11,30 +11,41 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 		$rubro=$_GET['rubro'];
 	}
 	if(empty($capturado)){
-		$sql=mysql_query("SELECT * FROM noticias_categoria WHERE id = '$rubro' ",$link);
+		$sql=mysql_query("SELECT id,nombre,imagen FROM noticias_categoria WHERE id = '$rubro' ",$link);
 		while($row=mysql_fetch_array($sql)){
-			$nombre=$row['nombre'];
-			$imagen=$row['imagen'];
+			$id=$row[0];
+			$nombre=$row[1];
+			$imagen=$row[2];
 		}
-	?>
-		<div id="form-main">
-			<form method="post" action="gadgets/noticias/ip_categoria_a.php">
-			<div id="maincontent-tit">
-				Modificar categoría<br><br>
-			</div>
-				<div id="maincontent-body">
-					<div>
-						Nombre:<br>
-						<input type="text" name="nombre" size="30" value="<?php echo $nombre; ?>"><br><br>
-						Imagen:<br><input type="text" name="imagen" size="30" value="<?php echo $imagen; ?>">.jpg<br><br>
-						<input type="hidden" name="rubro" value="<?php echo $rubro ?>"><br><br>
-					</div>
-						<div>
-							<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-							</form>
-						</div>
-				</div>
-		</div>
+		$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+		$url=mysql_fetch_array($sql_u);
+		if($url[1]==''){
+			$url_d='../'.$_SESSION["admin"].'/images/noticias/';
+		}else{
+			$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/noticias/';
+		}
+?>
+		<form method="post" action="gadgets/noticias/ip_categoria_a.php" enctype="multipart/form-data">
+		 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
+			<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+			<h1>Modificar categoría</h1>
+			<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
+			<label>Nombre</label>
+			<input type="text" name="nombre" value="<?php echo $nombre; ?>">
+			<fieldset>
+				<legend>Imagen</legend>
+		<?php
+				if(empty($imagen)){?>
+					<input type="file" name="imagen">
+
+		<?php		}else{?>
+				<?php echo $imagen; ?>
+					<a href="gadgets/noticias/borra_imagen.php?borra=2&rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a>
+		<?php } ?>			
+			</fieldset>
+			<input type="hidden" name="rubro" value="<?php echo $rubro ?>"><br><br>
+			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+		</form>
 		<?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

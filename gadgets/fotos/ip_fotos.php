@@ -12,7 +12,12 @@ $visible=$_POST["visible"];
 
 $sql=mysql_query("SELECT url,pagina FROM template_general",$link);
 $url=mysql_fetch_array($sql);
-$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/fotos/';
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/fotos/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/fotos/';
+}
+
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 
 $tipo_archivo = $_FILES['imagen']['type']; 

@@ -12,7 +12,7 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 		$sql=$mysql->consulta("SELECT id,nombre FROM propuesta_categoria");
 ?>
 		<div id="form-main">
-		<form method="post" action="gadgets/propuestas/ip_iniciativa.php">
+		<form method="post" action="gadgets/propuestas/ip_propuesta.php">
 			<div id="maincontent-tit">
 				Agregar Propuesta
 			</div>

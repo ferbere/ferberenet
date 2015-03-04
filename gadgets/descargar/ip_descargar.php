@@ -6,7 +6,13 @@ $link=Conectarse();
 $visible=$_POST['visible'];
 $disponible=$_POST['disponible'];
 
-$path='../../../images/descargas/';
+$sql=mysql_query("SELECT url,pagina FROM template_general",$link);
+$url=mysql_fetch_array($sql);
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/descargas/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/descargas/';
+}
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 
 $tipo_archivo = $_FILES['imagen']['type']; 

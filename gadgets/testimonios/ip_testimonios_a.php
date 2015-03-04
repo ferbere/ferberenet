@@ -8,6 +8,9 @@ if(isset($_POST["rubro"])){
 if(isset($_POST["titulo"])){
 	$titulo=$_POST["titulo"];
 }
+if(isset($_POST["subtitulo"])){
+	$subtitulo=$_POST["subtitulo"];
+}
 if(isset($_POST["contenido"])){
 	$contenido=$_POST["contenido"];
 }
@@ -23,7 +26,12 @@ if(isset($_POST["visible"])){
 
 $sql=mysql_query("SELECT url,pagina FROM template_general",$link);
 $url=mysql_fetch_array($sql);
-$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/testimonios/';
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/testimonios/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/testimonios/';
+}
+
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 
 $tipo_archivo = $_FILES['imagen']['type']; 
@@ -31,7 +39,7 @@ $tamano_archivo = $_FILES['imagen']['size'];
 //compruebo si las características del archivo son las que deseo 
 
 if(empty($nombre_archivo)){
-$que=mysql_query("UPDATE testimonios_index SET titulo = '$titulo',contenido = '$contenido',fecha = '$fecha',orden = '$orden', visible = '$visible' WHERE id = '$rubro'",$link);
+$que=mysql_query("UPDATE testimonios_index SET titulo = '$titulo',subtitulo = '$subtitulo',contenido = '$contenido',fecha = '$fecha',orden = '$orden', visible = '$visible' WHERE id = '$rubro'",$link);
 	if(!$que){
 		die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 		echo '<script>window.location.href="../../testimonios.php?ruta=if_testimonios.php&capturado=0";</script>';				
@@ -43,7 +51,7 @@ $que=mysql_query("UPDATE testimonios_index SET titulo = '$titulo',contenido = '$
 			echo '<script>window.location.href="../../testimonios.php?ruta=if_testimonios.php&capturado=2";</script>';  
 	}else{ 
 	   	if(move_uploaded_file($_FILES['imagen']['tmp_name'], $path.$nombre_archivo)){ 
-			$que=mysql_query("UPDATE testimonios_index SET titulo = '$titulo',contenido = '$contenido',fecha = '$fecha',imagen='$nombre_archivo', orden = '$orden', visible = '$visible' WHERE id = '$rubro'",$link);
+			$que=mysql_query("UPDATE testimonios_index SET titulo = '$titulo',subtitulo = '$subtitulo',contenido = '$contenido',fecha = '$fecha',imagen='$nombre_archivo', orden = '$orden', visible = '$visible' WHERE id = '$rubro'",$link);
 			if(!$que){
 				die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 				echo '<script>window.location.href="../../testimonios.php?ruta=if_testimonios.php&capturado=0";</script>';				

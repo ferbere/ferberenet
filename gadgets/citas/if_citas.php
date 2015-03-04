@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")||($_SESSION["privilegioss"]=="directivo")){
 $link=Conectarse();
 include("library/tinymce.php");
 include("library/confirm.php");
@@ -9,34 +9,28 @@ $capturado=$_GET['capturado'];
 }
 if(empty($capturado)){
 ?>
-<table width="600" align="center">
 	<form method="post" action="gadgets/citas/ip_citas.php">
-	<tr>
-		<td colspan="2"><h1>Cita nueva</h1></td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			Autor:<br>
-			<input type="text" name="autor" size="80%"><br>
-			Contenido:<br>
-			<textarea name="contenido" rows=19 cols=70 width:300px height:40px></textarea><br><br>
-			Visible:</br>
-<input type="radio" name="visible" value="0" checked>No  
-<input type="radio" name="visible" value="1">Sí
-		</td>
-	</tr>
-	<tr>
-		<td valign="bottom">
-			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+		<h1>Cita nueva</h1>
+		<label>Autor</label>
+		<input type="text" name="autor">
+		<label>Contenido</label>
+		<textarea name="contenido"></textarea>
+		<fieldset>
+			<div class="radio">
+				<legend>Visible</legend>
+				<label for ="0" class="not">No</label>
+				<input type="radio" class="not2" name="visible" value="0">
+				<label for ="1" class="not">Sí</label>
+				<input type="radio" class="not2" name="visible" value="1" checked>
+			</div>
+		</fieldset>
+		<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
 	</form>
-		</td>
-	</tr>
-</table>
 <?php
+	}else{
+		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	}
 }else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
-}
-}else{
-echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccción";
 }
 ?>

@@ -23,7 +23,7 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
  	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
 	<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
 <?php
-		$sql= mysql_query("SELECT articulos_index.titulo,articulos_index.subtitulo,articulos_categoria.nombre,articulos_index.imagen,articulos_index.contenido,articulos_index.publicado,perfil_index.nombre,articulos_index.fecha FROM articulos_index INNER JOIN articulos_categoria ON articulos_index.categoria = articulos_categoria.id INNER JOIN perfil_index ON articulos_index.autor = perfil_index.id WHERE articulos_index.id = '$rubro' ",$link);
+		$sql= mysql_query("SELECT articulos_index.titulo,articulos_index.subtitulo,articulos_categoria.nombre,articulos_index.imagen,articulos_index.contenido,articulos_index.publicado,usuario_index.nombre,articulos_index.fecha,articulos_index.tag FROM articulos_index INNER JOIN articulos_categoria ON articulos_index.categoria = articulos_categoria.id INNER JOIN usuario_index ON articulos_index.autor = usuario_index.id WHERE articulos_index.id = '$rubro' ",$link);
 		while ($row = mysql_fetch_array($sql)){
 			$titulo		=	$row[0];
 			$subtitulo	=	$row[1];
@@ -33,27 +33,19 @@ if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin"))
 			$publicado	=	$row[5];
 			$autor		=	$row[6];
 			$fecha		= 	$row[7];
+			$tag		= 	$row[8];
 		}
 		?>
-			<div id="maincontent-tit">
-				Editar artículo
-			</div>
-				<div id="maincontent-body">
-					<div><br><br>
-					<div style="text-align:center">
-						<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
-						<?php echo $imagen; ?>
-					</div><br><br>
-						Título:<br></h1>
-						<input type="text" name="titulo" style="width:95%" value="<?php echo $titulo ?>" /><br><br>
-						Subtítulo:<br>
-						<input type="text" name="subtitulo" style="width:95%" value="<?php echo $subtitulo ?>"/><br><br>
-						Fecha: <?php echo $fecha; ?>
-					</div>
-						<div style="width:500px; height: 50px"><br>
-							<div >
-								Sección:
-								<select name="categoria">
+	<h1>Editar artículo</h1>
+	<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
+	<?php echo $imagen; ?>
+	<label>Título</label>
+	<input type="text" name="titulo" value="<?php echo $titulo ?>" />
+	<label>Subtítulo</label>
+	<input type="text" name="subtitulo" value="<?php echo $subtitulo ?>"/>
+	<label>Fecha<?php echo $fecha; ?></label>
+	<label>Sección</label>
+	<select name="categoria">
 <?php
 $sqlCat=mysql_query("SELECT id,nombre FROM articulos_categoria ORDER BY id ASC ",$link);
 while($rowCat=mysql_fetch_array($sqlCat)){
@@ -67,25 +59,20 @@ if($categoria!=$rowCat['nombre']){
 	</option>
 <?php }
 ?>
-								</select>
-							</div>
-								<div style="position: relative; float:right">
+	</select>
+	<fieldset>
+		<legend>Imagen</legend>
 <?php
 		if(empty($imagen)){?>
-			Imagen: 
-			<input type="file" name="imagen" ><br><br><br>
+			<input type="file" name="imagen">
 
 <?php		}else{?>
-			Imagen: <b><?php echo $imagen; ?></b><br>
-			<a href="gadgets/articulos/borra_imagen.php?rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a><br><br><br>	
+		<?php echo $imagen; ?>
+			<a href="gadgets/articulos/borra_imagen.php?rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a>
 <?php } ?>			
-								</div>
-								</div>
-								<div>
-									Contenido:<br>
-									<textarea name="contenido" rows=19 cols=80 width:300px height:40px><?php echo $contenido ?></textarea>
-								</div>
-								<div style="float:left">
+	</fieldset>
+	<label>Contenido</label>
+	<textarea name="contenido"><?php echo $contenido ?></textarea>
 			<?php
 			if($publicado==0){
 			$publino="checked";
@@ -95,14 +82,19 @@ if($categoria!=$rowCat['nombre']){
 			$publisi="checked";
 			}
 			?>
-									<br>Publicado:<br>
-									Sí <input type="radio" name="publicado" value="1" size="30" <?php echo $publisi ?>>
-									No <input type="radio" name="publicado" value="0" size="30" <?php echo $publino ?>>
-									</div>
-									<div style="position:relative;left:150px">
-									<br>Autor:<br><select name="autor">
+	<fieldset>
+		<div id="radio">
+			<legend>Publicado</legend>
+			<label for="1" class="not">Sí</label>
+			<input type="radio" class="not2" name="publicado" value="1"<?php echo $publisi ?>>
+			<label for="0" class="not">No</label>
+			<input type="radio" class="not2" name="publicado" value="0" <?php echo $publino ?>>
+		</div>
+	</fieldset>
+	<label>Autor</label>
+	<select name="autor">
 			<?php
-			$sqlaut=mysql_query("SELECT id,nombre FROM perfil_index ORDER BY id ASC ",$link);
+			$sqlaut=mysql_query("SELECT id,nombre FROM usuario_index ORDER BY id ASC ",$link);
 			while($rowaut=mysql_fetch_array($sqlaut)){
 			if($autor!=$rowaut[1]){
 				$aut= 'nain';
@@ -112,13 +104,37 @@ if($categoria!=$rowCat['nombre']){
 				echo '<option value="'.$rowaut['id'].'"'.$aut.'>'.$rowaut['nombre'].'</option>';
 			}
 			?>
-						</select>									</div>
-									<div style="clear:both"></div>
-									<div>
-										<input type="submit"  value="enviar">
-										</form>
-									</div>
-			</div>
+	</select>
+				<fieldset>
+				<legend>Etiquetas:</legend>
+<?php
+$privv= decbin($tag);
+/*
+echo $tag.'<br>';
+echo $privv.'<br><br>';*/
+$sql_tag=mysql_query("SELECT nombre FROM articulos_tag ORDER BY id DESC",$link);
+$cuenta=mysql_num_rows($sql_tag);
+
+$privv_def=str_pad($privv,$cuenta,'0',STR_PAD_LEFT);
+
+echo '<br>';
+$h=$cuenta;
+$j=1;
+while($row_tag=mysql_fetch_array($sql_tag)){
+	if($privv_def{$j-1}==1){
+		$high='checked';
+	}else{
+		$high='nain';
+	}
+	echo '<input type="checkbox" name="tag[]" value="'.$j.'"'.$high.'>'.$row_tag[0].'  ';
+	$h=$h-1;
+	$j=$j+1;
+}
+?>
+			</fieldset>
+	<input type="hidden" name="cuenta" value="<?php echo $cuenta ?>">
+	<input type="submit"  value="enviar">
+</form>
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

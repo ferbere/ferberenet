@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	$link=Conectarse();
 	include("library/tinymce.php");
 	include("library/confirm.php");
@@ -9,35 +9,31 @@ if($_SESSION["estado"]=="Autenticado"){
 	}
 	if(empty($capturado)){
 ?>
-		<div id="form-main">
 		<form method="post" action="gadgets/video/ip_video.php">
-			<div id="maincontent-tit">
-				Agregar video
+		<h1>Agregar video</h1>
+		<label>Nombre</label>
+		<input type="text" name="nombre">
+		<label>Fecha</label>
+		<input type="text" name="fecha" placeholder="YYYY-MM-DD">
+		<label>Descripción</label>
+		<textarea name="descripcion"></textarea>
+		<label>Liga</label>
+		<input type="text" name="liga">
+		<fieldset>
+			<legend>Visible:</legend>
+			<div class="radio">
+				<label for="1" class="not">Sí</label>
+				<input type="radio" class="not2" name="visible" value="1">
+				<label for="0" class="not">No</label>
+				<input type="radio" class="not2" name="visible" value="0" checked>
 			</div>
-				<div id="maincontent-body">
-					<div>
-							Nombre:<br>
-			<input type="text" name="nombre" size="50"><br><br>
-							Fecha:<br>
-			<input type="text" name="fecha" size="50"><br><br>
-							Descripción:<br>
-			<textarea name="descripcion" rows=19 cols=70 width:300px height:40px></textarea><br>
-							Liga:<br>
-			<input type="text" name="liga" size="50"><br></br>
-
-							Visible:</br>
-			<input type="radio" name="visible" value="0" checked>No  
-			<input type="radio" name="visible" value="1">Sí  
-						</div>
-							<div>
-			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-			</form>
-							</div>
-		</div>
+		</fieldset>
+		<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+	</form>
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccción";
 }

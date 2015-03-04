@@ -11,40 +11,35 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 	if(empty($capturado)){
 		$sql=$mysql->consulta("SELECT id,pregunta FROM quiz_ques ORDER BY id ASC");
 ?>
-		<div id="form-main">
 		<form method="post" action="gadgets/quiz/ip_answ.php" enctype="multipart/form-data" name="fvalida">
 		<input type="hidden" name="MAX_FILE_SIZE" value="1000000"> 
-			<div id="maincontent-tit">
-				Agregar respuesta a la pregunta
+		<h1>Agregar respuesta a la pregunta</h1>
+		<label>Respuesta</label>
+		<input type="text" name="respuesta">
+		<fieldset>
+			<legend>Válida</legend>
+			<div class="radio">
+				<input type="radio" class="not" name="valida" value="1">
+				<label for ="1" class="not2">Verdadero</label>
+				<input type="radio" class="not" name="valida" value="0" checked>
+				<label for ="0" class="not2">Falso</label>
 			</div>
-				<div id="maincontent-body">
-					<div>
-						<br><br>Respuesta:<br>
-				<input type="text" name="respuesta" size="100%"><br><br>
-						<b>Valida:</b><br>
-				Cierta:<input type="radio" name="valida" value="1">
-				Falsa:<input type="radio" name="valida" value="0" checked><br><br>
-						Imagen:<br>
-				<input type="file" name="imagen" ><br><br>
-						Contenido:<br>
-				<textarea name="contenido" rows=19 cols=70 width:300px height:40px></textarea><br><br>
-						Pregunta:<br>
-					</div>
-					<div>
-						<select name="ques">
+			</fieldset>
+		<label>Imagen</label>
+		<input type="file" name="imagen">
+		<label>Contenido</label>
+		<textarea name="contenido"></textarea>
+		<label>Pregunta</label>
+		<select name="ques">
 <?php
 		while($row=$mysql->fetch_array($sql)){
 			echo '<option value="'.$row[0].'">'.$row[1].'</option>';
 		}
 
 ?>
-						</select><br><br>
-					</div>
-						<div>
-							<input type="submit" value="enviar">
-					</form>
-						</div>
-				</div>
+		</select>
+		<input type="submit" value="enviar">
+	</form>
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
 	$link=Conectarse();
 	include("library/tinymce.php");
 	include("library/confirm.php");
@@ -23,22 +23,21 @@ if($_SESSION["estado"]=="Autenticado"){
 			$banner		= $row[7];
 			$liga		= $row[8];
 		}
+	$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+	$url=mysql_fetch_array($sql_u);
+	if($url[1]==''){
+		$url_d='../'.$_SESSION["admin"].'/images/banners/';
+	}else{
+		$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/banners/';
+	}
 	?>
-		<div id="form-main">
 			<form method="post" action="gadgets/banners/ip_banner_a.php" enctype="multipart/form-data">
 			 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
-			<div id="maincontent-tit">
-				Modificar banner<br><br>
-			</div>
-				<div id="maincontent-body">
-					<div>
-						<div style="text-align:center">
-							<img src="../<?php echo $_SESSION['admin']?>/images/banners/<?php echo $imagen; ?>" height="200px"><br>
-						</div>
-							<div>
-								Nombre:<br>
-				<input type="text" name="nombre" size="30" value="<?php echo $nombre; ?>"><br><br>
-								Orientaci&oacute;n:
+				<h1>Modificar banner</h1>
+				<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
+				<label>Nombre:</label>
+				<input type="text" name="nombre" size="30" value="<?php echo $nombre; ?>">
+				<label>Orientación:</label>
 				<select name="orientacion">
 			<?php
 				$sql_orie=mysql_query("SELECT id,nombre FROM general_orientacion ",$link);
@@ -51,25 +50,25 @@ if($_SESSION["estado"]=="Autenticado"){
 					echo '<option value="'.$row_orie[0].'"'.$hig_orie.'>'.$row_orie[1].'</a>';
 				}
 			?>
-				</select><br><br>
-
-								Contenido:<br>
-				<textarea name="contenido" rows=19 cols=70 width:300px height:40px><?php echo $contenido ?></textarea>
-								Orden:<br>
-				<input type="text" name="orden" size="30" value="<?php echo $orden; ?>"><br>
-								Liga:<br>
-				<input type="text" name="liga" size="100" value="<?php echo $liga; ?>"><br>
+				</select>
+				<label>Contenido:</label>
+				<textarea name="contenido"><?php echo $contenido ?></textarea>
+				<label>Orden:</label>
+				<input type="text" name="orden" value="<?php echo $orden; ?>">
+				<label>Liga:</label>
+				<input type="text" name="liga" size="100" value="<?php echo $liga; ?>">
+				<fieldset>
+				<legend>Imagen</legend>
 						<?php
 						if(empty($imagen)){?>
-							Imagen: 
-							<input type="file" name="imagen" ><br><br><br>
+							<input type="file" name="imagen" >
 
 				<?php	}else{?>
-							Imagen: <b><?php echo $imagen; ?></b><br>
-							<a href="gadgets/banners/borra_imagen.php?rubro=<?php echo $id; ?>">Borrar y cargar otra imagen</a><br><br><br>	
-				<?php } ?>			
-
-								Banner:<br>
+							<?php echo $imagen; ?>
+							<a href="gadgets/banners/borra_imagen.php?borra=1&rubro=<?php echo $id; ?>">Borrar y cargar otra imagen</a>
+				<?php } ?>
+				</fieldset>	
+				<label>Banner:</label>
 				<select name="banner">
 			<?php
 				$sql_bann=mysql_query("SELECT id,nombre FROM banners_dir ",$link);
@@ -82,7 +81,7 @@ if($_SESSION["estado"]=="Autenticado"){
 					echo '<option value="'.$row_bann['id'].'"'.$hig.'>'.$row_bann['nombre'].'</a>';
 				}
 			?>
-				</select><br><br>
+				</select>
 			<?php
 			if($visible==1){
 				$visi_no='nain';
@@ -93,17 +92,17 @@ if($_SESSION["estado"]=="Autenticado"){
 				
 			}
 			?>
-							Publicado:<br>
-				<input type="radio" name="visible" value="0" <?php echo $visi_no ?>>No
-				<input type="radio" name="visible" value="1" <?php echo $visi_si ?>>S&iacute;<br>			
+			<fieldset>
+				<legend>Publicado:</legend>
+				<div id="radio">
+				<input type="radio" class="not" name="visible" value="0" <?php echo $visi_no ?>>
+				<label for="0" class="not2">No</label>
+				<input type="radio" class="not" name="visible" value="1" <?php echo $visi_si ?>>
+				<label for="1" class="not2">Sí</label>
+			</fieldset>
 				<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-							</div>
-						</div>
-								<div>
 				<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
 				</form>
-								</div>
-			</div>
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

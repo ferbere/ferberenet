@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('../../../classes/conex.php');
+include_once('../../classes/conex.php');
 $link=Conectarse();
 if(isset($_POST['rubro'])){
 $rubro=$_POST['rubro'];
@@ -12,7 +12,13 @@ if(isset($_POST['disponible'])){
 $disponible=$_POST['disponible'];
 }
 
-$path='../../../images/descargas/';
+$sql=mysql_query("SELECT url,pagina FROM template_general",$link);
+$url=mysql_fetch_array($sql);
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/articulos/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/articulos/';
+}
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 
 $tipo_archivo = $_FILES['imagen']['type']; 

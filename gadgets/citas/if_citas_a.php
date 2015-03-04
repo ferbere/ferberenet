@@ -11,27 +11,20 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 		if(isset($_GET['rubro'])){
 			$rubro=$_GET['rubro'];
 		}
-?>
-<div id="form-main">
-	<form method="post" action="gadgets/citas/ip_citas_a.php">
-	<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-<?php
 		$sql= mysql_query("SELECT autor,contenido,visible FROM citas_index WHERE id = '$rubro' ",$link);
 		while ($row = mysql_fetch_array($sql)){
 			$autor		=	$row[0];
 			$contenido	=	$row[1];
 			$visible	=	$row[2];
 		}
-		?>
-			<div id="maincontent-tit">
-				Editar cita
-			</div>
-				<div id="maincontent-body">
-					<div>
-						Autor:<br></h1>
-						<input type="text" name="autor" style="width:95%" value="<?php echo $autor ?>" /><br><br>
-						Contenido:<br>
-						<textarea name="contenido" rows=19 cols=80 width:300px height:40px><?php echo $contenido ?></textarea>
+?>
+	<form method="post" action="gadgets/citas/ip_citas_a.php">
+		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+		<h1>Editar cita</h1>
+		<label>Autor</label>
+		<input type="text" name="autor" value="<?php echo $autor ?>" />
+		<label>Contenido</label>
+		<textarea name="contenido"><?php echo $contenido ?></textarea>
 					<?php
 		if($visible==1){
 			$visi_no='nain';
@@ -42,16 +35,16 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 
 		}
 		?>
-						Visible:<br>
-			<input type="radio" name="visible" value="0" <?php echo $visi_no ?>>No
-			<input type="radio" name="visible" value="1" <?php echo $visi_si ?>>Sí<br>		
-					</div>
-						<div>
-							<input type="submit"  value="enviar">
-							</form>
-						</div>
-			</div>
-</div>
+		<fieldset>
+		<legend>Visible</legend>
+		<div class="radio">
+			<input type="radio" class="not" name="visible" value="1" <?php echo $visi_si ?>>
+			<label for="1" class="not2">Sí</label>
+			<input type="radio" class="not" name="visible" value="0" <?php echo $visi_no ?>><label for="0" class="not2">No</label>
+		</div>
+		</fieldset>
+		<input type="submit"  value="enviar">
+	</form>
 <?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

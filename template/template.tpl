@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>{title}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="style/style_admin.css" />
 <link rel="stylesheet" type="text/css" href="http://localhost/{css}/style/style_admin.css" />
 <link rel="stylesheet" type="text/css" href="style/font-awesome.css" />

@@ -19,5 +19,7 @@ if($borra==1){
 	mysql_query("DELETE FROM articulos_ediciones WHERE id = '$rubro' ", $link);
 }elseif($borra==5){
 	mysql_query("DELETE FROM articulos_fotoedicion WHERE id = '$rubro' ", $link);
+}elseif($borra==6){
+	mysql_query("DELETE FROM articulos_tag WHERE id = '$rubro' ", $link);
 }
 ?>

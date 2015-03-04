@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")||($_SESSION["privilegioss"]=="directivo")){
 	include_once('classes/conex.php');
 	$link=Conectarse();
 	include("library/tinymce.php");
@@ -24,24 +24,23 @@ if($_SESSION["estado"]=="Autenticado"){
 			$visible		= $row[7];
 			$categoria		= $row[8];
 		}
+		$sql_u=mysql_query("SELECT url,pagina FROM template_general",$link);
+		$url=mysql_fetch_array($sql_u);
+		if($url[1]==''){
+			$url_d='../'.$_SESSION["admin"].'/images/perfil/';
+		}else{
+			$url_d='http://'.$url[1].'/'.$_SESSION['admin'].'/images/perfil/';
+		}
 ?>
-	<div id="form-main">
 		<form method="post" action="gadgets/usuario/ip_perfil_a.php" enctype="multipart/form-data">
 	 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">	
-		<input type="hidden" name="rubro" value="<?php echo $rubro ?>"><br><br>
-		<div id="maincontent-tit">
-			Modificar perfil<br><br>
-		</div>
-			<div id="maincontent-body">
-				<table>
-					<tr>
-						<td rowspan="4">
-						<img src="../<?php echo $_SESSION['admin']?>/images/perfil/<?php echo $imagen; ?>" height="200px"><br>
-						</td>
-						<td>                        Nombre:<br>
-					<input type="text" name="nombre" size="40%" value="<?php echo $nombre ?>"><br><br>
-                        Nombramiento:<br>
-					<input type="text" name="nombramiento" size="40%" value="<?php echo $nombramiento ?>"><br><br>
+		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+		<h1>Modificar perfil</h1>
+		<img src="<?php echo $url_d.$imagen; ?>" height="200px"><br>
+		<label>Nombre</label>
+		<input type="text" name="nombre" value="<?php echo $nombre ?>">
+		<label>Nombramiento</label>
+		<input type="text" name="nombramiento" value="<?php echo $nombramiento ?>">
 <?php
 		if($visible==1){
 			$vis_si='checked';
@@ -52,15 +51,19 @@ if($_SESSION["estado"]=="Autenticado"){
 			
 		}
 ?>
-						Visible:
-					<input type="radio" name="visible" value="1" <?php echo $vis_si ?>>Sí
-					<input type="radio" name="visible" value="0" <?php echo $vis_no ?>>No<br><br></td>
-					</tr>
+	<fieldset>
+		<legend>Imagen</legend>
+<?php
+		if(empty($imagen)){?>
+			<input type="file" name="imagen">
 
-	<tr>
-		<td>
-			Categoría:
-			<select name="categoria">
+<?php		}else{?>
+		<?php echo $imagen; ?>
+			<a href="gadgets/usuario/borra_imagen.php?rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a>
+<?php } ?>			
+	</fieldset>
+	<label>CategorÃ­a</label>
+	<select name="categoria">
 <?php
 $sqlCat=mysql_query("SELECT id,nombre FROM usuario_categoria ORDER BY id ASC ",$link);
 while($rowCat=mysql_fetch_array($sqlCat)){
@@ -74,36 +77,20 @@ if($categoria!=$rowCat[0]){
 	</option>
 <?php }
 ?>
-			</select>
-		</td>
-	</tr>
-</table><div>		
-                        Perfil:<br>
-		<textarea name="perfil" rows=10 cols=80 ><?php echo $perfil ?></textarea><br><br>
-<?php
-		if(empty($imagen)){?>
-			Imagen: 
-			<input type="file" name="imagen" ><br><br><br>
-
-<?php		}else{?>
-			Imagen: <b><?php echo $imagen; ?></b><br>
-			<a href="gadgets/usuario/borra_imagen.php?rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a><br><br><br>	
-<?php } ?>			
-
-                    e-mail:<br><input type="text" name="maill" size="50%" value="<?php echo $maill ?>"><br><br>
-                    Celular:<br><input type="text" name="celular" size="100%" value="<?php echo $celular ?>"><br><br>
-					</div>
-                          	<div>
-                                  <input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-			</form>
-                                </div>
-			</div>
-		</div>
+	</select>
+	<label>Perfil</label>
+	<textarea name="perfil"><?php echo $perfil ?></textarea>
+	<label>e-mail</label>
+	<input type="text" name="maill" value="<?php echo $maill ?>">
+	<label>Celular</label>
+	<input type="text" name="celular" value="<?php echo $celular ?>">
+	<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+</form>
 <?php
     }else{
-	    echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	    echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
     }
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

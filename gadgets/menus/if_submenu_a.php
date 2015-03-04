@@ -17,33 +17,18 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 			$nombre	=	$row[1];
 		}
 	?>
-	<table border="0" cellpadding="0" width="600" align="center">
 		<form method="post" action="ip_submenu_a.php">
-		<tr>
-			<td>
-				<h1>Modificar Submenú</h1>
-			</td>
-		</tr>
-			<tr>
-				<td>
-					Nombre:<br><input type="text" name="nombre" size="30" value="<?php echo $nombre; ?>"><br>
-					<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-				</td>
-			</tr>
-				<tr>
-					<td valign="bottom">
-						<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+		<h1>Modificar SubmenÃº</h1>
+		<label>Nombre:</label>
+		<input type="text" name="nombre" value="<?php echo $nombre; ?>"><br>
+		<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+		<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
 		</form>
-					</td>
-						<td>
-						</td>
-				</tr>
-	</table>
 <?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 }else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

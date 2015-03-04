@@ -21,6 +21,7 @@ if(isset($_GET['ruta'])){
 		$ruta='contador.php';
 	}
 ?>
+<h1>Visitantes</h1>
 	<div style="margin: 0px auto">
 <?php
 			include_once("classes/sacar.class.php");

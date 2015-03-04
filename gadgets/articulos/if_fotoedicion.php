@@ -2,8 +2,8 @@
 session_start();
 if($_SESSION["estado"]=="Autenticado"){
 	$link=Conectarse();
-	include("../library/tinymce.php");
-	include("../library/confirm.php");
+	include("library/tinymce.php");
+	include("library/confirm.php");
 	if(isset($_GET['capturado'])){
 		$capturado=$_GET['capturado'];
 	}
@@ -12,15 +12,15 @@ if($_SESSION["estado"]=="Autenticado"){
 		<div id="form-main">
 		<form method="post" action="gadgets/articulos/ip_fotoedicion.php">
 			<div id="maincontent-tit">
-				Agregar Foto Edición<br><br>
+				Agregar Foto EdiciÃ³n<br><br>
 			</div>
 				<div id="maincontent-body">
 					<div>
 						imagen:<br>
 						<input type="text" name="imagen" size="80%">.jpg<br>
-						Páginas:<br>
+						PÃ¡ginas:<br>
 						<input type="text" name="paginas" size="80%"><br>
-						Edición:<br><select name="edicion">
+						EdiciÃ³n:<br><select name="edicion">
 <?php 
 $sql=mysql_query("SELECT id,nombre FROM articulos_ediciones ORDER BY id DESC ",$link);
 while($row=mysql_fetch_array($sql)){
@@ -37,9 +37,9 @@ while($row=mysql_fetch_array($sql)){
 		</div>
 		<?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. Â¡Muy bien!";
 	}
 	}else{
-	echo "Usted no tiene acceso a esta seccción";
+	echo "Usted no tiene acceso a esta seccciÃ³n";
 }
 ?>

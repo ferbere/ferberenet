@@ -12,7 +12,7 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 		$rubro=$_GET['rubro'];
 	}
 	if(empty($capturado)){
-		$sql=$mysql->consulta("SELECT id,nombre,texto,categoria,visible FROM perfil_iniciativa WHERE id = '$rubro' ");
+		$sql=$mysql->consulta("SELECT id,nombre,texto,categoria,visible FROM propuesta_index WHERE id = '$rubro' ");
 		while($row=$mysql->fetch_array($sql)){
 			$id			= $row[0];
 			$nombre		= $row[1];

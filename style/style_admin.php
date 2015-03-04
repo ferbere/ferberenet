@@ -1,7 +1,7 @@
 <?php
 include_once("../classes/mysql.php");
 $mysql=new MySQL();
-$sql=$mysql->consulta("SELECT css FROM template_index WHERE id = 8");
+$sql=$mysql->consulta("SELECT css FROM template_index WHERE id = 3");
 $row=$mysql->fetch_array($sql);
 if(!empty($row[0])){
 	$sql_u=$mysql->consulta("SELECT url,pagina FROM template_general");

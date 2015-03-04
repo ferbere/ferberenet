@@ -16,6 +16,7 @@ if(isset($_GET['ruta'])){
 		$ruta='bus_privilegios.php';
 	}
 ?>
+<h1>Edita privilegios</h1>
 <div align="center">
 	<form action="usuario.php" method="get">
 	Criterio de búsqueda:
@@ -29,15 +30,20 @@ if(isset($_GET['ruta'])){
 			include_once("classes/sacar.class.php");
 			$self=sacar($_SERVER['PHP_SELF'],"ferberenet/",".php");
 			include_once("classes/buscador.class.php");
-			$sql = "SELECT id,nombre FROM usuario_privilegios WHERE id != 0 ";
+			mysql_query('set @numero=0');
+			$sql = "SELECT @numero:=@numero+1 AS orden,nombre,id FROM usuario_privilegios WHERE id > 1 ";
 			$celdas=array(0=>'id',1=>'nombre');
 			$pez=" and nombre like '%" . $criterio . "%'";
 			$set='if_privilegios_a.php';
 			$ruta='bus_privilegios.php';
+			$order=' ORDER BY id DESC LIMIT ';
 			$borra=2;
-			$clPag = new paginacion();
-			$clPag->cuantos($sql,$pez);
-			$clPag->pagina($pag,$sql,$pez,$set,$borra,$celdas,$self);
-			$clPag->pie($pag,$sql,$pez,$self);
+			$clPag = new paginacion($pez,$self);
+			$clPag1=$clPag->cuantos($sql);
+			$clPag2=$clPag->pagina($pag,$sql,$set,$order,$borra,$celdas);
+			$clPag3=$clPag->pie($pag,$sql);
+			echo  $clPag1[0];
+			echo  $clPag2;
+			echo  $clPag3;
 ?>
 	</div>

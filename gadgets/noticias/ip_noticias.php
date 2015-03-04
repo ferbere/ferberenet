@@ -10,7 +10,13 @@ $fecha=$_POST["fecha"];
 $orden=$_POST["orden"];
 $categoria=$_POST["categoria"];
 
-$path='../../../images/noticias/';
+$sql=mysql_query("SELECT url,pagina FROM template_general",$link);
+$url=mysql_fetch_array($sql);
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/noticias/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/noticias/';
+}
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 
 $tipo_archivo = $_FILES['imagen']['type']; 

@@ -21,5 +21,12 @@ if($borra==1){
 	}else{
 		echo 	'<script>window.location.href="../../catalogo.php?ruta=if_masfotos_a.php&rubro='.$rubro.'";</script>';
 	}
+}elseif($borra==3){
+	$sql=mysql_query("UPDATE catalogo_categoria SET imagen = '' WHERE id = '$rubro' ", $link);
+	if(!$sql){
+		die ("Pos no se borró el contenido, parece que: " .mysql_error());
+	}else{
+		echo 	'<script>window.location.href="../../catalogo.php?ruta=if_categoria_a.php&rubro='.$rubro.'";</script>';
+	}
 }
 ?>

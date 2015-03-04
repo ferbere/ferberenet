@@ -17,7 +17,13 @@ if(isset($_POST["ques"])){
 if(isset($_POST["contenido"])){
 	$contenido=$_POST["contenido"];
 }
-$path='../../../images/encuesta/';
+$sql=mysql_query("SELECT url,pagina FROM template_general",$link);
+$url=mysql_fetch_array($sql);
+if($url[1]==''){
+	$path=$url[0].'/'.$_SESSION['admin'].'/images/encuestas/';
+}else{
+	$path=$url[0].'/'.$url[1].'/'.$_SESSION['admin'].'/images/encuestas/';
+}
 //datos del arhivo 
 $nombre_archivo = $_FILES['imagen']['name']; 
 $tipo_archivo = $_FILES['imagen']['type']; 
@@ -25,7 +31,7 @@ $tamano_archivo = $_FILES['imagen']['size'];
 //compruebo si las características del archivo son las que deseo 
 
 if(empty($nombre_archivo)){
-$que=mysql_query("UPDATE quiz_answ SET respuesta='$respuesta', valida = '$valida',ques='$ques',contenido='$contenido' WHERE id = '$rubro' ",$link);
+	$que=mysql_query("UPDATE quiz_answ SET respuesta='$respuesta', valida = '$valida',ques='$ques',contenido='$contenido' WHERE id = '$rubro' ",$link);
 	if(!$que){
 		die ("Pos no se capturó el contenido, parece que: " .mysql_error());
 		echo '<script>window.location.href="../../quiz.php?ruta=if_answ_a.php&capturado=0";</script>';				

@@ -11,39 +11,40 @@ if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin"))
 	if(empty($capturado)){
 		$sql_cat=mysql_query("SELECT id,nombre FROM noticias_categoria",$link);
 ?>
-		<div id="form-main">
-			<form method="post" action="gadgets/noticias/ip_noticias.php" enctype="multipart/form-data">
-		   	 <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> 
-	<div id="maincontent-tit">
-		Noticia nueva
-	</div>
-	<div id="maincontent-body">
-		<div>
-				Título:<br>
-			<input type="text" name="titulo" size="100"><br>
-				Subtítulo:<br>
-			<input type="text" name="subtitulo" size="100"><br>
-				Fecha:<br>
-				<input type="date" name="fecha" placeholder="YYYY-MM-DD"><br>							
-				Categoría:<br><select name="categoria">
+		<form method="post" action="gadgets/noticias/ip_noticias.php" enctype="multipart/form-data">
+			<input type="hidden" name="MAX_FILE_SIZE" value="1000000"> 
+			<h1>Noticia nueva</h1>
+			<label>Título</label>
+			<input type="text" name="titulo">
+			<label>Subtítulo</label>
+			<input type="text" name="subtitulo">
+			<label>Fecha</label>
+			<input type="date" name="fecha" placeholder="YYYY-MM-DD">
+			<label>Categoría</label>
+			<select name="categoria">
 <?php
 while ($row_cat=mysql_fetch_array($sql_cat)){
 echo '<option value="'.$row_cat[0].'">'."\n".$row_cat[1]."</a>   ";
 }
 ?>
-				</select><br><br>
-				Imagen:<br>
-				<input type="file" name="imagen" ><br>
-				Contenido:<br>
-			<textarea name="contenido" rows=19 cols=80 width:300px height:40px></textarea><br>
-				Publicado:<br>
-			Sí <input type="radio" name="publicado" value="1" size="30">
-			No <input type="radio" name="publicado" value="0" size="30" checked><br><br>
-
+			</select>
+			<fieldset>
+				<legend>Imagen</legend>
+				<input type="file" name="imagen" >
+			</fieldset>
+			<label>Contenido</label>
+			<textarea name="contenido"></textarea>
+			<fieldset>
+				<legend>Publicado:</legend>
+				<div class="radio">
+					<label for="1" class="not">Sí</label>
+					<input type="radio" class="not2" name="publicado" value="1">
+					<label for="0" class="not">No</label>
+					<input type="radio" class="not2" name="publicado" value="0" checked>
+				</div>
+			</fieldset>
 			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-			</form>
-			</div>
-		</div>
+		</form>
 <?php
 	}elseif($capturado==1){
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";

@@ -1,5 +1,7 @@
 <?php
 session_start();
+include_once("classes/mysql.php");
+$mysql=new MySQL();
 include("library/tinymce.php");
 include("library/confirm.php");
 if(($_SESSION['privilegioss']=="ferbere")||($_SESSION['privilegioss']=="admin")){
@@ -7,36 +9,42 @@ if(isset($_GET['capturado'])){
 $capturado=$_GET['capturado'];
 }
 if(empty($capturado)){
-$link=Conectarse();
-if(isset($_GET['rubro'])){
-$rubro=$_GET['rubro'];
-}
+	if(isset($_GET['rubro'])){
+		$rubro=$_GET['rubro'];
+	}
 ?>
-<div id="form-main" style="margin:0px auto; border:0px solid">
-	<div>
-		<div>
-<form method="get" action="faq.php">
-<input type="hidden" name="ruta" value="ip_faq_a.php">
-<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
 <?php
-$sql= mysql_query("SELECT titulo,pregunta,respuesta,categoria FROM faq_index WHERE id = '$rubro' ",$link);
-while ($row = mysql_fetch_array($sql)){
-	$titulo=$row[0];
+$sql= $mysql->consulta("SELECT nombre,pregunta,respuesta,categoria,visible FROM faq_index WHERE id = '$rubro' ");
+while ($row = $mysql->fetch_array($sql)){
+	$nombre=$row[0];
 	$pregunta=$row[1];
 	$respuesta=$row[2];
 	$categoria=$row[3];
+	$visible=$row[4];
 }
 ?>
-	<div>
-		<h1>Título:<br></h1>
-		<input type="text" name="titulo" size="100px" value="<?php echo $titulo ?>" /><?php echo $material ?>
-<br><br>
-			Pregunta:<br><textarea name="pregunta" rows=19 cols=70 width:300px height:40px><?php echo $pregunta ?></textarea>
-<br><br>
-			Respuesta:<br><textarea name="respuesta" rows=19 cols=70 width:300px height:40px><?php echo $respuesta ?></textarea>
-<br><br>
-			Categoría:<br>
-			<select name="categoria">
+<h1>Edita pregunta frecuente</h1>
+<form method="post" action="gadgets/faq/ip_faq_a.php">
+	<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+	<label>Título</label>
+	<input type="text" name="nombre" value="<?php echo $nombre ?>" />
+	<?php echo $material ?>
+	<label>Pregunta</label>
+	<textarea name="pregunta" ><?php echo $pregunta ?></textarea>
+	<label>Respuesta</label>
+	<textarea name="respuesta"><?php echo $respuesta ?></textarea>
+	<?php
+		if($visible==1){
+			$vis_si='checked';
+			$vis_no='nain';
+		}elseif($visible==0){
+			$vis_si='nain';
+			$vis_no='checked';
+			
+		}
+?>
+	Categoría:<br>
+	<select name="categoria">
 <?php
 $sqlCat=mysql_query("SELECT id,nombre FROM faq_categoria ORDER BY id ASC ",$link);
 while($rowCat=mysql_fetch_array($sqlCat)){
@@ -51,15 +59,21 @@ while($rowCat=mysql_fetch_array($sqlCat)){
 <?php
 }
 ?>
-			</select><br><br>
-			<input type="submit"  value="enviar"></form>
-		</div>
+	</select>
+	<fieldset>
+	<legend>Visible</legend>
+	<div class="radio">
+		<input type="radio" class="not" name="visible" value="1" <?php echo $vis_si ?>>
+		<label for="1" class="not2">Sí</label>
+		<input type="radio" class="not" name="visible" value="0" <?php echo $vis_no ?>><label for="0" class="not2">No</label>
 	</div>
-</div>
+	</fieldset>
+	<input type="submit"  value="enviar">
+</form>
 <?
-}else{
-	echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
-}
+	}else{
+		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
+	}
 }else{
 echo "Usted no tiene acceso a esta sección";
 }		

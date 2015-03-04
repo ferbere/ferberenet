@@ -1,10 +1,10 @@
 <?php
 session_start();
 if($_SESSION["estado"]=="Autenticado"){
-	include_once('../classes/conex.php');
+	include_once('classes/conex.php');
 	$link=Conectarse();
-	include("../library/tinymce.php");
-	include("../library/confirm.php");
+	include("library/tinymce.php");
+	include("library/confirm.php");
 	if(isset($_GET['rubro'])){
 		$rubro=$_GET['rubro'];
 	}
@@ -32,9 +32,9 @@ if($_SESSION["estado"]=="Autenticado"){
 ?>
 					Imagen:<br>
 					<input type="text" name="imagen" size="30" value="<?php echo $imagen ?>"><br><br>
-					p·ginas:<br>
+					p√°ginas:<br>
 					<input type="text" name="paginas" size="30" value="<?php echo $paginas ?>"><br><br>
-					EdiciÛn:<br>
+					Edici√≥n:<br>
 					<select name="edicion">
 <?php
 $sqlCat=mysql_query("SELECT id,nombre FROM articulos_ediciones ORDER BY id ASC ",$link);
@@ -58,9 +58,9 @@ while($rowCat=mysql_fetch_array($sqlCat)){
 		</div>
 	<?php
 	}else{
-		echo "El contenido ha sido capturado, debidamente. °Muy bien!";
+		echo "El contenido ha sido capturado, debidamente. ¬°Muy bien!";
 	}
 }else{
-echo "Usted no tiene acceso a esta seccciÛn";
+echo "Usted no tiene acceso a esta seccci√≥n";
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["estado"]=="Autenticado"){
+if(($_SESSION["privilegioss"]=="ferbere")||($_SESSION["privilegioss"]=="admin")||($_SESSION["privilegioss"]=="directivo")){
 	include_once('classes/conex.php');
 	$link=Conectarse();
 	include("library/tinymce.php");
@@ -35,26 +35,15 @@ if($_SESSION["estado"]=="Autenticado"){
 		}
 		$path=$url_c.$_SESSION['admin'].'/images/catalogo/';
 ?>
-	<div id="form-main">
-		<form method="post" action="gadgets/catalogo/ip_catalogo_a.php" enctype="multipart/form-data">
+	<form method="post" action="gadgets/catalogo/ip_catalogo_a.php" enctype="multipart/form-data">
 	 	<input type="hidden" name="MAX_FILE_SIZE" value="1000000">
 		<input type="hidden" name="rubro" value="<?php echo $rubro ?>"><br><br>
-		<div id="maincontent-tit">
-			Modificar cat·logo<br><br>
-		</div>
-			<div id="maincontent-body">
-				<table>
-					<tr>
-						<td rowspan="2">
-						<img src="<?php echo $path.$imagen; ?>" height="200px"><br>
-						</td>
-						<td></td>
-					<tr>
-						<td></td><td>
-                        Nombre:<br>
-					<input type="text" name="nombre" size="40%" value="<?php echo $nombre ?>"><br><br>
-                    	Subnombre:<br>
-					<input type="text" name="subnombre" size="60%" value="<?php echo $subnombre ?>"><br><br>
+		<h1>Modificar cat√°logo</h1>
+		<img src="<?php echo $path.$imagen; ?>" height="200px"><br>
+		<label>Nombre:</label>
+		<input type="text" name="nombre" value="<?php echo $nombre ?>">
+		<label>Subnombre:</label>
+		<input type="text" name="subnombre" value="<?php echo $subnombre ?>">
 <?php
 		if($visible==1){
 			$vis_si='checked';
@@ -64,55 +53,55 @@ if($_SESSION["estado"]=="Autenticado"){
 			$vis_no='checked';
 			
 		}
-?>
-						Visible:
-					<input type="radio" name="visible" value="1" <?php echo $vis_si ?>>SÌ
-					<input type="radio" name="visible" value="0" <?php echo $vis_no ?>>No<br><br>
-					CategorÌa:<br><br><select name="categoria">
-					<?php
-					$sqlCat=mysql_query("SELECT id,nombre FROM catalogo_categoria ORDER BY id ASC ",$link);
-					while($rowCat=mysql_fetch_array($sqlCat)){
-							if($categoria!=$rowCat['id']){
-								$hig= 'nain';
-								}else{$hig="selected";}
-								echo '<option value="'.$rowCat['id'].'"'.$hig.'>'.$rowCat['nombre'].'</option>';
-							}
-					echo '</select>';
+?>	<fieldset>
+		<legend>Visible:</legend>
+		<div class="radio">
+			<label class="not" for="1">S√≠</label>
+			<input type="radio" name="visible" value="1" class="not2">
+			<label class="not" for=0>No</label>
+			<input type="radio" name="visible" value="0" class="not2" checked>
+		</div>
+	</fieldset>
+	<label>Categor√≠a:</label>
+	<select name="categoria">
+	<?php
+	$sqlCat=mysql_query("SELECT id,nombre FROM catalogo_categoria ORDER BY id ASC ",$link);
+	while($rowCat=mysql_fetch_array($sqlCat)){
+			if($categoria!=$rowCat['id']){
+				$hig= 'nain';
+				}else{$hig="selected";}
+				echo '<option value="'.$rowCat['id'].'"'.$hig.'>'.$rowCat['nombre'].'</option>';
+			}
+	echo '</select>';
 ?><br><br>
-		</td>
-	<tr>
-</table><div>		
-                        DescripciÛn:<br>
-		<textarea name="descripcion" rows=10 cols=80 ><?php echo $descripcion ?></textarea><br><br>
+	<label>Descripci√≥n:</label>
+	<textarea name="descripcion" rows=10 cols=80 ><?php echo $descripcion ?></textarea><br><br>
+	<fieldset>
+	<legend>Imagen:</legend>
 <?php
 		if(empty($imagen)){?>
-			Imagen: 
-			<input type="file" name="imagen" ><br><br><br>
+	<input type="file" name="imagen">
 
-<?php		}else{?>
-			Imagen: <b><?php echo $imagen; ?></b><br>
-			<a href="gadgets/catalogo/borra_imagen.php?borra=1&rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a><br><br><br>	
+<?php	}else{?>
+	<?php echo $imagen; ?>
+	<a href="gadgets/catalogo/borra_imagen.php?borra=1&rubro=<?php echo $rubro; ?>">Borrar y cargar otra imagen</a><br><br><br>	
 <?php } ?>			
-<br><br>
-                    Existencias:<br><input type="number" name="existe"  value="<?php echo $existe ?>"><br><br>
-                    Precio:<br>$<input type="text" name="precio" size="30%" value="<?php echo $precio ?>"><br><br>                        
-                    Dimensiones:<br><input type="text" name="dimensiones" size="30%" value="<?php echo $dimensiones ?>"><br><br>                        
-                    Orden:<br><input type="text" name="orden" size="30%" value="<?php echo $orden ?>"><br><br>
-					</div>
-<?php
-//            }
-?>
-                            	<div>
-                                    <input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-			</form>
-                                </div>
-			</div>
-		</div>
+	</fieldset>
+
+	<label>Existencias:</label>
+	<input type="number" name="existe"  value="<?php echo $existe ?>">
+	<label>Precio:</label>
+	<input type="text" name="precio" value="<?php echo $precio ?>">
+	<label>Dimensiones:</label>
+	<input type="text" name="dimensiones" value="<?php echo $dimensiones ?>"><label>Orden:</label>
+	<input type="text" name="orden" size="30%" value="<?php echo $orden ?>"> <input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+</form>
+
 <?php
     }else{
-	    echo "El contenido ha sido capturado, debidamente. °Muy bien!";
+	    echo "El contenido ha sido capturado, debidamente. ¬°Muy bien!";
     }
 }else{
-echo "Usted no tiene acceso a esta seccciÛn";
+echo "Usted no tiene acceso a esta seccci√≥n";
 }
 ?>

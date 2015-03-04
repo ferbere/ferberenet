@@ -21,16 +21,14 @@ if($_SESSION["privilegioss"]=="ferbere"){
 			$privilegios=$row[5];
 		}
 	?>
-	<div id="form-main">
 		<form method="post" action="gadgets/gadgets/ip_gadgets_a.php">
-			<div id="maincontent-tit">
-				Modificar Gadget
-			</div>
-				<div id="maincontent-body" style="width:100%">
-					<div>
-						Gadget:<br><input type="text" name="gadget" size="30" value="<?php echo $gadget; ?>"><br><br>
-						Alias:<br><input type="text" name="alias" size="30" value="<?php echo $alias; ?>"><br><br>
-						Ruta:<br><input type="text" name="ruta" size="60" value="<?php echo $ruta; ?>"><br>
+			<h1>Modificar Gadget</h1>
+			<label>Gadget:</label>
+			<input type="text" name="gadget" value="<?php echo $gadget; ?>">
+			<label>Alias:</label>
+			<input type="text" name="alias" value="<?php echo $alias; ?>">
+			<label>Ruta:</label>
+			<input type="text" name="ruta" value="<?php echo $ruta; ?>">
 	<?php
 	if($visible==1){
 		$higsi='checked';
@@ -40,10 +38,16 @@ if($_SESSION["privilegioss"]=="ferbere"){
 			$higno='checked';
 		}
 	?>
-						<br>Visible: <br>
-							<input type="radio" name="visible" value="1" <?echo $higsi ?>>Sí
-							<input type="radio" name="visible" value="0" <?echo $higno ?>>No<br><br>
-						Privilegios: <br>
+			<fieldset>
+				<legend>Visible:</legend>
+				<div class="radio">
+				<input type="radio" class="not" name="visible" value="1" <?echo $higsi ?>
+				<label for="1" class="not2">Sí</label>
+				<input type="radio" class="not" name="visible" value="0" <?echo $higno ?>
+				<label for="0" class="not2">No</label>
+			</fieldset>
+			<fieldset>
+				<legend>Privilegios:</legend>
 <?php
 $privv= decbin($privilegios);
 /*
@@ -68,15 +72,12 @@ while($row_privi=$mysql->fetch_array($sql_privi)){
 	$j=$j+1;
 }
 ?>
-						<input type="hidden" name="cuenta" value="<?php echo $cuenta ?>">
-						<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
-					</div>
-						<div>
-							<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
-			</form>
-						</div>
-		</div>
-	<?php
+			</fieldset>
+			<input type="hidden" name="cuenta" value="<?php echo $cuenta ?>">
+			<input type="hidden" name="rubro" value="<?php echo $rubro ?>">
+			<input type="submit" onClick="MM_popupMsg('Guardar');return false" value="enviar">
+		</form>
+<?php
 	}else{
 		echo "El contenido ha sido capturado, debidamente. ¡Muy bien!";
 	}
